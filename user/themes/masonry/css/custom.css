@@ -1,0 +1,39 @@
+/* custom css */
+
+header.no-cover.main-header {
+	min-height: auto !important;
+	max-height: auto !important;
+	height: 108px !important;
+	margin-bottom: 0 !important;
+	background-color: #f2f3f5;
+}
+
+header.no-cover.main-header .overlay {
+	height: 38px !important;
+	background-color: #f2f3f5;
+}
+
+.masonry {
+   	column-count: 4 !important;
+}
+
+body:not(.post-template) .post-title {
+   	font-size: 2rem;
+}
+
+.post-meta, .post-date {
+   	font-size: 1.1rem;
+   	line-height: 2rem;
+}
+
+@media only screen and (max-width: 992px) {
+	.masonry {
+    	column-count: 3 !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.masonry {
+	    column-count: 1 !important;
+	}
+}

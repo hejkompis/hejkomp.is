@@ -1,0 +1,28 @@
+<input type="checkbox" id="show-menu" class="show-menu" />
+<div class="nav">
+    <h3 class="nav-title">{{ 'THEME_MASONRY.MENU_TITLE'|t }}</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Stäng</span>
+    </a>
+    <ul>
+
+        {% set navcollection = page.evaluate([{'@page.children':'/blog'}]) %}
+
+        {% set tags = [] %}
+        {% for post in navcollection %}
+            {% for tag in post.taxonomy.tag %}
+                {% if tag not in tags %}
+                    {% set tags = tags|merge([tag]) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        <li class="nav-x {{ current_page }}" role="presentation"><a href="{{ url('./') }}">Visa alla</a></li>
+
+        {% for tag in tags %}
+            <li class="nav-x {{ current_page }}" role="presentation"><a href="{{ base_url }}/tag{{ config.system.param_sep }}{{ tag }}">{{ tag|capitalize }}</a></li>
+        {% endfor %}
+
+    </ul>
+</div>
+<span class="nav-cover"></span>
