@@ -17,6 +17,8 @@ composer.phar
 .vagrant/
 
 ### Blog pages ###
-/user/pages/blog/
+/user/pages/blog/*
+!/user/pages/blog/.gitkeep
+!/user/pages/blog/default.md
 
 # End of https://www.gitignore.io/api/git,vagrant,composer
