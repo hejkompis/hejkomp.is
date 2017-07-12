@@ -1,0 +1,2 @@
+# hejkomp.is
+Hej kompis!
