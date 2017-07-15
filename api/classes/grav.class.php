@@ -118,7 +118,7 @@
 			    }
 
 			    if($file->getFilename() == 'image.jpg') {
-			    	$imgUrl = str_replace('..', 'http://hejkompis.dev', $file->getPathname());
+			    	$imgUrl = str_replace('..', 'http://'.ROOT, $file->getPathname());
 			    } else {
 			    	$imgUrl = '';
 			    }

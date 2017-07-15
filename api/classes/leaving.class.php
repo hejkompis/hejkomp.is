@@ -2,9 +2,9 @@
 
 	class Leaving {
 
-		static public function external() {
+		static public function fallback($data) {
 
-			$url = $_GET['for'];
+			$url = $data['for'];
 			header('Location: '.$url);
 
 		}

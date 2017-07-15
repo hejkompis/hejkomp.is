@@ -10,20 +10,27 @@
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			
 			if($request === 'post') {
-				$fields = '';
-				foreach ($data as $key => $value) {
-				    $fields .= $key . '=' . $value . '&';
-				}
-				rtrim($fields, '&');
+				
+				if(is_array($data)) {
+					$fields = '';
+					foreach ($data as $key => $value) {
+					    $fields .= $key . '=' . $value . '&';
+					}
+					rtrim($fields, '&');
 
-				curl_setopt($ch, CURLOPT_POST, count($data));
-    			curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+					curl_setopt($ch, CURLOPT_POST, count($data));
+	    			curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+				}
+
+				else {
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+				}
+				
 			}
 
 			if($headers) {
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			    	$headers
-			    ));
+				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			}
 
 			$output = curl_exec($ch); 

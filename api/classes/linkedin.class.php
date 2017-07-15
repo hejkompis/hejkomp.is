@@ -133,7 +133,8 @@
 
 			$headers = [
 				'Content-Type: application/json',
-				'x-li-format: json'
+				'x-li-format: json',
+				'Authorization: Bearer '.$_SESSION[SESSION]['linkedin']['access_token']
 			];
 
 			$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
