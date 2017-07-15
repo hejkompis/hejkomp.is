@@ -100,9 +100,13 @@
 
 		public static function post() {
 
-			if ($_SESSION[SESSION]['linkedin']['expires_at'] < time() || (!isset($_SESSION[SESSION]['linkedin']))) {
+			if($_SESSION[SESSION]['linkedin']['expires_at'] < time()) {
 				Curl::get('http://'.ROOT.'/api/linkedin/');
 			}
+
+			if(!isset($_SESSION[SESSION]['linkedin'])) {
+				Curl::get('http://'.ROOT.'/api/linkedin/');
+			}			
 
 			$data['tag'] = 'inspiration';
 
@@ -132,7 +136,7 @@
 				'x-li-format: json'
 			];
 
-			$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+			//$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
 
 			echo '<pre>';
 			print_r($response);
