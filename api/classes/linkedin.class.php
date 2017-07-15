@@ -136,7 +136,7 @@
 				'x-li-format: json'
 			];
 
-			//$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+			$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
 
 			echo '<pre>';
 			print_r($response);
