@@ -64,14 +64,16 @@
 			$date = !empty($data['date']) ? strtotime($data['date']) : time();
 
 			$selectedPosts = [];
+			$imgUrl = '';
 
 			$di = new RecursiveDirectoryIterator('../user/pages/blog/');
 			foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+			    
 			    if($file->getFilename() == 'post.md') {
 				 	$postmd = fopen($file->getRealPath(),"r") or die("Gick ej att öppna filen");
 					$postData = fread($postmd, filesize($file->getRealPath()));
 					fclose($postmd);
-					
+
 					$postData = ltrim($postData, "--- \n");
 					$postData = rtrim($postData, " ---");
 
@@ -86,12 +88,14 @@
 							if(!empty($splitValue[1])) {
 								$postDataArray[trim($splitValue[0])] = trim($splitValue[1]);
 							}
+
+							$postDataArray['tagArray'] = [];
+
 							if(array_key_exists('tag', $postDataArray)) {
 								$tagString = ltrim($postDataArray['tag'], "[");
 								$tagString = rtrim($tagString, "]");
 
 								$tagArray = explode(',', $tagString);
-								$postDataArray['tagArray'] = [];
 								foreach($tagArray as $tag) {
 									if($tag != '') { array_push($postDataArray['tagArray'],$tag); }
  								}
@@ -103,10 +107,20 @@
 
 					$postDataArray['timestamp'] = strtotime($postDataArray['date']);
 
+					if(array_key_exists('image', $postDataArray)) {
+						$postDataArray['imageUrl'] = $imgUrl;
+					}
+
 					if(in_array($data['tag'], $postDataArray['tagArray'])) {
 						array_push($selectedPosts, $postDataArray);
 					}
 
+			    }
+
+			    if($file->getFilename() == 'image.jpg') {
+			    	$imgUrl = str_replace('..', 'http://hejkompis.dev', $file->getPathname());
+			    } else {
+			    	$imgUrl = '';
 			    }
 
 			    $postmd = '';
@@ -125,39 +139,21 @@
 			}
 
 			if(!empty($lastWeeksPosts)) {
-				$selectedPost = self::getRandomPost($lastWeeksPosts);
+				$selectedPost = self::get_random_post($lastWeeksPosts);
 			} elseif(!empty($selectedPosts)) {
-				$selectedPost = self::getRandomPost($selectedPosts);
+				$selectedPost = self::get_random_post($selectedPosts);
 			} else {
 				die('Hittar inga sparade poster med taggen '.$data['tag'].'.');
 			}
 
-			echo '<pre>';
-			print_r($selectedPost);
-			echo '</pre>';
+			return $selectedPost;
 
 		}
 
-		static private function getRandomPost($posts) {
+		static private function get_random_post($posts) {
 			$noofPosts = count($posts)-1;
 			$randomValue = rand(0, $noofPosts);
 			return $posts[$randomValue];
 		}
 
 	}
-
-	// Content-Type: application/json
-	// x-li-format: json
-
-	// {
-	//   "comment": "Check out developer.linkedin.com!",
-	//   "content": {
-	//     "title": "LinkedIn Developers Resources",
-	//     "description": "Leverage LinkedIn's APIs to maximize engagement",
-	//     "submitted-url": "https://developer.linkedin.com",  
-	//     "submitted-image-url": "https://example.com/logo.png"
-	//   },
-	//   "visibility": {
-	//     "code": "anyone"
-	//   }  
-	// }

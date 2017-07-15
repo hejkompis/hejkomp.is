@@ -4,7 +4,7 @@
 
 		static public function external() {
 
-			$url = $_GET['link'];
+			$url = $_GET['for'];
 			header('Location: '.$url);
 
 		}

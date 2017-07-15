@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/git,vagrant,composer
 
 .DS_STORE
+cache/
 
 ### Composer ###
 composer.phar
