@@ -140,8 +140,10 @@
 
 			if(!empty($lastWeeksPosts)) {
 				$selectedPost = self::get_random_post($lastWeeksPosts);
+				$selectedPost['post_type'] = 'last_week';
 			} elseif(!empty($selectedPosts)) {
 				$selectedPost = self::get_random_post($selectedPosts);
+				$selectedPost['post_type'] = 'all_time';
 			} else {
 				die('Hittar inga sparade poster med taggen '.$data['tag'].'.');
 			}

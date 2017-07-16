@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/themes/masonry/languages.yaml',
-    'modified' => 1499675367,
+    'modified' => 1500047081,
     'data' => [
         'en' => [
             'THEME_MASONRY' => [

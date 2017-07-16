@@ -16,7 +16,7 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        $context["url"] = (((isset($context["base_url"]) ? $context["base_url"] : null) . "/api/leaving/external/?link=") . $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "source", array()));
+        $context["url"] = ((((isset($context["base_url"]) ? $context["base_url"] : null) . "/api/leaving/?for=") . $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "source", array())) . "&referrer=Website");
         // line 2
         echo "
 <article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\">
@@ -129,7 +129,7 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% set url = base_url ~ \"/api/leaving/external/?link=\" ~ post.header.source %}
+        return new Twig_Source("{% set url = base_url ~ \"/api/leaving/?for=\" ~ post.header.source ~ \"&referrer=Website\" %}
 
 <article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\">
     {% if post.header.image %}

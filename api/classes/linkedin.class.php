@@ -42,13 +42,6 @@
 					self::get_authorization();
 				}
 
-				// if($data['return']) {
-				// 	if(method_exists(Linkedin, $data['return'])) {
-				// 		self::$data['return'];	
-				// 	}
-					
-				// }
-
 			}
 			
 		}
@@ -100,21 +93,23 @@
 
 		public static function post() {
 
-			if($_SESSION[SESSION]['linkedin']['expires_at'] < time()) {
+			if(!isset($_SESSION[SESSION]['linkedin'])) {
 				Curl::get('http://'.ROOT.'/api/linkedin/');
 			}
 
-			if(!isset($_SESSION[SESSION]['linkedin'])) {
+			if($_SESSION[SESSION]['linkedin']['expires_at'] < time()) {
 				Curl::get('http://'.ROOT.'/api/linkedin/');
 			}			
 
 			$data['tag'] = 'inspiration';
 
+			$what_post = self::get_what_post();
+
 			$post = Grav::publish_item($data);
 
 			$contentArray = [
 				'title' => $post['title'],
-				'description' => isset($post['description']) ? $post['description'] : '',
+				'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
 				'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
 				'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
 			];
@@ -124,7 +119,7 @@
 			];
 
 			$postArray = [
-				'comment' => 'Testar att bygga en delningsfunktion...',
+				'comment' => $what_post['comment'],
 				'content' => $contentArray,
 				'visibility' => $visbilityArray
 			];
@@ -142,6 +137,58 @@
 			echo '<pre>';
 			print_r($response);
 			echo '</pre>';
+
+		}
+
+		public static function get_what_post() {
+
+			$day = date('N');
+			$output = [];
+
+			switch ($day) {
+				case "1":
+					// Monday
+					$output['tag'] = 'musiken';
+					$output['description'] = '';
+					$output['comment'] = 'Musikmåndag: Ett tips från mina favoritlåtar på Spotify.';
+					break;
+				case "2":
+					// Tuesday
+					die;
+					break;
+				case "3":
+					// Wednesday
+					$output['tag'] = 'jobbet';
+					$output['description'] = '';
+					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelateradartikel att läsa.';
+					break;
+				case "4":
+					// Thursday
+					$output['tag'] = 'köket';
+					$output['description'] = '';
+					$output['comment'] = 'Vad ska du äta idag? Här kommer ett kökstips.';
+					break;
+				case "5":
+					// Friday
+					$output['tag'] = 'inspiration';
+					$output['description'] = '';
+					$output['comment'] = 'Varje fredag tipsar jag om en artikel eller pryl, en artikel eller något annat jag inspireras av.';
+					break;
+				case "7":
+					// Saturday
+					$output['tag'] = 'fåtöljen';
+					$output['description'] = '';
+					$output['comment'] = 'Äntligen finns det tid till långläsning.';
+					break;
+				case "6":
+					// Sunday
+					die;
+					break;
+				default:
+					die;
+			}
+
+			return($output);
 
 		}
 
