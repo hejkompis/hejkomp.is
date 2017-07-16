@@ -44,7 +44,9 @@
 
 			}
 
-			if($data['return']) {
+			if(isset($data['return'])) {
+
+				echo $data['return']; die;
 
 				self::$data['return'];
 
