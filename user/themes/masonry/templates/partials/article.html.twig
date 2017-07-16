@@ -1,4 +1,4 @@
-{% set url = base_url ~ "/api/leaving/external/?link=" ~ post.header.source %}
+{% set url = base_url ~ "/api/leaving/?for=" ~ post.header.source ~ "&referrer=Website" %}
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
     {% if post.header.image %}
