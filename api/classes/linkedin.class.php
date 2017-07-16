@@ -44,14 +44,9 @@
 
 			}
 
-			if(isset($data['return'])) {
+			// push data to Linkedin
+			self::post();
 
-				echo $data['return']; die;
-
-				self::$data['return'];
-
-			}
-			
 		}
 
 		static public function get_token($data) {
