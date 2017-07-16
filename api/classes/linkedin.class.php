@@ -45,7 +45,6 @@
 			}
 
 			// push data to Linkedin API
-			self::post();
 
 		}
 
