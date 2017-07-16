@@ -162,27 +162,27 @@
 					// Wednesday
 					$output['tag'] = 'jobbet';
 					$output['description'] = '';
-					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelateradartikel att läsa.';
+					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelaterad artikel att läsa.';
 					break;
 				case "4":
 					// Thursday
 					$output['tag'] = 'köket';
 					$output['description'] = '';
-					$output['comment'] = 'Vad ska du äta idag? Här kommer ett kökstips.';
+					$output['comment'] = 'Vet du vad du ska du äta idag? Här kommer ett tips till köket.';
 					break;
 				case "5":
 					// Friday
 					$output['tag'] = 'inspiration';
 					$output['description'] = '';
-					$output['comment'] = 'Varje fredag tipsar jag om en artikel eller pryl, en artikel eller något annat jag inspireras av.';
+					$output['comment'] = 'Lite inspiration behövs varje fredag!';
 					break;
-				case "7":
+				case "6":
 					// Saturday
 					$output['tag'] = 'fåtöljen';
 					$output['description'] = '';
-					$output['comment'] = 'Äntligen finns det tid till långläsning.';
+					$output['comment'] = 'Lördag morgon, och äntligen finns det tid att läsa en riktigt bra artikel.';
 					break;
-				case "6":
+				case "7":
 					// Sunday
 					die;
 					break;
