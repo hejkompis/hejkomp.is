@@ -43,6 +43,12 @@
 				}
 
 			}
+
+			if($data['return']) {
+
+				self::$data['return'];
+
+			}
 			
 		}
 
@@ -94,11 +100,13 @@
 		public static function post() {
 
 			if(!isset($_SESSION[SESSION]['linkedin'])) {
-				Curl::get('http://'.ROOT.'/api/linkedin/');
+				$data['return'] = 'post';
+				self::fallback($data);
 			}
 
 			if($_SESSION[SESSION]['linkedin']['expires_at'] < time()) {
-				Curl::get('http://'.ROOT.'/api/linkedin/');
+				$data['return'] = 'post';
+				self::fallback($data);
 			}			
 
 			$data['tag'] = 'inspiration';
