@@ -107,6 +107,8 @@
 
 			$what_post = self::get_what_post();
 
+			print_r($what_post); die;
+
 			$post = Grav::publish_item($what_post['tag']);
 
 			$contentArray = [
