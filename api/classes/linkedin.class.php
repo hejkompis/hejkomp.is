@@ -106,11 +106,9 @@
 				self::fallback($data);
 			}			
 
-			$data['tag'] = 'inspiration';
-
 			$what_post = self::get_what_post();
 
-			$post = Grav::publish_item($data);
+			$post = Grav::publish_item($what_post['tag']);
 
 			$contentArray = [
 				'title' => $post['title'],
