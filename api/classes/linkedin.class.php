@@ -2,7 +2,7 @@
 
 	define('CLIENT_ID', '785m6qrraf5l3x');
 	define('CLIENT_KEY', '3ju0gOKcRpUXGlNB');
-	define('REDIRECT_URI', 'http://'.ROOT.'/api/linkedin/');
+	define('REDIRECT_URI', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	define('SCOPE', 'r_basicprofile r_emailaddress rw_company_admin w_share');
 
 	class Linkedin {
@@ -45,6 +45,9 @@
 			}
 
 			// push data to Linkedin API
+			echo '<pre>';
+				print_r($_SESSION[SESSION]['linkedin']);
+			echo '</pre>';
 
 		}
 
@@ -96,49 +99,76 @@
 		public static function post() {
 
 			if(!isset($_SESSION[SESSION]['linkedin'])) {
-				$data['return'] = 'post';
-				self::fallback($data);
+
+				self::reset_linkedin_session();
+
 			}
 
-			if($_SESSION[SESSION]['linkedin']['expires_at'] < time()) {
-				$data['return'] = 'post';
-				self::fallback($data);
-			}			
+			if (isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			} elseif(isset($data['code'])) {
+			
+				if ($data['state'] == $data['state']) {
+					// Get token so you can make API calls
+					self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			} elseif ($_SESSION[SESSION]['linkedin']['expires_at'] < time()) { 
+		
+				// Token has expired, clear the state
+				self::reset_linkedin_session();
+	
+			}
+	
+			elseif (empty($_SESSION[SESSION]['linkedin']['access_token'])) {
+					
+				// Start authorization process
+				self::get_authorization();
 
-			$what_post = self::get_what_post();
+			} else {
 
-			$post = Grav::publish_item($what_post);
+				$what_post = self::get_what_post();
 
-			$contentArray = [
-				'title' => $post['title'],
-				'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
-				'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
-				'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
-			];
+				$post = Grav::publish_item($what_post);
 
-			$visbilityArray = [
-				'code' => 'connections-only'
-			];
+				$contentArray = [
+					'title' => $post['title'],
+					'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
+					'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
+					'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
+				];
 
-			$postArray = [
-				'comment' => $what_post['comment'],
-				'content' => $contentArray,
-				'visibility' => $visbilityArray
-			];
+				$visbilityArray = [
+					'code' => 'connections-only'
+				];
 
-			$postdata = json_encode($postArray);
+				$postArray = [
+					'comment' => $what_post['comment'],
+					'content' => $contentArray,
+					'visibility' => $visbilityArray
+				];
 
-			$headers = [
-				'Content-Type: application/json',
-				'x-li-format: json',
-				'Authorization: Bearer '.$_SESSION[SESSION]['linkedin']['access_token']
-			];
+				$postdata = json_encode($postArray);
 
-			$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+				$headers = [
+					'Content-Type: application/json',
+					'x-li-format: json',
+					'Authorization: Bearer '.$_SESSION[SESSION]['linkedin']['access_token']
+				];
 
-			echo '<pre>';
-			print_r($response);
-			echo '</pre>';
+				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+
+				echo '<pre>';
+					print_r($response);
+				echo '</pre>';
+
+			}		
 
 		}
 
