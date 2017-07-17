@@ -44,7 +44,6 @@
 
 			}
 
-			// push data to Linkedin API
 			echo '<pre>';
 				print_r($_SESSION[SESSION]['linkedin']);
 			echo '</pre>';
@@ -75,6 +74,10 @@
 
 			$_SESSION[SESSION]['linkedin']['expires_in'] = 0;
 			$_SESSION[SESSION]['linkedin']['expires_at'] = 0;
+
+			echo '<pre>';
+				print_r($_SESSION[SESSION]['linkedin']);
+			echo '</pre>';
 
 		}
 
