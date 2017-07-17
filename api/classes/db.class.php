@@ -3,12 +3,12 @@
 	class DB {
 
 		private static $instance = null, $prev_results = [], $mysqli;
-		public static $con;
-		//private $db = ['url' => 'localhost', 'user' => 'root', 'password' => 'root', 'database' => 'hapyak_data'];
+		public static $con, $user;
 
 		private function __construct() {
-			//self::$mysqli = new mysqli($this->db['url'], $this->db['user'], $this->db['password'], $this->db['database']);
-			//self::$mysqli->query("SET NAMES 'utf8'");
+
+			self::$mysqli = new mysqli(DB_S, DB_U, DB_P, DB_D);
+			self::$mysqli->query("SET NAMES 'utf8'");
 			self::$con = self::con();
 		}
 
@@ -126,6 +126,82 @@
 
 			curl_close($ch);
 
+		}
+
+		public static function generate_string($length=9, $strength=0) {
+		
+		    $vowels = 'aeuy';
+		    $consonants = 'bdghjmnpqrstvz';
+		    
+		    if ($strength & 1) {
+		    
+		    	$consonants .= 'BDGHJLMNPQRSTVWXZ';
+		    
+		    }
+		    
+		    if ($strength & 2) {
+		    
+		    	$vowels .= "AEUY";
+		    
+		    }
+		    
+		    if ($strength & 4) {
+		    
+		    	$consonants .= '23456789';
+		    
+		    }
+		    
+		    if ($strength & 8) {
+		    
+		    	$consonants .= '@#$%';
+		    
+		    }
+		 
+		    $codestring = '';
+		    $alt = time() % 2;
+
+		    for ($i = 0; $i < $length; $i++) {
+
+		    	if ($alt == 1) {
+
+		    		$codestring .= $consonants[(rand() % strlen($consonants))];
+		    		$alt = 0;
+
+		    	} 
+		    	
+		    	else {
+		    	
+		    		$codestring .= $vowels[(rand() % strlen($vowels))];
+		    		$alt = 1;
+		    	
+		    	}
+		    
+		    }
+		
+		return $codestring;
+
+		}
+
+		public static function get_user_ip() 
+		{
+		    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+		    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+		    $remote  = $_SERVER['REMOTE_ADDR'];
+
+		    if(filter_var($client, FILTER_VALIDATE_IP))
+		    {
+		        $ip = $client;
+		    }
+		    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+		    {
+		        $ip = $forward;
+		    }
+		    else
+		    {
+		        $ip = $remote;
+		    }
+
+		    return $ip;
 		}
 
 	}

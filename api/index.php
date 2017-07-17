@@ -6,6 +6,8 @@
     define('ROOT', $_SERVER['HTTP_HOST']);
     define('SESSION', 'hejkompis');
 
+    require_once('db-settings.php');
+
     $_SESSION[SESSION] = isset($_SESSION[SESSION]) ? $_SESSION[SESSION] : $_SESSION[SESSION] = [];
 
    // autoload känner av att vi anropar klasser och laddar motsvarande fil. 

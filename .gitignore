@@ -1,7 +1,9 @@
 # Created by https://www.gitignore.io/api/git,vagrant,composer
 
 .DS_STORE
-cache/
+/cache/
+/logs/
+/api/adminer/*
 
 ### Composer ###
 composer.phar
@@ -21,5 +23,7 @@ composer.phar
 /user/pages/blog/*
 !/user/pages/blog/.gitkeep
 !/user/pages/blog/default.md
+
+/api/db-settings.php
 
 # End of https://www.gitignore.io/api/git,vagrant,composer
