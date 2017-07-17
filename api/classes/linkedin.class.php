@@ -237,7 +237,7 @@
 					// Monday
 					$output['tag'] = 'musiken';
 					$output['description'] = '';
-					$output['comment'] = 'Musikmåndag: Ett tips från mina favoritlåtar på Spotify.';
+					$output['comment'] = 'Musikmåndag: Ett tips från mina favoritlåtar på Spotify. Se hela listan på http://hejkomp.is/tag:musiken';
 					break;
 				case "2":
 					// Tuesday
@@ -247,25 +247,25 @@
 					// Wednesday
 					$output['tag'] = 'jobbet';
 					$output['description'] = '';
-					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelaterad artikel att läsa.';
+					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelaterad artikel att läsa. Hitta fler på http://hejkomp.is/tag:jobbet';
 					break;
 				case "4":
 					// Thursday
 					$output['tag'] = 'köket';
 					$output['description'] = '';
-					$output['comment'] = 'Vet du vad du ska du äta idag? Här kommer ett tips till köket.';
+					$output['comment'] = 'Vet du vad du ska du äta idag? Här kommer ett tips till köket. Hitta mer på http://hejkomp.is/tag:köket';
 					break;
 				case "5":
 					// Friday
 					$output['tag'] = 'inspiration';
 					$output['description'] = '';
-					$output['comment'] = 'Lite inspiration behövs varje fredag!';
+					$output['comment'] = 'Lite inspiration behövs varje fredag! Det finns mer på http://hejkomp.is/tag:inspiration';
 					break;
 				case "6":
 					// Saturday
 					$output['tag'] = 'fåtöljen';
 					$output['description'] = '';
-					$output['comment'] = 'Lördag morgon, och äntligen finns det tid att läsa en riktigt bra artikel.';
+					$output['comment'] = 'Lördag morgon, och äntligen tid att läsa en riktigt bra artikel. Se alla jag sparat, på http://hejkomp.is/tag:fåtöljen';
 					break;
 				case "7":
 					// Sunday
