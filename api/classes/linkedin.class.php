@@ -4,6 +4,7 @@
 	define('CLIENT_KEY', '3ju0gOKcRpUXGlNB');
 	
 	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+
 	define('REDIRECT_URI', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$uri_parts[0]);
 	define('SCOPE', 'r_basicprofile r_emailaddress rw_company_admin w_share');
 
@@ -40,7 +41,7 @@
 
 				}
 
-				if($linkedin_credentials['access_token'] == '') {
+				if($linkedin_credentials['access_token'] == '' && $linkedin_credentials['state'] == '') {
 			
 					self::get_authorization();
 			
@@ -51,6 +52,108 @@
 			echo '<pre>';
 				print_r($linkedin_credentials);
 			echo '</pre>';
+
+		}
+
+		public static function post($data) {
+
+			$linkedin_credentials = self::get_from_db();
+
+			if(isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			}
+
+			elseif(isset($data['code'])) {
+			
+				if($linkedin_credentials['state'] == $data['state']) {
+					// Get token so you can make API calls
+					$linkedin_credentials = self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			}
+
+			else {
+
+				if($linkedin_credentials['expires_at'] < time()) {
+
+					self::reset_linkedin_session();
+
+				}
+
+				if($linkedin_credentials['access_token'] == '') {
+			
+					self::get_authorization();
+			
+				}
+
+			}
+
+			if($linkedin_credentials['expires_at'] >= time() &&  $linkedin_credentials['access_token'] != '') {
+
+				$what_post = self::get_what_post();
+
+				$post = Grav::publish_item($what_post);
+
+				$contentArray = [
+					'title' => $post['title'],
+					'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
+					'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
+					'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
+				];
+
+				$visbilityArray = [
+					'code' => 'connections-only'
+				];
+
+				$postArray = [
+					'comment' => $what_post['comment'],
+					'content' => $contentArray,
+					'visibility' => $visbilityArray
+				];
+
+				$postdata = json_encode($postArray);
+
+				$headers = [
+					'Content-Type: application/json',
+					'x-li-format: json',
+					'Authorization: Bearer '.$linkedin_credentials['access_token']
+				];
+
+				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+
+				echo '<pre>';
+					print_r($response);
+				echo '</pre>';
+
+			}
+
+		}
+
+		private static function get_authorization() {
+
+			$params = [
+				'response_type' => 'code',
+				'client_id' 	=> CLIENT_ID,
+				'redirect_uri' 	=> REDIRECT_URI,
+				'state' 		=> uniqid('', true),
+				'scope' 		=> SCOPE
+			];
+
+			$url = 'https://www.linkedin.com/oauth/v2/authorization?'.http_build_query($params);
+
+			$data = [
+				'state' => $params['state']
+			];
+
+			self::update_db($data);
+			
+			header('Location: '.$url);
 
 		}
 
@@ -96,28 +199,6 @@
 
 		}
 
-		private static function get_authorization() {
-
-			$params = [
-				'response_type' => 'code',
-				'client_id' 	=> CLIENT_ID,
-				'redirect_uri' 	=> REDIRECT_URI,
-				'state' 		=> uniqid('', true),
-				'scope' 		=> SCOPE
-			];
-
-			$url = 'https://www.linkedin.com/oauth/v2/authorization?'.http_build_query($params);
-
-			$data = [
-				'state' => $params['state']
-			];
-
-			self::update_db($data);
-			
-			header('Location: '.$url);
-
-		}
-
 		private static function get_from_db() {
 
 			$sql = 'SELECT * FROM linkedin WHERE id = 1';
@@ -142,87 +223,7 @@
 			$string = rtrim($string, ', ');
 
 			$sql = 'UPDATE linkedin SET '.$string.' WHERE id = 1';
-			DB::query($sql, true);
-
-		}
-
-		public static function post() {
-
-			$linkedin_credentials = self::get_from_db();
-
-			if(isset($data['error'])) {
-		
-				echo $data['error'] . ': ' . $data['error_description'];
-				die;
-		
-			}
-
-			elseif(isset($data['code'])) {
-			
-				if($linkedin_credentials['state'] == $data['state']) {
-					// Get token so you can make API calls
-					$linkedin_credentials = self::get_token($data);
-				} else {
-					// CSRF attack? Or did you mix up your states?
-					die;
-				}
-	
-			} 
-
-			else {
-
-				if($linkedin_credentials['expires_at'] < time()) {
-
-					self::reset_linkedin_session();
-
-				}
-
-				if($linkedin_credentials['access_token'] == '') {
-			
-					self::get_authorization();
-			
-				}
-
-				if($linkedin_credentials['expires_at'] >= time() &&  $linkedin_credentials['access_token'] != '') {
-
-					$what_post = self::get_what_post();
-
-					$post = Grav::publish_item($what_post);
-
-					$contentArray = [
-						'title' => $post['title'],
-						'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
-						'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
-						'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
-					];
-
-					$visbilityArray = [
-						'code' => 'connections-only'
-					];
-
-					$postArray = [
-						'comment' => $what_post['comment'],
-						'content' => $contentArray,
-						'visibility' => $visbilityArray
-					];
-
-					$postdata = json_encode($postArray);
-
-					$headers = [
-						'Content-Type: application/json',
-						'x-li-format: json',
-						'Authorization: Bearer '.$linkedin_credentials['access_token']
-					];
-
-					$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
-
-					echo '<pre>';
-						print_r($response);
-					echo '</pre>';
-
-				}
-
-			}		
+			DB::query($sql);
 
 		}
 
