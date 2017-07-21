@@ -19,7 +19,7 @@
             require_once($class_file);
         }
         else {
-            return false;
+            die('Class does not exist');
         }
 
     }
@@ -83,6 +83,9 @@
     if(class_exists($class)) {
         if(method_exists($class, $method)) {
           $twig_data = $class::$method($data);
+        }
+        else {
+            die('Method does not exist');
         }
     }
     

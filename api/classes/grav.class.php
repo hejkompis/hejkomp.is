@@ -8,9 +8,24 @@
 
 			$data = Content::get_all();
 
+			$blog_directories = glob(BLOG_PATH . '/*' , GLOB_ONLYDIR);
+
+			echo '<pre>';
+				print_r($blog_directories);
+			echo '</pre>';
+
+			die();
+
 			foreach($data as $key => $value) {
 
 				$folder_name = $value->folder_name;
+				$post_file = '../user/pages/blog/'.$folder_name.'/post.md';
+				$directory_path = BLOG_PATH.'/'.$folder_name;
+
+				if(in_array($directory_path, $blog_directories)) {
+					$key = array_search($directory_path, $blog_directories);
+					unset($blog_directories[$key]);
+				}
 
 				if (!file_exists('../user/pages/blog/'.$folder_name)) {
 					mkdir('../user/pages/blog/'.$folder_name, 0777, true);
@@ -48,17 +63,60 @@
 
 					$img_data = [];
 
-					$fp = fopen('../user/pages/blog/'.$folder_name.'/post.md','wb');
+					$fp = fopen($post_file,'wb');
 					fwrite($fp,$content);
 					fclose($fp);
+					
+				} else {
+
+					// hämta ut innehållet
+					$fileData = self::read_contents_of_file($post_file);
+
+					// kolla om taggarna är desamma
+					$pocket_tags = is_array($value->tags) ? $value->tags : [];
+					$file_tags = is_array($fileData['tagArray']) ? $fileData['tagArray'] : [];
+
+
+					if(array_diff($pocket_tags, $file_tags)) {
+
+						// om inte, uppdatera taggarna
+						$file_tags = $pocket_tags;
+						$tags = !empty($file_tags) ? implode(',', $file_tags) : '';
+
+						// samla ihop innehållet
+						$content = "---\r\n";
+						$content .= "title:  ".$fileData['title']."\r\n";
+						$content .= "slug:  ".$fileData['slug']."\r\n";
+						$content .= "source:  ".$fileData['source']."\r\n";
+						$content .= "date:  ".date('Y-m-d H:i', $fileData['timestamp'])."\r\n";
+						$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
+
+						if(isset($fileData['image'])) {
+							$content .= "image:  image.jpg\r\n";
+						}
+
+						$content .= "---";
+					
+						// spara i fil
+						$fp = fopen($post_file,'wb');
+						fwrite($fp,$content);
+						fclose($fp);
+
+					}
 					
 				}
 
 			}
 
+			foreach($blog_directories as $blog_directory) {
+
+				self::delete_dir($blog_directory);
+
+			}
+
 		}
 
-		public static function publish_item($data) {
+		public static function publish_item($url) {
 			
 			if(empty($data['tag'])) { echo 'tag saknas, stänger av.'; die; }
 			$date = !empty($data['date']) ? strtotime($data['date']) : time();
@@ -68,63 +126,25 @@
 
 			$di = new RecursiveDirectoryIterator('../user/pages/blog/');
 			foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-			    
-			    if($file->getFilename() == 'post.md') {
-				 	$postmd = fopen($file->getRealPath(),"r") or die("Gick ej att öppna filen");
-					$postData = fread($postmd, filesize($file->getRealPath()));
-					fclose($postmd);
-
-					$postData = ltrim($postData, "--- \n");
-					$postData = rtrim($postData, " ---");
-
-					$postDataArray = explode("\n", $postData);
-
-					foreach($postDataArray as $key => $value) {
-
-						$value = trim($value);
-
-						if($value != '') {
-							$splitValue = explode(": ", $value);
-							if(!empty($splitValue[1])) {
-								$postDataArray[trim($splitValue[0])] = trim($splitValue[1]);
-							}
-
-							$postDataArray['tagArray'] = [];
-
-							if(array_key_exists('tag', $postDataArray)) {
-								$tagString = ltrim($postDataArray['tag'], "[");
-								$tagString = rtrim($tagString, "]");
-
-								$tagArray = explode(',', $tagString);
-								foreach($tagArray as $tag) {
-									if($tag != '') { array_push($postDataArray['tagArray'],$tag); }
- 								}
-							}
-						}
-						unset($postDataArray[$key]);
-
-					}
-
-					$postDataArray['timestamp'] = strtotime($postDataArray['date']);
-
-					if(array_key_exists('image', $postDataArray)) {
-						$postDataArray['imageUrl'] = $imgUrl;
-					}
+				
+				if($file->getFilename() == 'post.md') {
+					
+					self::read_contents_of_file($file->getRealPath());
 
 					if(in_array($data['tag'], $postDataArray['tagArray'])) {
 						array_push($selectedPosts, $postDataArray);
 					}
 
-			    }
+				}
 
-			    if($file->getFilename() == 'image.jpg') {
-			    	$imgUrl = str_replace('..', 'http://'.ROOT, $file->getPathname());
-			    } else {
-			    	$imgUrl = '';
-			    }
+				if($file->getFilename() == 'image.jpg') {
+					$imgUrl = str_replace('..', 'http://'.ROOT, $file->getPathname());
+				} else {
+					$imgUrl = '';
+				}
 
-			    $postmd = '';
-			    
+				$postmd = '';
+				
 			}
 
 			$lastWeeksPosts = [];
@@ -151,11 +171,80 @@
 			return $selectedPost;
 
 		}
+		
+		private static function read_contents_of_file($file) {
+
+			$postmd = fopen($file,"r") or die("Gick ej att öppna filen");
+			$postData = fread($postmd, filesize($file));
+			fclose($postmd);
+
+			$postData = ltrim($postData, "--- \n");
+			$postData = rtrim($postData, " ---");
+
+			$postDataArray = explode("\n", $postData);
+
+			foreach($postDataArray as $key => $value) {
+
+				$value = trim($value);
+
+				if($value != '') {
+					$splitValue = explode(": ", $value);
+					if(!empty($splitValue[1])) {
+						$postDataArray[trim($splitValue[0])] = trim($splitValue[1]);
+					}
+
+					$postDataArray['tagArray'] = [];
+
+					if(array_key_exists('tag', $postDataArray)) {
+						$tagString = ltrim($postDataArray['tag'], "[");
+						$tagString = rtrim($tagString, "]");
+
+						$tagArray = explode(',', $tagString);
+						foreach($tagArray as $tag) {
+							if($tag != '') { array_push($postDataArray['tagArray'],$tag); }
+						}
+					}
+				}
+				unset($postDataArray[$key]);
+
+			}
+
+			$postDataArray['timestamp'] = strtotime($postDataArray['date']);
+
+			if(array_key_exists('image', $postDataArray)) {
+
+				$imgUrl = str_replace('post.md', 'image.jpg', $file);
+				$imgUrl = str_replace('..', 'http://'.ROOT, $imgUrl);
+
+				$postDataArray['imageUrl'] = $imgUrl;
+			}
+
+			return $postDataArray;
+
+		}
 
 		static private function get_random_post($posts) {
 			$noofPosts = count($posts)-1;
 			$randomValue = rand(0, $noofPosts);
 			return $posts[$randomValue];
+		}
+
+		public static function delete_dir($dir_path) {
+			if (! is_dir($dir_path)) {
+				throw new InvalidArgumentException($dir_path.' must be a directory');
+			}
+			if (substr($dir_path, strlen($dir_path) - 1, 1) != '/') {
+				$dir_path .= '/';
+			}
+			$files = glob($dir_path . '*', GLOB_MARK);
+			foreach ($files as $file) {
+				if (is_dir($file)) {
+					self::delete_dir($file);
+				} else {
+					unlink($file);
+				}
+			}
+			rmdir($dir_path);
 		}
 
 	}

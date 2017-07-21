@@ -35,11 +35,11 @@
 
 			$output = [];
 
-			$spotify_items = Spotify::get_all();
+			//$spotify_items = Spotify::get_all();
+			$spotify_items = array();
 			$pocket_items = Pocket::get_all();
 
 			$output = array_merge($spotify_items, $pocket_items);
-			// $output = $pocket_items;
 			usort($output, "cmp");
 
 			$output = array_reverse($output);

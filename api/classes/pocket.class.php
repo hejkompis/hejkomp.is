@@ -8,7 +8,6 @@
 				$url, 
 				$image, 
 				$tags = [],
-				$decriptions = [],
 				$timestamp;
 
 		function __construct($object) {
@@ -32,7 +31,6 @@
 			if(isset($object->tags) && is_object($object->tags)) {
 				foreach($object->tags as $tag) {
 					array_push($this->tags, $tag->tag);
-					array_push($this->descriptions, Tag::setTagName($tag->tag));
 				}
 			}
 
