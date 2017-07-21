@@ -10,12 +10,6 @@
 
 			$blog_directories = glob(BLOG_PATH . '/*' , GLOB_ONLYDIR);
 
-			echo '<pre>';
-				print_r($blog_directories);
-			echo '</pre>';
-
-			die();
-
 			foreach($data as $key => $value) {
 
 				$folder_name = $value->folder_name;
