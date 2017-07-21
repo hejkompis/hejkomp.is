@@ -65,17 +65,51 @@
 
 					// hämta ut innehållet
 					$fileData = self::read_contents_of_file($post_file);
+					// vi utgår från att inget måste uppdateras
+					$update_content = false;
+
+					$image_to_content = '';
+
+					if(isset($fileData['image'])) {
+						$image_to_content = "image:  image.jpg\r\n";
+					} else {
+
+						if($value->image) {
+
+							$img_data = getimagesize($value->image);
+
+							if($img_data[0] > 320 && $img_data[1] > 320) {
+							
+								$image = Content::curl_get_contents($value->image);
+
+								$fp = fopen('../user/pages/blog/'.$folder_name.'/image.jpg', 'w');
+								fwrite($fp, $image);
+								fclose($fp);
+
+								$image_to_content = "image:  image.jpg\r\n";
+								$update_content = true;
+
+							}
+							
+						}
+
+					}
 
 					// kolla om taggarna är desamma
 					$pocket_tags = is_array($value->tags) ? $value->tags : [];
 					$file_tags = is_array($fileData['tagArray']) ? $fileData['tagArray'] : [];
 
-
 					if(array_diff($pocket_tags, $file_tags)) {
 
 						// om inte, uppdatera taggarna
 						$file_tags = $pocket_tags;
-						$tags = !empty($file_tags) ? implode(',', $file_tags) : '';
+						$update_content = true;
+
+					}
+
+					$tags = !empty($file_tags) ? implode(',', $file_tags) : '';
+
+					if($update_content) {
 
 						// samla ihop innehållet
 						$content = "---\r\n";
@@ -84,10 +118,7 @@
 						$content .= "source:  ".$fileData['source']."\r\n";
 						$content .= "date:  ".date('Y-m-d H:i', $fileData['timestamp'])."\r\n";
 						$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
-
-						if(isset($fileData['image'])) {
-							$content .= "image:  image.jpg\r\n";
-						}
+						$content .= $image_to_content;
 
 						$content .= "---";
 					
