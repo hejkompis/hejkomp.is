@@ -30,7 +30,7 @@
 			}
 
 			if($headers) {
-				$headers = !is_array($headers) ? array() : $headers;
+				$headers = !is_array($headers) ? array($headers) : $headers;
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			}
 
