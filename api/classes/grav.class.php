@@ -163,19 +163,20 @@
 
 				if($input->image) {
 
-					//$img_data = getimagesize($input->image);
+					$image = Content::curl_get_contents($input->image);
+					$imageUrl = '../user/pages/blog/'.$folder_name.'/image.jpg';
 
-					//if($img_data[0] > 320 && $img_data[1] > 320) {
+					$fp = fopen($imageUrl, 'w');
+					fwrite($fp, $image);
+					fclose($fp);
+
+					$img_data = getimagesize($imageUrl);
+
+					if($img_data[0] > 320 && $img_data[1] > 320) {
 					
-						$image = Content::curl_get_contents($input->image);
-
-						$fp = fopen('../user/pages/blog/'.$folder_name.'/image.jpg', 'w');
-						fwrite($fp, $image);
-						fclose($fp);
-
 						$content .= "image:  image.jpg\r\n";
 
-					//}
+					}
 					
 				}
 
@@ -202,20 +203,21 @@
 
 					if($input->image) {
 
-						//$img_data = getimagesize($input->image);
+						$image = Content::curl_get_contents($input->image);
+						$imageUrl = '../user/pages/blog/'.$folder_name.'/image.jpg';
 
-						//if($img_data[0] > 320 && $img_data[1] > 320) {
+						$fp = fopen($imageUrl, 'w');
+						fwrite($fp, $image);
+						fclose($fp);
+
+						$img_data = getimagesize($imageUrl);
+
+						if($img_data[0] > 320 && $img_data[1] > 320) {
 						
-							$image = Content::curl_get_contents($input->image);
-
-							$fp = fopen('../user/pages/blog/'.$folder_name.'/image.jpg', 'w');
-							fwrite($fp, $image);
-							fclose($fp);
-
 							$image_to_content = "image:  image.jpg\r\n";
 							$update_content = true;
 
-						//}
+						}
 						
 					}
 
