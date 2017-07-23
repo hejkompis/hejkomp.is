@@ -163,9 +163,9 @@
 
 				if($input->image) {
 
-					$img_data = getimagesize($input->image);
+					//$img_data = getimagesize($input->image);
 
-					if($img_data[0] > 320 && $img_data[1] > 320) {
+					//if($img_data[0] > 320 && $img_data[1] > 320) {
 					
 						$image = Content::curl_get_contents($input->image);
 
@@ -175,7 +175,7 @@
 
 						$content .= "image:  image.jpg\r\n";
 
-					}
+					//}
 					
 				}
 

@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/accounts/per.yaml',
-    'modified' => 1493651032,
+    'modified' => 1500047079,
     'data' => [
         'email' => 'per@grafikprofil.se',
         'fullname' => 'Per Olsson',

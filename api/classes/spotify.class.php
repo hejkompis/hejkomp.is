@@ -22,7 +22,7 @@
 
 		function __construct($object) {
 
-			$this->name 		= $object->track->artists[0]->name.' - '.$object->track->name;
+			$this->name 		= Content::set_name($object->track->artists[0]->name.' - '.$object->track->name);
 			$this->url 			= $object->track->external_urls->spotify;
 			$this->timestamp 	= strtotime($object->added_at);
 			$this->folder_name 	= Content::set_folder_name($this->timestamp, $this->name);
