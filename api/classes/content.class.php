@@ -74,10 +74,11 @@
 			$str = strip_tags($str); 
 			$str = preg_replace('/[\r\n\t ]+/', ' ', $str);
 			$str = preg_replace('/[\"\*\/\:\<\>\?\'\|]+/', ' ', $str);
+			$str = str_replace('[', '', $str);
+			$str = str_replace(']', '', $str);
 			$str = html_entity_decode( $str, ENT_QUOTES, "utf-8" );
 			$str = htmlentities($str, ENT_QUOTES, "utf-8");
 
-			var_dump($str);
 			return $str;
 
 		}
