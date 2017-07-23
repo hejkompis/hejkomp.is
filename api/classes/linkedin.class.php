@@ -201,7 +201,7 @@
 
 		private static function get_from_db() {
 
-			$sql = 'SELECT * FROM linkedin WHERE id = 1';
+			$sql = 'SELECT * FROM tokens WHERE name = "linkedin"';
 			$cred = DB::query($sql, true);
 
 			return $cred;
@@ -222,7 +222,7 @@
 
 			$string = rtrim($string, ', ');
 
-			$sql = 'UPDATE linkedin SET '.$string.' WHERE id = 1';
+			$sql = 'UPDATE tokens SET '.$string.' WHERE name = "linkedin"';
 			DB::query($sql);
 
 		}

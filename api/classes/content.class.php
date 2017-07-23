@@ -35,9 +35,8 @@
 
 			$output = [];
 
-			//$spotify_items = Spotify::get_all();
-			$spotify_items = array();
-			$pocket_items = Pocket::get_all();
+			$spotify_items = !empty(Spotify::get_favourites()) ? Spotify::get_favourites() : [];
+			$pocket_items = !empty(Pocket::get_all()) ? Pocket::get_all() : [];
 
 			$output = array_merge($spotify_items, $pocket_items);
 			usort($output, "cmp");

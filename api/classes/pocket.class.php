@@ -75,7 +75,9 @@
 
 			$output = array_reverse($output);
 
-			return $output;
+			foreach($output as $key => $value) {
+				Grav::save_item($value);
+			}
 		}		
 
 	}

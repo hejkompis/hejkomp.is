@@ -141,6 +141,130 @@
 
 		}
 
+		static public function save_item($input) {
+
+			$folder_name = $input->folder_name;
+			$post_file = '../user/pages/blog/'.$folder_name.'/post.md';
+			$directory_path = BLOG_PATH.'/'.$folder_name;
+
+			if (!file_exists('../user/pages/blog/'.$folder_name)) {
+				mkdir('../user/pages/blog/'.$folder_name, 0777, true);
+
+				$tags = !empty($input->tags) ? implode(',', $input->tags) : '';
+
+				$content = "---\r\n";
+				$content .= "title:  ".$input->name."\r\n";
+				$content .= "slug:  ".$input->slug."\r\n";
+				$content .= "source:  ".$input->url."\r\n";
+				$content .= "date:  ".date('Y-m-d H:i', $input->timestamp)."\r\n";
+				$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
+
+				$img_data = [];
+
+				if($input->image) {
+
+					$img_data = getimagesize($input->image);
+
+					if($img_data[0] > 320 && $img_data[1] > 320) {
+					
+						$image = Content::curl_get_contents($input->image);
+
+						$fp = fopen('../user/pages/blog/'.$folder_name.'/image.jpg', 'w');
+						fwrite($fp, $image);
+						fclose($fp);
+
+						$content .= "image:  image.jpg\r\n";
+
+					}
+					
+				}
+
+				$content .= "---";
+
+				$img_data = [];
+
+				$fp = fopen($post_file,'wb');
+				fwrite($fp,$content);
+				fclose($fp);
+				
+			} else {
+
+				// hämta ut innehållet
+				$fileData = self::read_contents_of_file($post_file);
+				// vi utgår från att inget måste uppdateras
+				$update_content = false;
+
+				$image_to_content = '';
+
+				if(isset($fileData['image'])) {
+					$image_to_content = "image:  image.jpg\r\n";
+				} else {
+
+					if($input->image) {
+
+						$img_data = getimagesize($input->image);
+
+						if($img_data[0] > 320 && $img_data[1] > 320) {
+						
+							$image = Content::curl_get_contents($input->image);
+
+							$fp = fopen('../user/pages/blog/'.$folder_name.'/image.jpg', 'w');
+							fwrite($fp, $image);
+							fclose($fp);
+
+							$image_to_content = "image:  image.jpg\r\n";
+							$update_content = true;
+
+						}
+						
+					}
+
+				}
+
+				// kolla om taggarna är desamma
+				$fetched_tags = is_array($input->tags) ? $input->tags : [];
+
+				$file_tags = is_array($fileData['tagArray']) ? $fileData['tagArray'] : [];
+
+				$diff1 = array_diff($fetched_tags, $file_tags);
+				$diff2 = array_diff($file_tags, $fetched_tags);
+
+				$diff = array_merge($diff1, $diff2);
+
+				if(count($diff) > 0) {
+
+					// om inte, uppdatera taggarna
+					$file_tags = $fetched_tags;
+					$update_content = true;
+
+				}
+
+				$tags = !empty($file_tags) ? implode(',', $file_tags) : '';
+
+				if($update_content) {
+
+					// samla ihop innehållet
+					$content = "---\r\n";
+					$content .= "title:  ".$fileData['title']."\r\n";
+					$content .= "slug:  ".$fileData['slug']."\r\n";
+					$content .= "source:  ".$fileData['source']."\r\n";
+					$content .= "date:  ".date('Y-m-d H:i', $fileData['timestamp'])."\r\n";
+					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
+					$content .= $image_to_content;
+
+					$content .= "---";
+				
+					// spara i fil
+					$fp = fopen($post_file,'wb');
+					fwrite($fp,$content);
+					fclose($fp);
+
+				}
+				
+			}
+
+		}
+
 		public static function publish_item($url) {
 			
 			if(empty($data['tag'])) { echo 'tag saknas, stänger av.'; die; }

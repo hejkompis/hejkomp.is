@@ -1,8 +1,14 @@
-<?php 
+<?php
+
+	define('CLIENT_ID', 'f6a80d92d1c34a0abea6656a44150dfb');
+	define('CLIENT_KEY', 'cd2e7f85d91c413f993dbbf12f9e400d');
+	
+	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+
+	define('REDIRECT_URI', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$uri_parts[0]);
+	define('SCOPE', 'playlist-read-private');
 
 	class Spotify {
-
-		private static $access_token = '';
 
 		private $type = 'Spotify', 
 				$name,
@@ -42,70 +48,184 @@
 			return FALSE; 
 		}
 
-		private static function set_access_token() {
+		static public function fallback($data) {
 
-			$url = 'https://accounts.spotify.com/api/token';
-			$headers = 'Authorization: Basic ZjZhODBkOTJkMWMzNGEwYWJlYTY2NTZhNDQxNTBkZmI6Y2QyZTdmODVkOTFjNDEzZjk5M2RiYmYxMmY5ZTQwMGQ=';
-			$data = [
-				'grant_type' => 'refresh_token',
-				'refresh_token' => 'AQA62ufl1llWZ-E7gqbZYnktEmbeyqjyx-QCp_sHV9uBCboVtm7VO4ml8VlnAda2UJpwWLZ1colozBtGhON95_iHHdltCTkdIPZoEJe5KY4AvqrVMEsZREhfujiYF_oOeT0'
-			];
-
-			$data = Curl::get($url, $headers, 'post', $data);
-
-			Spotify::$access_token = $data->access_token;
+			die('Method not in use');
 
 		}
 
-		static function get_playlist_length() {
+		public static function get_favourites($data = false) {
 
-			self::set_access_token();
+			$credentials = self::get_from_db();
+
+			if(isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			}
+
+			elseif(isset($data['code'])) {
+			
+				if($credentials['state'] == $data['state']) {
+					// Get token so you can make API calls
+					$credentials = self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			}
+
+			else {
+
+				if($credentials['expires_at'] < time()) {
+
+					self::reset_db();
+
+				}
+
+				if($credentials['access_token'] == '') {
+			
+					self::get_authorization();
+			
+				}
+
+			}
+
+			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
+
+				// do good stuff here
+				$no_of_songs = self::get_playlist_length($credentials);
+				$headers = 'Authorization: Bearer '.$credentials['access_token'];
+
+				$output = [];			
+
+				for($i = 0; $i < $no_of_songs; $i += 100) {
+
+					$url = 'https://api.spotify.com/v1/users/amadore/playlists/6jP2cBhQHmEqxoCr4UMp03/tracks?offset='.$i;
+					
+					$data = Curl::get($url, $headers);
+					
+					foreach($data->items as $item) {
+						
+						$output[] = new Spotify($item);
+						
+					}
+
+				}
+
+				foreach($output as $key => $value) {
+					Grav::save_item($value);
+				}
+
+			}
+
+		}
+
+		private static function get_authorization() {
+
+			$params = [
+				'response_type' => 'code',
+				'client_id' 	=> CLIENT_ID,
+				'redirect_uri' 	=> REDIRECT_URI,
+				'state' 		=> uniqid('', true),
+				'scope' 		=> SCOPE
+			];
+
+			$url = 'https://accounts.spotify.com/authorize?'.http_build_query($params);
+
+			$data = [
+				'state' => $params['state']
+			];
+
+			self::update_db($data);
+			
+			header('Location: '.$url);
+
+		}
+
+		static public function get_token($data) {
+
+			$new_linkedin_credentials = self::get_from_db();
+
+			$postdata = [
+				'grant_type' 	=> 'authorization_code',
+				'code' 			=> $data['code'],
+				'redirect_uri' 	=> REDIRECT_URI,
+				'client_id' 	=> CLIENT_ID,
+				'client_secret' => CLIENT_KEY
+			];
+
+			$token = Curl::get('https://accounts.spotify.com/api/token', true, 'post', $postdata);
+
+			$data = [
+				'access_token' 	=> $token->access_token,
+				'expires_in' 	=> $token->expires_in,
+				'expires_at'	=> time() + $token->expires_in
+			];
+
+			self::update_db($data);
+
+			$new_credentials['access_token'] = $token->access_token;
+			$new_credentials['expires_in'] = $token->expires_in;
+			$new_credentials['expires_at'] = time() + $token->expires_in;
+			return $new_credentials;
+
+		}
+
+		public static function reset_db() {
+
+			$clear = [
+				'state' 		=> '',
+				'access_token' 	=> '',
+				'expires_in' 	=> 0,
+				'expires_at'	=> 0
+			];
+
+			self::update_db($clear);
+
+		}
+
+		private static function get_from_db() {
+
+			$sql = 'SELECT * FROM tokens WHERE name = "spotify"';
+			$cred = DB::query($sql, true);
+
+			return $cred;
+
+		}
+
+		private static function update_db($data) {
+
+			$string = '';
+
+			foreach($data as $key => $value) {
+				if(is_string($value)) {
+					$value = '"'.$value.'"';
+				}
+
+				$string .= $key.' = '.$value.', ';
+			}
+
+			$string = rtrim($string, ', ');
+
+			$sql = 'UPDATE tokens SET '.$string.' WHERE name = "spotify"';
+			DB::query($sql);
+
+		}
+
+		static function get_playlist_length($input) {
 
 			$output = [];
 
 			$url = 'https://api.spotify.com/v1/users/amadore/playlists/6jP2cBhQHmEqxoCr4UMp03/tracks';
 			//'type' 		=> 'items',
-			$headers = 'Authorization: Bearer '.Spotify::$access_token;
+			$headers = 'Authorization: Bearer '.$input['access_token'];
 
 			$output = Curl::get($url, $headers);
 
 			return $output->total;
-
-		}
-
-		static function get_all() {
-
-			self::set_access_token();
-			$headers = 'Authorization: Bearer '.Spotify::$access_token;
-
-			$no_of_songs = self::get_playlist_length();
-
-			$output = [];			
-
-			for($i = 0; $i < $no_of_songs; $i += 100) {
-
-				$url = 'https://api.spotify.com/v1/users/amadore/playlists/6jP2cBhQHmEqxoCr4UMp03/tracks?offset='.$i;
-				
-				$data = Curl::get($url, $headers);
-
-				// $count = 1;
-
-				// foreach($data->items as $item) {
-					
-				// 	if($count++ <= 2) {
-				// 		$output[] = new Spotify($item);
-				// 	}
-					
-				// }
-				
-				foreach($data->items as $item) {
-					
-					$output[] = new Spotify($item);
-					
-				}
-
-			}
-			return $output;
 
 		}
 
