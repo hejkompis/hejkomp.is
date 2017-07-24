@@ -235,7 +235,7 @@
 			switch ($day) {
 				case "1":
 					// Monday
-					$output['tag'] = 'musiken';
+					$output['tag'] = 'låtar';
 					$output['description'] = '';
 					$output['comment'] = 'Musikmåndag: Ett tips från mina favoritlåtar på Spotify. Se hela listan på http://hejkomp.is/tag:musiken';
 					break;
