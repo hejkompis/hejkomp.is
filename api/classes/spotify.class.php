@@ -6,7 +6,7 @@
 	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 
 	define('REDIRECT_URI', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$uri_parts[0]);
-	define('SCOPE', 'playlist-read-private');
+	define('SCOPE', 'playlist-read-private user-library-read');
 
 	class Spotify {
 
@@ -22,16 +22,14 @@
 
 		function __construct($object) {
 
-			$this->name 		= Content::set_name($object->track->artists[0]->name.' - '.$object->track->name);
-			$this->url 			= $object->track->external_urls->spotify;
-			$this->timestamp 	= strtotime($object->added_at);
+			$this->name 		= Content::set_name($object['name']);
+			$this->url 			= $object['url'];
+			$this->timestamp 	= strtotime($object['timestamp']);
 			$this->folder_name 	= Content::set_folder_name($this->timestamp, $this->name);
 			$this->slug = Content::set_slug($this->name);
-			if(isset($object->track->album->images[0]->url) && is_object($object->track->album)) {
-				$this->image 	= $object->track->album->images[0]->url;	
-			}
-			$this->tags 		= ['musiken'];
-			$this->description	= [Tag::setTagName('musiken')];
+			$this->image 		= $object['image'];	
+			$this->tags 		= [$object['tag']];
+			$this->description	= [Tag::setTagName($object['tag'])];
 		
 		}
 
@@ -108,8 +106,106 @@
 					$data = Curl::get($url, $headers);
 					
 					foreach($data->items as $item) {
+
+						$image = false;
+
+						if(isset($item->track->album->images[0]->url) && is_object($item->track->album)) {
+							$image = $item->track->album->images[0]->url;
+						}
+
+						$item_data = [
+							'name' => $item->track->artists[0]->name.' - '.$item->track->name,
+							'url' => $item->track->external_urls->spotify,
+							'timestamp' => $item->added_at,
+							'image' => $image,
+							'tag' => 'låtar'
+						];
 						
-						$output[] = new Spotify($item);
+						$output[] = new Spotify($item_data);
+						
+					}
+
+				}
+
+				foreach($output as $key => $value) {
+
+					Grav::save_item($value);
+				}
+
+			}
+
+		}
+
+		public static function get_albums($data = false) {
+
+			$credentials = self::get_from_db();
+
+			if(isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			}
+
+			elseif(isset($data['code'])) {
+			
+				if($credentials['state'] == $data['state']) {
+					// Get token so you can make API calls
+					$credentials = self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			}
+
+			else {
+
+				if($credentials['expires_at'] < time()) {
+
+					self::reset_db();
+
+				}
+
+				if($credentials['access_token'] == '') {
+			
+					self::get_authorization();
+			
+				}
+
+			}
+
+			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
+
+				// do good stuff here
+				$no_of_songs = self::get_albums_length($credentials);
+				$headers = 'Authorization: Bearer '.$credentials['access_token'];
+
+				$output = [];			
+
+				for($i = 0; $i < $no_of_songs; $i += 100) {
+
+					$url = 'https://api.spotify.com/v1/me/albums?offset='.$i;
+					
+					$data = Curl::get($url, $headers);
+
+					foreach($data->items as $item) {
+
+						$image = false;
+
+						if(isset($item->album->images[0]->url) && is_object($item->album)) {
+							$image = $item->album->images[0]->url;
+						}
+
+						$item_data = [
+							'name' => $item->album->artists[0]->name.' - '.$item->album->name,
+							'url' => $item->album->external_urls->spotify,
+							'timestamp' => $item->added_at,
+							'image' => $image,
+							'tag' => 'album'
+						];
+						
+						$output[] = new Spotify($item_data);
 						
 					}
 
@@ -220,6 +316,20 @@
 			$output = [];
 
 			$url = 'https://api.spotify.com/v1/users/amadore/playlists/6jP2cBhQHmEqxoCr4UMp03/tracks';
+			//'type' 		=> 'items',
+			$headers = 'Authorization: Bearer '.$input['access_token'];
+
+			$output = Curl::get($url, $headers);
+
+			return $output->total;
+
+		}
+
+		static function get_albums_length($input) {
+
+			$output = [];
+
+			$url = 'https://api.spotify.com/v1/me/albums';
 			//'type' 		=> 'items',
 			$headers = 'Authorization: Bearer '.$input['access_token'];
 
