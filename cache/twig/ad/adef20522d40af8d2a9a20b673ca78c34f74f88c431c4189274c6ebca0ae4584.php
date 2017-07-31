@@ -31,13 +31,13 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         ";
         // line 4
         $this->displayBlock('head', $context, $blocks);
-        // line 50
+        // line 52
         echo "    </head>
 
     ";
-        // line 52
+        // line 54
         $this->displayBlock('body', $context, $blocks);
-        // line 55
+        // line 57
         echo "
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-KRGNN9\"
@@ -45,20 +45,20 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         <!-- End Google Tag Manager (noscript) -->
 
         ";
-        // line 61
-        $this->loadTemplate("partials/navigation.html.twig", "partials/base.html.twig", 61)->display($context);
-        // line 62
+        // line 63
+        $this->loadTemplate("partials/navigation.html.twig", "partials/base.html.twig", 63)->display($context);
+        // line 64
         echo "
         <div class=\"site-wrapper\">
 
             ";
-        // line 65
+        // line 67
         $this->displayBlock('content', $context, $blocks);
-        // line 66
+        // line 68
         echo "
             <footer class=\"site-footer clearfix\">
                 <section class=\"copyright\"><a href=\"";
-        // line 68
+        // line 70
         echo (isset($context["base_url"]) ? $context["base_url"] : null);
         echo "\">";
         echo $this->getAttribute((isset($context["site"]) ? $context["site"] : null), "title", array());
@@ -69,16 +69,16 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         </div>
 
         ";
-        // line 75
+        // line 77
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 92
+        // line 97
         echo "
     </body>
     ";
-        // line 94
+        // line 99
         $this->displayBlock('bottom', $context, $blocks);
-        // line 95
+        // line 100
         echo "</html>
 ";
     }
@@ -201,86 +201,94 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         // line 41
         echo "        <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400\" />
 
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" />
+
         ";
-        // line 43
+        // line 45
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 48
+        // line 50
         echo "
         ";
     }
 
-    // line 43
+    // line 45
     public function block_stylesheets($context, array $blocks = array())
     {
-        // line 44
+        // line 46
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/screen.css", 1 => 101), "method");
-        // line 45
+        // line 47
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/custom.css", 1 => 101), "method");
-        // line 46
+        // line 48
         echo "            ";
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "css", array(), "method");
         echo "
         ";
     }
 
-    // line 52
+    // line 54
     public function block_body($context, array $blocks = array())
     {
-        // line 53
+        // line 55
         echo "    <body class=\"home-template nav-closed\">
     ";
     }
 
-    // line 65
+    // line 67
     public function block_content($context, array $blocks = array())
     {
     }
 
-    // line 75
+    // line 77
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 76
+        // line 78
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "jquery", 1 => 101), "method");
-        // line 77
+        // line 79
         echo "
             ";
-        // line 79
+        // line 81
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/index.js"), "method");
-        // line 80
+        // line 82
         echo "
             ";
-        // line 82
+        // line 84
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/prism.js"), "method");
-        // line 83
+        // line 85
         echo "
             ";
-        // line 85
+        // line 87
         echo "            ";
-        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
-            // line 86
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
-            // line 87
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
-            // line 88
-            echo "            ";
-        }
-        // line 89
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/custom.js"), "method");
+        // line 88
         echo "
             ";
         // line 90
+        echo "            ";
+        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
+            // line 91
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
+            // line 92
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
+            // line 93
+            echo "            ";
+        }
+        // line 94
+        echo "
+            ";
+        // line 95
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "js", array(), "method");
         echo "
         ";
     }
 
-    // line 94
+    // line 99
     public function block_bottom($context, array $blocks = array())
     {
     }
@@ -297,7 +305,7 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
     public function getDebugInfo()
     {
-        return array (  284 => 94,  278 => 90,  275 => 89,  272 => 88,  269 => 87,  266 => 86,  263 => 85,  260 => 83,  257 => 82,  254 => 80,  251 => 79,  248 => 77,  245 => 76,  242 => 75,  237 => 65,  232 => 53,  229 => 52,  222 => 46,  219 => 45,  216 => 44,  213 => 43,  208 => 48,  206 => 43,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 95,  80 => 94,  76 => 92,  73 => 75,  62 => 68,  58 => 66,  56 => 65,  51 => 62,  49 => 61,  41 => 55,  39 => 52,  35 => 50,  33 => 4,  28 => 2,  25 => 1,);
+        return array (  292 => 99,  286 => 95,  283 => 94,  280 => 93,  277 => 92,  274 => 91,  271 => 90,  268 => 88,  265 => 87,  262 => 85,  259 => 84,  256 => 82,  253 => 81,  250 => 79,  247 => 78,  244 => 77,  239 => 67,  234 => 55,  231 => 54,  224 => 48,  221 => 47,  218 => 46,  215 => 45,  210 => 50,  208 => 45,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 100,  80 => 99,  76 => 97,  73 => 77,  62 => 70,  58 => 68,  56 => 67,  51 => 64,  49 => 63,  41 => 57,  39 => 54,  35 => 52,  33 => 4,  28 => 2,  25 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -352,6 +360,8 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         {# Fonts #}
         <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400\" />
 
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" />
+
         {% block stylesheets %}
             {% do assets.add('theme://css/screen.css',101) %}
             {% do assets.add('theme://css/custom.css',101) %}
@@ -392,6 +402,9 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
             {# Highlighting #}
             {% do assets.add('theme://js/prism.js') %}
+
+            {# Custom JS #}
+            {% do assets.add('theme://js/custom.js') %}
 
             {# ... #}
             {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}

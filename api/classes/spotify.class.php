@@ -1,12 +1,9 @@
 <?php
-
-	define('CLIENT_ID', 'f6a80d92d1c34a0abea6656a44150dfb');
-	define('CLIENT_KEY', 'cd2e7f85d91c413f993dbbf12f9e400d');
 	
 	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 
 	define('REDIRECT_URI', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$uri_parts[0]);
-	define('SCOPE', 'playlist-read-private user-library-read');
+	define('SCOPE', 'playlist-read-private user-library-read user-read-currently-playing');
 
 	class Spotify {
 
@@ -219,11 +216,106 @@
 
 		}
 
+		public static function get_current($data = false) {
+
+			$credentials = self::get_from_db();
+
+			if(isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			}
+
+			elseif(isset($data['code'])) {
+			
+				if($credentials['state'] == $data['state']) {
+					// Get token so you can make API calls
+					$credentials = self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			}
+
+			else {
+
+				if($credentials['expires_at'] < time()) {
+
+					self::reset_db();
+
+				}
+
+				if($credentials['access_token'] == '') {
+			
+					self::get_authorization();
+			
+				}
+
+			}
+
+			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
+
+				// do good stuff here
+				$headers = 'Authorization: Bearer '.$credentials['access_token'];
+
+				$url = 'https://api.spotify.com/v1/me/player/currently-playing';
+				$data = Curl::get($url, $headers);
+
+				$output = [
+					'status' => '',
+					'artist' => '',
+					'track' => '',
+					'url' => ''
+				];
+
+				if($data->is_playing) {
+
+					$output['status'] = 'playing';
+					$output['artist'] = $data->item->album->artists[0]->name;
+					$output['track'] = $data->item->name;
+					$output['url'] = $data->item->external_urls->spotify;
+
+				} else {
+
+					$output['status'] = 'paused';
+
+				}
+
+				$string = '';
+
+				foreach($output as $key => $value) {
+					if(is_string($value)) {
+						$value = '"'.$value.'"';
+					}
+
+					$string .= $key.' = '.$value.', ';
+				}
+
+				$string = rtrim($string, ', ');
+
+				$sql = 'UPDATE currently_playing SET '.$string.'';
+				DB::query($sql);
+
+			}
+
+		}
+
+		public static function print_current() {
+
+			$sql = 'SELECT * FROM currently_playing LIMIT 1';
+			$data = DB::query($sql, true);
+
+			echo json_encode($data);
+
+		}
+
 		private static function get_authorization() {
 
 			$params = [
 				'response_type' => 'code',
-				'client_id' 	=> CLIENT_ID,
+				'client_id' 	=> SPOTIFY_CLIENT_ID,
 				'redirect_uri' 	=> REDIRECT_URI,
 				'state' 		=> uniqid('', true),
 				'scope' 		=> SCOPE
@@ -249,8 +341,8 @@
 				'grant_type' 	=> 'authorization_code',
 				'code' 			=> $data['code'],
 				'redirect_uri' 	=> REDIRECT_URI,
-				'client_id' 	=> CLIENT_ID,
-				'client_secret' => CLIENT_KEY
+				'client_id' 	=> SPOTIFY_CLIENT_ID,
+				'client_secret' => SPOTIFY_CLIENT_KEY
 			];
 
 			$token = Curl::get('https://accounts.spotify.com/api/token', true, 'post', $postdata);

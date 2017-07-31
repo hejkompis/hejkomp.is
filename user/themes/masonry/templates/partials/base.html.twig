@@ -40,6 +40,8 @@
         {# Fonts #}
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
         {% block stylesheets %}
             {% do assets.add('theme://css/screen.css',101) %}
             {% do assets.add('theme://css/custom.css',101) %}
@@ -80,6 +82,9 @@
 
             {# Highlighting #}
             {% do assets.add('theme://js/prism.js') %}
+
+            {# Custom JS #}
+            {% do assets.add('theme://js/custom.js') %}
 
             {# ... #}
             {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}

@@ -1,7 +1,4 @@
 <?php
-
-	define('CLIENT_ID', '785m6qrraf5l3x');
-	define('CLIENT_KEY', '3ju0gOKcRpUXGlNB');
 	
 	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 
@@ -139,7 +136,7 @@
 
 			$params = [
 				'response_type' => 'code',
-				'client_id' 	=> CLIENT_ID,
+				'client_id' 	=> LINKEDIN_CLIENT_ID,
 				'redirect_uri' 	=> REDIRECT_URI,
 				'state' 		=> uniqid('', true),
 				'scope' 		=> SCOPE
@@ -165,8 +162,8 @@
 				'grant_type' 	=> 'authorization_code',
 				'code' 			=> $data['code'],
 				'redirect_uri' 	=> REDIRECT_URI,
-				'client_id' 	=> CLIENT_ID,
-				'client_secret' => CLIENT_KEY
+				'client_id' 	=> LINKEDIN_CLIENT_ID,
+				'client_secret' => LINKEDIN_CLIENT_KEY
 			];
 
 			$token = Curl::get('https://www.linkedin.com/oauth/v2/accessToken', true, 'post', $postdata);
