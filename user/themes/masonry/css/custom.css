@@ -25,6 +25,7 @@ header.no-cover.main-header .overlay {
 .masonry .post {
 	width: 21%;
 	margin: 2%;
+	overflow: hidden;
 }
 
 .masonry .post .post-image {
