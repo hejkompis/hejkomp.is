@@ -69,6 +69,10 @@ body:not(.post-template) .post-title {
 	margin: 3rem auto 1rem auto !important;
 }
 
+.show-on-mobile {
+	display: none;
+}
+
 @media only screen and (max-width: 992px) {
 
 	/* change of columns for tablet */
@@ -126,5 +130,18 @@ body:not(.post-template) .post-title {
 	/* hide on mobile class */
 	.hide-on-mobile {
 		display: none !important;
+	}
+
+	.show-on-mobile {
+		display: block !important;
+	}
+
+	.span-menu-on-mobile {
+		line-height: 1.8em;
+		margin:0 9%;
+	}
+
+	.span-menu-on-mobile a {
+		text-decoration: none;
 	}
 }
