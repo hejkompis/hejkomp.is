@@ -62,9 +62,9 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         echo (isset($context["base_url"]) ? $context["base_url"] : null);
         echo "\">";
         echo $this->getAttribute((isset($context["site"]) ? $context["site"] : null), "title", array());
-        echo "</a> &copy; 2016</section>
-                <section class=\"poweredby\">Proudly published with <a href=\"https://getgrav.org\">Grav</a></section>
-                <section class=\"poweredby\"><a href=\"https://github.com/koca/grav-theme-masonry\">Theme</a> Ported by <a href=\"http://mesutkoca.com\">Mesut Koca</a></section>
+        echo "</a> &copy; 2017</section>
+                <section class=\"poweredby\">Leker webbutvecklare via <a href=\"/api/leaving/?for=http://grafikprofil.se&amp;referrer=Website\" target=\"_blank\">Grafik &amp; Profil</a></section>
+                <section class=\"poweredby\">Jobbar heltid som konceptutvecklare på <a href=\"/api/leaving/?for=https://digitalstrategi.se&amp;referrer=Website\" target=\"_blank\">Digital Strategi</a></section>
             </footer>
         </div>
 
@@ -72,13 +72,13 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         // line 77
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 97
+        // line 106
         echo "
     </body>
     ";
-        // line 99
+        // line 108
         $this->displayBlock('bottom', $context, $blocks);
-        // line 100
+        // line 109
         echo "</html>
 ";
     }
@@ -219,7 +219,7 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/screen.css", 1 => 101), "method");
         // line 47
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/custom.css", 1 => 101), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/custom.css"), "method");
         // line 48
         echo "            ";
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "css", array(), "method");
@@ -251,44 +251,62 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
             ";
         // line 81
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/index.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js"), "method");
         // line 82
         echo "
             ";
         // line 84
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/prism.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js"), "method");
         // line 85
         echo "
             ";
         // line 87
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/custom.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"), "method");
         // line 88
         echo "
             ";
         // line 90
         echo "            ";
-        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
-            // line 91
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
-            // line 92
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
-            // line 93
-            echo "            ";
-        }
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/index.js"), "method");
+        // line 91
+        echo "
+            ";
+        // line 93
+        echo "            ";
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/prism.js"), "method");
         // line 94
         echo "
             ";
-        // line 95
+        // line 96
+        echo "            ";
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/custom.js"), "method");
+        // line 97
+        echo "
+            ";
+        // line 99
+        echo "            ";
+        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
+            // line 100
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
+            // line 101
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
+            // line 102
+            echo "            ";
+        }
+        // line 103
+        echo "
+            ";
+        // line 104
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "js", array(), "method");
         echo "
         ";
     }
 
-    // line 99
+    // line 108
     public function block_bottom($context, array $blocks = array())
     {
     }
@@ -305,7 +323,7 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
     public function getDebugInfo()
     {
-        return array (  292 => 99,  286 => 95,  283 => 94,  280 => 93,  277 => 92,  274 => 91,  271 => 90,  268 => 88,  265 => 87,  262 => 85,  259 => 84,  256 => 82,  253 => 81,  250 => 79,  247 => 78,  244 => 77,  239 => 67,  234 => 55,  231 => 54,  224 => 48,  221 => 47,  218 => 46,  215 => 45,  210 => 50,  208 => 45,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 100,  80 => 99,  76 => 97,  73 => 77,  62 => 70,  58 => 68,  56 => 67,  51 => 64,  49 => 63,  41 => 57,  39 => 54,  35 => 52,  33 => 4,  28 => 2,  25 => 1,);
+        return array (  310 => 108,  304 => 104,  301 => 103,  298 => 102,  295 => 101,  292 => 100,  289 => 99,  286 => 97,  283 => 96,  280 => 94,  277 => 93,  274 => 91,  271 => 90,  268 => 88,  265 => 87,  262 => 85,  259 => 84,  256 => 82,  253 => 81,  250 => 79,  247 => 78,  244 => 77,  239 => 67,  234 => 55,  231 => 54,  224 => 48,  221 => 47,  218 => 46,  215 => 45,  210 => 50,  208 => 45,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 109,  80 => 108,  76 => 106,  73 => 77,  62 => 70,  58 => 68,  56 => 67,  51 => 64,  49 => 63,  41 => 57,  39 => 54,  35 => 52,  33 => 4,  28 => 2,  25 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -364,7 +382,7 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
         {% block stylesheets %}
             {% do assets.add('theme://css/screen.css',101) %}
-            {% do assets.add('theme://css/custom.css',101) %}
+            {% do assets.add('theme://css/custom.css') %}
             {{ assets.css() }}
         {% endblock %}
 
@@ -387,15 +405,24 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
             {% block content %}{% endblock %}
 
             <footer class=\"site-footer clearfix\">
-                <section class=\"copyright\"><a href=\"{{base_url}}\">{{site.title}}</a> &copy; 2016</section>
-                <section class=\"poweredby\">Proudly published with <a href=\"https://getgrav.org\">Grav</a></section>
-                <section class=\"poweredby\"><a href=\"https://github.com/koca/grav-theme-masonry\">Theme</a> Ported by <a href=\"http://mesutkoca.com\">Mesut Koca</a></section>
+                <section class=\"copyright\"><a href=\"{{base_url}}\">{{site.title}}</a> &copy; 2017</section>
+                <section class=\"poweredby\">Leker webbutvecklare via <a href=\"/api/leaving/?for=http://grafikprofil.se&amp;referrer=Website\" target=\"_blank\">Grafik &amp; Profil</a></section>
+                <section class=\"poweredby\">Jobbar heltid som konceptutvecklare på <a href=\"/api/leaving/?for=https://digitalstrategi.se&amp;referrer=Website\" target=\"_blank\">Digital Strategi</a></section>
             </footer>
         </div>
 
         {# Footer JS #}
         {% block javascripts %}
             {% do assets.add('jquery', 101) %}
+
+            {# Isotope #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js') %}
+
+            {# ImagesLoaded #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js') %}
+
+            {# LazyLoad #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js') %}
 
             {# Main JS #}
             {% do assets.add('theme://js/index.js') %}

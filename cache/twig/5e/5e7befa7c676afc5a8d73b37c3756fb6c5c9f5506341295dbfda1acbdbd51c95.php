@@ -74,8 +74,9 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
 <main id=\"content\" class=\"content\" role=\"main\">
     <div class=\"wrapper\">
         <section class=\"masonry\">
+            <article class=\"masonry-sizer\">
             ";
-        // line 23
+        // line 24
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["collection"]) ? $context["collection"] : null));
         $context['loop'] = array(
@@ -95,7 +96,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
             echo " ";
             if ( !$this->getAttribute($this->getAttribute($context["post"], "header", array()), "hide", array())) {
                 echo " ";
-                $this->loadTemplate("partials/article.html.twig", "default.html.twig", 23)->display($context);
+                $this->loadTemplate("partials/article.html.twig", "default.html.twig", 24)->display($context);
                 echo " ";
             }
             echo " ";
@@ -111,19 +112,19 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 24
+        // line 25
         echo "        </section>
     </div>
     ";
-        // line 26
+        // line 27
         if (($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["config"]) ? $context["config"] : null), "plugins", array()), "pagination", array()), "enabled", array()) && $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))) {
-            // line 27
-            echo "        ";
-            $this->loadTemplate("partials/pagination.html.twig", "default.html.twig", 27)->display(array_merge($context, array("base_url" => $this->getAttribute((isset($context["page"]) ? $context["page"] : null), "url", array()), "pagination" => $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))));
             // line 28
+            echo "        ";
+            $this->loadTemplate("partials/pagination.html.twig", "default.html.twig", 28)->display(array_merge($context, array("base_url" => $this->getAttribute((isset($context["page"]) ? $context["page"] : null), "url", array()), "pagination" => $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))));
+            // line 29
             echo "    ";
         }
-        // line 29
+        // line 30
         echo "</main>
 
 ";
@@ -141,7 +142,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
 
     public function getDebugInfo()
     {
-        return array (  127 => 29,  124 => 28,  121 => 27,  119 => 26,  115 => 24,  79 => 23,  68 => 15,  62 => 11,  50 => 9,  48 => 8,  37 => 6,  34 => 5,  31 => 4,  27 => 1,  25 => 2,  11 => 1,);
+        return array (  128 => 30,  125 => 29,  122 => 28,  120 => 27,  116 => 25,  80 => 24,  68 => 15,  62 => 11,  50 => 9,  48 => 8,  37 => 6,  34 => 5,  31 => 4,  27 => 1,  25 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -176,6 +177,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
 <main id=\"content\" class=\"content\" role=\"main\">
     <div class=\"wrapper\">
         <section class=\"masonry\">
+            <article class=\"masonry-sizer\">
             {% for post in collection %} {% if not post.header.hide %} {% include 'partials/article.html.twig' %} {% endif %} {% endfor %}
         </section>
     </div>

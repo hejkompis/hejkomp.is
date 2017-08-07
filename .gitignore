@@ -5,6 +5,8 @@
 cache/
 /logs/
 logs/
+/images/
+images/
 /api/adminer/*
 
 ### Composer ###

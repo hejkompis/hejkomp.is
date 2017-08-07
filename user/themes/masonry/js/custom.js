@@ -8,18 +8,6 @@ $(document).ready(function() {
 		print_current();
 	}, 10000);
 
-	var $grid = $('.masonry').isotope({
-		itemSelector: 'article.post',
-		masonry: {
-			// use outer width of grid-sizer for columnWidth
-			// columnWidth: '.masonry-sizer'
-		}
-	});
-
-	$grid.imagesLoaded().progress( function() {
-  		$grid.isotope('layout');
-	});
-
 });
 
 $(window).load(function() {
@@ -33,15 +21,27 @@ $(window).load(function() {
 
 });
 
+var $grid = $('.masonry').isotope({
+	itemSelector: 'article.post',
+	masonry: {
+		// use outer width of grid-sizer for columnWidth
+		// columnWidth: '.masonry-sizer'
+	}
+});
+
+$grid.imagesLoaded().progress( function() {
+	$grid.isotope('layout');
+});
+
 function print_current() {
 
 	$.getJSON('./api/spotify/print	_current/', function(data) {
 		
 		if(data.status == 'playing') {
-			$('#spotify_current').html('<a href="'+data.url+'" target="_blank"><i class="fa fa-fw fa-spotify" aria-hidden="true"></i> '+data.artist + ' - ' + data.track+'  #nowplaying</a>');
+			$('#spotify_current').html('<a href="./api/leaving/?for='+data.url+'&referrer=Website" target="_blank"><i class="fa fa-fw fa-spotify" aria-hidden="true"></i> '+data.artist + ' - ' + data.track+'  #nowplaying</a>');
 		}
 		else if(data.status == 'paused') {
-			$('#spotify_current').html('');
+			$('#spotify_current').html('<a href="./api/leaving/?for=https://open.spotify.com/user/amadore&referrer=Website"><i class="fa fa-fw fa-spotify" aria-hidden="true"></i> @amadore</a>');
 		}
 
 	}).fail(function() {
