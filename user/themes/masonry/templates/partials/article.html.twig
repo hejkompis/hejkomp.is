@@ -1,6 +1,10 @@
 {% set url = base_url ~ "/api/leaving/?for=" ~ post.header.source ~ "&referrer=Website" %}
 
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article" data-category="
+    {% if post.taxonomy.tag|length > 0 %}
+        {% for tag in post.taxonomy.tag %}{{tag}}{%if not loop.last %}, {% endif %}{% endfor %}
+    {% endif %}
+">
     {% if post.header.image %}
         <figure class="post-image hide-on-mobile" itemprop="image">
             <a href="{{ url }}" target="_blank" class="js-ajax-link">

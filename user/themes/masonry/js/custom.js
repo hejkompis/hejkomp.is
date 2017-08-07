@@ -1,5 +1,7 @@
 /* custom.js */
 
+$grid = '';
+
 $(document).ready(function() {
 
 	print_current();

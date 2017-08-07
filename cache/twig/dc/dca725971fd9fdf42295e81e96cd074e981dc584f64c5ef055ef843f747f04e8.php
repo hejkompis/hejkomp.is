@@ -19,23 +19,65 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
         $context["url"] = ((((isset($context["base_url"]) ? $context["base_url"] : null) . "/api/leaving/?for=") . $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "source", array())) . "&referrer=Website");
         // line 2
         echo "
-<article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\">
+<article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\" data-category=\"
     ";
         // line 4
-        if ($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "image", array())) {
+        if ((twig_length_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "taxonomy", array()), "tag", array())) > 0)) {
             // line 5
+            echo "        ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "taxonomy", array()), "tag", array()));
+            $context['loop'] = array(
+              'parent' => $context['_parent'],
+              'index0' => 0,
+              'index'  => 1,
+              'first'  => true,
+            );
+            if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof Countable)) {
+                $length = count($context['_seq']);
+                $context['loop']['revindex0'] = $length - 1;
+                $context['loop']['revindex'] = $length;
+                $context['loop']['length'] = $length;
+                $context['loop']['last'] = 1 === $length;
+            }
+            foreach ($context['_seq'] as $context["_key"] => $context["tag"]) {
+                echo $context["tag"];
+                if ( !$this->getAttribute($context["loop"], "last", array())) {
+                    echo ", ";
+                }
+                ++$context['loop']['index0'];
+                ++$context['loop']['index'];
+                $context['loop']['first'] = false;
+                if (isset($context['loop']['length'])) {
+                    --$context['loop']['revindex0'];
+                    --$context['loop']['revindex'];
+                    $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+                }
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['tag'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 6
+            echo "    ";
+        }
+        // line 7
+        echo "\">
+    ";
+        // line 8
+        if ($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "image", array())) {
+            // line 9
             echo "        <figure class=\"post-image hide-on-mobile\" itemprop=\"image\">
             <a href=\"";
-            // line 6
+            // line 10
             echo (isset($context["url"]) ? $context["url"] : null);
             echo "\" target=\"_blank\" class=\"js-ajax-link\">
                 <img class=\"lazy\" data-original=\"";
-            // line 7
+            // line 11
             echo $this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "media", array()), $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "image", array()), array(), "array"), "cropResize", array(0 => 350, 1 => 350), "method"), "url", array());
             echo "\" width=\"100%\" height=\"100%\" alt=\"\">
                 <noscript>
                     <img src=\"";
-            // line 9
+            // line 13
             echo $this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "media", array()), $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "image", array()), array(), "array"), "cropResize", array(0 => 350, 1 => 350), "method"), "url", array());
             echo "\" width=\"100%\" height=\"100%\">
                 </noscript>
@@ -43,10 +85,10 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
         </figure>
     ";
         }
-        // line 14
+        // line 18
         echo "    <header class=\"post-header\">
         <h2 class=\"post-title\" itemprop=\"name\"><a href=\"";
-        // line 15
+        // line 19
         echo (isset($context["url"]) ? $context["url"] : null);
         echo "\" target=\"_blank\" itemprop=\"url\">";
         echo $this->getAttribute((isset($context["post"]) ? $context["post"] : null), "title", array());
@@ -54,9 +96,9 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
     </header>
     <footer class=\"post-meta\">
         ";
-        // line 18
+        // line 22
         if ((twig_length_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "taxonomy", array()), "tag", array())) > 0)) {
-            // line 19
+            // line 23
             echo "            ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "taxonomy", array()), "tag", array()));
@@ -99,10 +141,10 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['tag'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 20
+            // line 24
             echo "        ";
         }
-        // line 21
+        // line 25
         echo "        <time class=\"post-date\" datetime=\"";
         echo twig_date_format_filter($this->env, $this->getAttribute((isset($context["post"]) ? $context["post"] : null), "date", array()), "Y-m-d H:i");
         echo "\">";
@@ -125,7 +167,7 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
 
     public function getDebugInfo()
     {
-        return array (  106 => 21,  103 => 20,  60 => 19,  58 => 18,  50 => 15,  47 => 14,  39 => 9,  34 => 7,  30 => 6,  27 => 5,  25 => 4,  21 => 2,  19 => 1,);
+        return array (  148 => 25,  145 => 24,  102 => 23,  100 => 22,  92 => 19,  89 => 18,  81 => 13,  76 => 11,  72 => 10,  69 => 9,  67 => 8,  64 => 7,  61 => 6,  27 => 5,  25 => 4,  21 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -140,7 +182,11 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
     {
         return new Twig_Source("{% set url = base_url ~ \"/api/leaving/?for=\" ~ post.header.source ~ \"&referrer=Website\" %}
 
-<article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\">
+<article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\" data-category=\"
+    {% if post.taxonomy.tag|length > 0 %}
+        {% for tag in post.taxonomy.tag %}{{tag}}{%if not loop.last %}, {% endif %}{% endfor %}
+    {% endif %}
+\">
     {% if post.header.image %}
         <figure class=\"post-image hide-on-mobile\" itemprop=\"image\">
             <a href=\"{{ url }}\" target=\"_blank\" class=\"js-ajax-link\">
