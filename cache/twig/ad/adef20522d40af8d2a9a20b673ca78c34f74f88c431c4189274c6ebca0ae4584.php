@@ -31,13 +31,13 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         ";
         // line 4
         $this->displayBlock('head', $context, $blocks);
-        // line 52
+        // line 55
         echo "    </head>
 
     ";
-        // line 54
-        $this->displayBlock('body', $context, $blocks);
         // line 57
+        $this->displayBlock('body', $context, $blocks);
+        // line 60
         echo "
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-KRGNN9\"
@@ -45,20 +45,20 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         <!-- End Google Tag Manager (noscript) -->
 
         ";
-        // line 63
-        $this->loadTemplate("partials/navigation.html.twig", "partials/base.html.twig", 63)->display($context);
-        // line 64
+        // line 66
+        $this->loadTemplate("partials/navigation.html.twig", "partials/base.html.twig", 66)->display($context);
+        // line 67
         echo "
         <div class=\"site-wrapper\">
 
             ";
-        // line 67
+        // line 70
         $this->displayBlock('content', $context, $blocks);
-        // line 68
+        // line 71
         echo "
             <footer class=\"site-footer clearfix\">
                 <section class=\"copyright\"><a href=\"";
-        // line 70
+        // line 73
         echo (isset($context["base_url"]) ? $context["base_url"] : null);
         echo "\">";
         echo $this->getAttribute((isset($context["site"]) ? $context["site"] : null), "title", array());
@@ -69,16 +69,16 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         </div>
 
         ";
-        // line 77
+        // line 80
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 106
+        // line 109
         echo "
     </body>
     ";
-        // line 108
+        // line 111
         $this->displayBlock('bottom', $context, $blocks);
-        // line 109
+        // line 112
         echo "</html>
 ";
     }
@@ -199,114 +199,118 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
         ";
         // line 41
-        echo "        <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400\" />
+        echo "        ";
+        // line 42
+        echo "
+        <script src=\"https://use.typekit.net/eho3mak.js\"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
         <link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" />
 
         ";
-        // line 45
+        // line 48
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 50
+        // line 53
         echo "
         ";
     }
 
-    // line 45
+    // line 48
     public function block_stylesheets($context, array $blocks = array())
     {
-        // line 46
+        // line 49
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/screen.css", 1 => 101), "method");
-        // line 47
+        // line 50
         echo "            ";
         $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://css/custom.css"), "method");
-        // line 48
+        // line 51
         echo "            ";
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "css", array(), "method");
         echo "
         ";
     }
 
-    // line 54
+    // line 57
     public function block_body($context, array $blocks = array())
     {
-        // line 55
+        // line 58
         echo "    <body class=\"home-template nav-closed\">
     ";
     }
 
-    // line 67
+    // line 70
     public function block_content($context, array $blocks = array())
     {
     }
 
-    // line 77
+    // line 80
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 78
-        echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "jquery", 1 => 101), "method");
-        // line 79
-        echo "
-            ";
         // line 81
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "jquery", 1 => 101), "method");
         // line 82
         echo "
             ";
         // line 84
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js"), "method");
         // line 85
         echo "
             ";
         // line 87
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js"), "method");
         // line 88
         echo "
             ";
         // line 90
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/index.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"), "method");
         // line 91
         echo "
             ";
         // line 93
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/prism.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/index.js"), "method");
         // line 94
         echo "
             ";
         // line 96
         echo "            ";
-        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/custom.js"), "method");
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/prism.js"), "method");
         // line 97
         echo "
             ";
         // line 99
         echo "            ";
-        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
-            // line 100
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
-            // line 101
-            echo "                ";
-            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
-            // line 102
-            echo "            ";
-        }
-        // line 103
+        $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "theme://js/custom.js"), "method");
+        // line 100
         echo "
             ";
-        // line 104
+        // line 102
+        echo "            ";
+        if (((($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getBrowser", array()) == "msie") && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) >= 8)) && ($this->getAttribute((isset($context["browser"]) ? $context["browser"] : null), "getVersion", array()) <= 9))) {
+            // line 103
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"), "method");
+            // line 104
+            echo "                ";
+            $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "add", array(0 => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"), "method");
+            // line 105
+            echo "            ";
+        }
+        // line 106
+        echo "
+            ";
+        // line 107
         echo $this->getAttribute((isset($context["assets"]) ? $context["assets"] : null), "js", array(), "method");
         echo "
         ";
     }
 
-    // line 108
+    // line 111
     public function block_bottom($context, array $blocks = array())
     {
     }
@@ -323,7 +327,7 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
 
     public function getDebugInfo()
     {
-        return array (  310 => 108,  304 => 104,  301 => 103,  298 => 102,  295 => 101,  292 => 100,  289 => 99,  286 => 97,  283 => 96,  280 => 94,  277 => 93,  274 => 91,  271 => 90,  268 => 88,  265 => 87,  262 => 85,  259 => 84,  256 => 82,  253 => 81,  250 => 79,  247 => 78,  244 => 77,  239 => 67,  234 => 55,  231 => 54,  224 => 48,  221 => 47,  218 => 46,  215 => 45,  210 => 50,  208 => 45,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 109,  80 => 108,  76 => 106,  73 => 77,  62 => 70,  58 => 68,  56 => 67,  51 => 64,  49 => 63,  41 => 57,  39 => 54,  35 => 52,  33 => 4,  28 => 2,  25 => 1,);
+        return array (  314 => 111,  308 => 107,  305 => 106,  302 => 105,  299 => 104,  296 => 103,  293 => 102,  290 => 100,  287 => 99,  284 => 97,  281 => 96,  278 => 94,  275 => 93,  272 => 91,  269 => 90,  266 => 88,  263 => 87,  260 => 85,  257 => 84,  254 => 82,  251 => 81,  248 => 80,  243 => 70,  238 => 58,  235 => 57,  228 => 51,  225 => 50,  222 => 49,  219 => 48,  214 => 53,  212 => 48,  204 => 42,  202 => 41,  193 => 38,  190 => 37,  157 => 35,  153 => 34,  139 => 23,  135 => 22,  131 => 21,  127 => 20,  122 => 19,  119 => 17,  113 => 15,  110 => 14,  104 => 12,  98 => 10,  96 => 9,  90 => 5,  87 => 4,  82 => 112,  80 => 111,  76 => 109,  73 => 80,  62 => 73,  58 => 71,  56 => 70,  51 => 67,  49 => 66,  41 => 60,  39 => 57,  35 => 55,  33 => 4,  28 => 2,  25 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -376,7 +380,10 @@ class __TwigTemplate_e4c92adc5f7f75814dabfd35aaa087a99ea32b67453ad16b766c72aaaca
         <title>{% if header.title %}{{ header.title }} | {% endif %}{{ site.title }}</title>
 
         {# Fonts #}
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400\" />
+        {# <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400\" /> #}
+
+        <script src=\"https://use.typekit.net/eho3mak.js\"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
         <link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" />
 

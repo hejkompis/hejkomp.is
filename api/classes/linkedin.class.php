@@ -9,7 +9,7 @@
 
 		static public function fallback($data) {
 
-			$linkedin_credentials = self::get_from_db();
+			$credentials = self::get_from_db();
 
 			if(isset($data['error'])) {
 		
@@ -20,9 +20,9 @@
 
 			elseif(isset($data['code'])) {
 			
-				if($linkedin_credentials['state'] == $data['state']) {
+				if($credentials['state'] == $data['state']) {
 					// Get token so you can make API calls
-					$linkedin_credentials = self::get_token($data);
+					$credentials = self::get_token($data);
 				} else {
 					// CSRF attack? Or did you mix up your states?
 					die;
@@ -32,13 +32,13 @@
 
 			else {
 
-				if($linkedin_credentials['expires_at'] < time()) {
+				if($credentials['expires_at'] < time()) {
 
-					self::reset_linkedin_session();
+					$credentials = self::reset_linkedin_session();
 
 				}
 
-				if($linkedin_credentials['access_token'] == '' && $linkedin_credentials['state'] == '') {
+				if($credentials['access_token'] == '' && $credentials['state'] == '') {
 			
 					self::get_authorization();
 			
@@ -47,14 +47,14 @@
 			}
 
 			echo '<pre>';
-				print_r($linkedin_credentials);
+				print_r($credentials);
 			echo '</pre>';
 
 		}
 
 		public static function post($data) {
 
-			$linkedin_credentials = self::get_from_db();
+			$credentials = self::get_from_db();
 
 			if(isset($data['error'])) {
 		
@@ -65,9 +65,9 @@
 
 			elseif(isset($data['code'])) {
 			
-				if($linkedin_credentials['state'] == $data['state']) {
+				if($credentials['state'] == $data['state']) {
 					// Get token so you can make API calls
-					$linkedin_credentials = self::get_token($data);
+					$credentials = self::get_token($data);
 				} else {
 					// CSRF attack? Or did you mix up your states?
 					die;
@@ -77,13 +77,13 @@
 
 			else {
 
-				if($linkedin_credentials['expires_at'] < time()) {
+				if($credentials['expires_at'] < time()) {
 
-					self::reset_linkedin_session();
+					$credentials = self::reset_linkedin_session();
 
 				}
 
-				if($linkedin_credentials['access_token'] == '') {
+				if($credentials['access_token'] == '') {
 			
 					self::get_authorization();
 			
@@ -91,7 +91,7 @@
 
 			}
 
-			if($linkedin_credentials['expires_at'] >= time() &&  $linkedin_credentials['access_token'] != '') {
+			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
 				$what_post = self::get_what_post();
 
@@ -119,7 +119,7 @@
 				$headers = [
 					'Content-Type: application/json',
 					'x-li-format: json',
-					'Authorization: Bearer '.$linkedin_credentials['access_token']
+					'Authorization: Bearer '.$credentials['access_token']
 				];
 
 				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
@@ -193,6 +193,8 @@
 			];
 
 			self::update_db($clear);
+
+			return $clear;
 
 		}
 

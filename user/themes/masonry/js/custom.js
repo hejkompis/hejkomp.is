@@ -15,7 +15,10 @@ $(window).load(function() {
 	$(function() {
 		$("img.lazy").show().lazyload({
 			threshold : 200,
-			effect : "fadeIn"
+			effect : "fadeIn",
+			load: function() {
+				$grid.isotope('layout');
+			}
 		});
 	});
 

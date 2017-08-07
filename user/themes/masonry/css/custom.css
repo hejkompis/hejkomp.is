@@ -1,16 +1,26 @@
 /* custom css */
 
+body, h1, h2, h3, h4, h5, h6, p, span, a {
+	font-family: "proxima-nova",sans-serif !important;
+}
+
+div.site-wrapper {
+	background: linear-gradient(to right, rgba(255,255,240,1), rgba(255,230,230,1));
+}
+
 header.no-cover.main-header {
 	min-height: auto !important;
 	max-height: auto !important;
 	height: 108px !important;
 	margin-bottom: 0 !important;
-	background-color: #f2f3f5;
+	// background-color: #f2f3f5;
+	background: transparent;
 }
 
 header.no-cover.main-header .overlay {
 	height: 38px !important;
-	background-color: #f2f3f5;
+	// background-color: #f2f3f5;
+	background: transparent;
 }
 
 /* change of columns for all widths */
