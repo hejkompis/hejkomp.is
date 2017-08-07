@@ -60,11 +60,22 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
         }
         // line 11
         echo "
-        <span id=\"spotify_current\" class=\"small-text hide-on-mobile\"></span>
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.instagram.com/dinkompisper/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-instagram\" aria-hidden=\"true\"></i> dinkompisper</a>
+        </span> 
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.twitter.com/p3r&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-twitter\" aria-hidden=\"true\"></i> p3r</a>
+        </span> 
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.linkedin.com/in/hejkompis/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-linkedin\" aria-hidden=\"true\"></i> Per</a>
+        </span> 
+        <span class=\"spotify_current small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://open.spotify.com/user/amadore&amp;referrer=Website\"><i class=\"fa fa-fw fa-spotify\" aria-hidden=\"true\"></i> amadore</a>
+        </span>
 
         <a class=\"menu-button icon-menu\" href=\"#\">
             <label for=\"show-menu\" class=\"word\">";
-        // line 15
+        // line 26
         echo $this->env->getExtension('Grav\Common\Twig\TwigExtension')->translate("THEME_MASONRY.MENU_TITLE");
         echo "</label>
         </a>
@@ -76,7 +87,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
         <section class=\"masonry\">
             <article class=\"masonry-sizer\">
             ";
-        // line 24
+        // line 35
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["collection"]) ? $context["collection"] : null));
         $context['loop'] = array(
@@ -96,7 +107,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
             echo " ";
             if ( !$this->getAttribute($this->getAttribute($context["post"], "header", array()), "hide", array())) {
                 echo " ";
-                $this->loadTemplate("partials/article.html.twig", "default.html.twig", 24)->display($context);
+                $this->loadTemplate("partials/article.html.twig", "default.html.twig", 35)->display($context);
                 echo " ";
             }
             echo " ";
@@ -112,19 +123,19 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 25
+        // line 36
         echo "        </section>
     </div>
     ";
-        // line 27
+        // line 38
         if (($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["config"]) ? $context["config"] : null), "plugins", array()), "pagination", array()), "enabled", array()) && $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))) {
-            // line 28
+            // line 39
             echo "        ";
-            $this->loadTemplate("partials/pagination.html.twig", "default.html.twig", 28)->display(array_merge($context, array("base_url" => $this->getAttribute((isset($context["page"]) ? $context["page"] : null), "url", array()), "pagination" => $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))));
-            // line 29
+            $this->loadTemplate("partials/pagination.html.twig", "default.html.twig", 39)->display(array_merge($context, array("base_url" => $this->getAttribute((isset($context["page"]) ? $context["page"] : null), "url", array()), "pagination" => $this->getAttribute($this->getAttribute((isset($context["collection"]) ? $context["collection"] : null), "params", array()), "pagination", array()))));
+            // line 40
             echo "    ";
         }
-        // line 30
+        // line 41
         echo "</main>
 
 ";
@@ -142,7 +153,7 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
 
     public function getDebugInfo()
     {
-        return array (  128 => 30,  125 => 29,  122 => 28,  120 => 27,  116 => 25,  80 => 24,  68 => 15,  62 => 11,  50 => 9,  48 => 8,  37 => 6,  34 => 5,  31 => 4,  27 => 1,  25 => 2,  11 => 1,);
+        return array (  139 => 41,  136 => 40,  133 => 39,  131 => 38,  127 => 36,  91 => 35,  79 => 26,  62 => 11,  50 => 9,  48 => 8,  37 => 6,  34 => 5,  31 => 4,  27 => 1,  25 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -166,7 +177,18 @@ class __TwigTemplate_37793f572606ee722626c3d218ef1b8854dea15dc872722e55337087b61
             <a class=\"blog-logo\" href=\"{{url('./')}}\"><img src=\"{{ theme_url }}/images/{{site.logo}}\" alt=\"{{ site.title}}\" width=\"100%\" height=\"100%\" /></a>
         {% endif %}
 
-        <span id=\"spotify_current\" class=\"small-text hide-on-mobile\"></span>
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.instagram.com/dinkompisper/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-instagram\" aria-hidden=\"true\"></i> dinkompisper</a>
+        </span> 
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.twitter.com/p3r&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-twitter\" aria-hidden=\"true\"></i> p3r</a>
+        </span> 
+        <span class=\"small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://www.linkedin.com/in/hejkompis/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-linkedin\" aria-hidden=\"true\"></i> Per</a>
+        </span> 
+        <span class=\"spotify_current small-text hide-on-mobile\">
+            <a href=\"./api/leaving/?for=https://open.spotify.com/user/amadore&amp;referrer=Website\"><i class=\"fa fa-fw fa-spotify\" aria-hidden=\"true\"></i> amadore</a>
+        </span>
 
         <a class=\"menu-button icon-menu\" href=\"#\">
             <label for=\"show-menu\" class=\"word\">{{ 'THEME_MASONRY.MENU_TITLE'|t }}</label>

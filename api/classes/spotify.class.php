@@ -51,42 +51,7 @@
 
 		public static function get_favourites($data = false) {
 
-			$credentials = self::get_from_db();
-
-			if(isset($data['error'])) {
-		
-				echo $data['error'] . ': ' . $data['error_description'];
-				die;
-		
-			}
-
-			elseif(isset($data['code'])) {
-			
-				if($credentials['state'] == $data['state']) {
-					// Get token so you can make API calls
-					$credentials = self::get_token($data);
-				} else {
-					// CSRF attack? Or did you mix up your states?
-					die;
-				}
-	
-			}
-
-			else {
-
-				if($credentials['expires_at'] < time()) {
-
-					self::reset_db();
-
-				}
-
-				if($credentials['access_token'] == '') {
-			
-					self::get_authorization();
-			
-				}
-
-			}
+			$credentials = self::get_credentials($data);
 
 			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
@@ -135,42 +100,7 @@
 
 		public static function get_albums($data = false) {
 
-			$credentials = self::get_from_db();
-
-			if(isset($data['error'])) {
-		
-				echo $data['error'] . ': ' . $data['error_description'];
-				die;
-		
-			}
-
-			elseif(isset($data['code'])) {
-			
-				if($credentials['state'] == $data['state']) {
-					// Get token so you can make API calls
-					$credentials = self::get_token($data);
-				} else {
-					// CSRF attack? Or did you mix up your states?
-					die;
-				}
-	
-			}
-
-			else {
-
-				if($credentials['expires_at'] < time()) {
-
-					self::reset_db();
-
-				}
-
-				if($credentials['access_token'] == '') {
-			
-					self::get_authorization();
-			
-				}
-
-			}
+			$credentials = self::get_credentials($data);
 
 			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
@@ -218,42 +148,7 @@
 
 		public static function get_current($data = false) {
 
-			$credentials = self::get_from_db();
-
-			if(isset($data['error'])) {
-		
-				echo $data['error'] . ': ' . $data['error_description'];
-				die;
-		
-			}
-
-			elseif(isset($data['code'])) {
-			
-				if($credentials['state'] == $data['state']) {
-					// Get token so you can make API calls
-					$credentials = self::get_token($data);
-				} else {
-					// CSRF attack? Or did you mix up your states?
-					die;
-				}
-	
-			}
-
-			else {
-
-				if($credentials['expires_at'] < time()) {
-
-					self::reset_db();
-
-				}
-
-				if($credentials['access_token'] == '') {
-			
-					self::get_authorization();
-			
-				}
-
-			}
+			$credentials = self::get_credentials($data);
 
 			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
@@ -311,6 +206,61 @@
 
 		}
 
+		private static function get_credentials($data) {
+
+			$credentials = self::get_from_db();
+
+			if(isset($data['error'])) {
+		
+				echo $data['error'] . ': ' . $data['error_description'];
+				die;
+		
+			}
+
+			elseif(isset($data['code'])) {
+			
+				if($credentials['state'] == $data['state']) {
+					// Get token so you can make API calls
+					$credentials = self::get_token($data);
+				} else {
+					// CSRF attack? Or did you mix up your states?
+					die;
+				}
+	
+			}
+
+			else {
+
+				if($credentials['expires_at'] < time()) {
+
+					if($credentials['refresh_token'] != '') {
+
+						$data = [
+							'code' => $credentials['refresh_token']
+						];
+
+						$credentials = self::get_refresh_token($data);
+
+					} else {
+
+						$credentials = self::reset_db();
+
+					}
+
+				}
+
+				if($credentials['access_token'] == '') {
+			
+					self::get_authorization();
+			
+				}
+
+			}
+
+			return $credentials;
+
+		}
+
 		private static function get_authorization() {
 
 			$params = [
@@ -335,11 +285,38 @@
 
 		static public function get_token($data) {
 
-			$new_linkedin_credentials = self::get_from_db();
-
 			$postdata = [
 				'grant_type' 	=> 'authorization_code',
 				'code' 			=> $data['code'],
+				'redirect_uri' 	=> REDIRECT_URI,
+				'client_id' 	=> SPOTIFY_CLIENT_ID,
+				'client_secret' => SPOTIFY_CLIENT_KEY
+			];
+
+			$token = Curl::get('https://accounts.spotify.com/api/token', true, 'post', $postdata);
+
+			$data = [
+				'access_token' 	=> $token->access_token,
+				'refresh_token' => $token->refresh_token,
+				'expires_in' 	=> $token->expires_in,
+				'expires_at'	=> time() + $token->expires_in
+			];
+
+			self::update_db($data);
+
+			$new_credentials['access_token'] 	= $token->access_token;
+			$new_credentials['refresh_token'] 	= $token->refresh_token;
+			$new_credentials['expires_in'] 		= $token->expires_in;
+			$new_credentials['expires_at'] 		= time() + $token->expires_in;
+			return $new_credentials;
+
+		}
+
+		static public function get_refresh_token($data) {
+
+			$postdata = [
+				'grant_type' 	=> 'refresh_token',
+				'refresh_token' => $data['code'],
 				'redirect_uri' 	=> REDIRECT_URI,
 				'client_id' 	=> SPOTIFY_CLIENT_ID,
 				'client_secret' => SPOTIFY_CLIENT_KEY
@@ -355,9 +332,9 @@
 
 			self::update_db($data);
 
-			$new_credentials['access_token'] = $token->access_token;
-			$new_credentials['expires_in'] = $token->expires_in;
-			$new_credentials['expires_at'] = time() + $token->expires_in;
+			$new_credentials['access_token'] 	= $token->access_token;
+			$new_credentials['expires_in'] 		= $token->expires_in;
+			$new_credentials['expires_at'] 		= time() + $token->expires_in;
 			return $new_credentials;
 
 		}
@@ -367,11 +344,14 @@
 			$clear = [
 				'state' 		=> '',
 				'access_token' 	=> '',
+				'refresh_token' => '',
 				'expires_in' 	=> 0,
 				'expires_at'	=> 0
 			];
 
 			self::update_db($clear);
+
+			return $clear;
 
 		}
 

@@ -99,6 +99,19 @@ class __TwigTemplate_29e326837fba6485d1f9c4d23d6e089b9050e6da46e6f2ff442ded6bb65
         // line 25
         echo "
     </ul>
+
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.instagram.com/dinkompisper/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-instagram\" aria-hidden=\"true\"></i> dinkompisper</a>
+    </span> 
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.twitter.com/p3r&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-twitter\" aria-hidden=\"true\"></i> p3r</a>
+    </span> 
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.linkedin.com/in/hejkompis/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-linkedin\" aria-hidden=\"true\"></i> Per</a>
+    </span> 
+    <span class=\"spotify_current small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://open.spotify.com/user/amadore&amp;referrer=Website\"><i class=\"fa fa-fw fa-spotify\" aria-hidden=\"true\"></i> amadore</a>
+    </span>
 </div>
 <span class=\"nav-cover\"></span>
 ";
@@ -155,6 +168,19 @@ class __TwigTemplate_29e326837fba6485d1f9c4d23d6e089b9050e6da46e6f2ff442ded6bb65
         {% endfor %}
 
     </ul>
+
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.instagram.com/dinkompisper/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-instagram\" aria-hidden=\"true\"></i> dinkompisper</a>
+    </span> 
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.twitter.com/p3r&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-twitter\" aria-hidden=\"true\"></i> p3r</a>
+    </span> 
+    <span class=\"small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://www.linkedin.com/in/hejkompis/&amp;referrer=Website\" target=\"_blank\"><i class=\"fa fa-fw fa-linkedin\" aria-hidden=\"true\"></i> Per</a>
+    </span> 
+    <span class=\"spotify_current small-text show-on-mobile span-menu-on-mobile\">
+        <a href=\"./api/leaving/?for=https://open.spotify.com/user/amadore&amp;referrer=Website\"><i class=\"fa fa-fw fa-spotify\" aria-hidden=\"true\"></i> amadore</a>
+    </span>
 </div>
 <span class=\"nav-cover\"></span>
 ", "partials/navigation.html.twig", "/var/www/public/user/themes/masonry/templates/partials/navigation.html.twig");

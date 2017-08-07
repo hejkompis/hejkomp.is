@@ -24,7 +24,7 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
         // line 4
         if ($this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : null), "header", array()), "image", array())) {
             // line 5
-            echo "        <figure class=\"post-image\" itemprop=\"image\">
+            echo "        <figure class=\"post-image hide-on-mobile\" itemprop=\"image\">
             <a href=\"";
             // line 6
             echo (isset($context["url"]) ? $context["url"] : null);
@@ -142,7 +142,7 @@ class __TwigTemplate_9c29936bf1388c3c2e99b911c043cf219d99d8089606aba54e8ebe65a50
 
 <article class=\"post\" itemscope itemtype=\"http://schema.org/BlogPosting\" role=\"article\">
     {% if post.header.image %}
-        <figure class=\"post-image\" itemprop=\"image\">
+        <figure class=\"post-image hide-on-mobile\" itemprop=\"image\">
             <a href=\"{{ url }}\" target=\"_blank\" class=\"js-ajax-link\">
                 <img class=\"lazy\" data-original=\"{{ post.media[post.header.image].cropResize(350, 350).url }}\" width=\"100%\" height=\"100%\" alt=\"\">
                 <noscript>
