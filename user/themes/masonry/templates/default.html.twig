@@ -20,6 +20,7 @@
 <main id="content" class="content" role="main">
     <div class="wrapper">
         <section class="masonry">
+            <article class="masonry-sizer">
             {% for post in collection %} {% if not post.header.hide %} {% include 'partials/article.html.twig' %} {% endif %} {% endfor %}
         </section>
     </div>

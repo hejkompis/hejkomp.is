@@ -44,7 +44,7 @@
 
         {% block stylesheets %}
             {% do assets.add('theme://css/screen.css',101) %}
-            {% do assets.add('theme://css/custom.css',101) %}
+            {% do assets.add('theme://css/custom.css') %}
             {{ assets.css() }}
         {% endblock %}
 
@@ -67,15 +67,24 @@
             {% block content %}{% endblock %}
 
             <footer class="site-footer clearfix">
-                <section class="copyright"><a href="{{base_url}}">{{site.title}}</a> &copy; 2016</section>
-                <section class="poweredby">Proudly published with <a href="https://getgrav.org">Grav</a></section>
-                <section class="poweredby"><a href="https://github.com/koca/grav-theme-masonry">Theme</a> Ported by <a href="http://mesutkoca.com">Mesut Koca</a></section>
+                <section class="copyright"><a href="{{base_url}}">{{site.title}}</a> &copy; 2017</section>
+                <section class="poweredby">Leker webbutvecklare via <a href="/api/leaving/?for=http://grafikprofil.se&amp;referrer=Website" target="_blank">Grafik &amp; Profil</a></section>
+                <section class="poweredby">Jobbar heltid som konceptutvecklare på <a href="/api/leaving/?for=https://digitalstrategi.se&amp;referrer=Website" target="_blank">Digital Strategi</a></section>
             </footer>
         </div>
 
         {# Footer JS #}
         {% block javascripts %}
             {% do assets.add('jquery', 101) %}
+
+            {# Isotope #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js') %}
+
+            {# ImagesLoaded #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js') %}
+
+            {# LazyLoad #}
+            {% do assets.add('https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js') %}
 
             {# Main JS #}
             {% do assets.add('theme://js/index.js') %}

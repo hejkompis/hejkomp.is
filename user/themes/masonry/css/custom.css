@@ -13,34 +13,117 @@ header.no-cover.main-header .overlay {
 	background-color: #f2f3f5;
 }
 
+/* change of columns for all widths */
 .masonry {
-   	column-count: 4 !important;
+   	display: block;
 }
 
+.masonry-sizer {
+	width: 25%;
+}
+
+.masonry .post {
+	width: 21%;
+	margin: 2%;
+}
+
+.masonry .post .post-image {
+	z-index: 999;
+}
+
+header.post-header h2::after {
+	content: " ";
+    background: white;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,1));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 90%;
+}
+
+/* change of article title font size */
 body:not(.post-template) .post-title {
-   	font-size: 2rem;
+   	font-size: 1.8rem;
 }
 
+/* change of article tag and date font sizes */
 .post-meta, .post-date {
    	font-size: 1.1rem;
    	line-height: 2rem;
 }
 
+/* small span text for #nowplaying */
 .small-text {
 	font-size: 1.2rem;
 }
 
+/* hide lazy loaded images (fix for noscript) */
+.lazy {
+	display: none;
+}
+
+/* center paginaton - not working??? */
+.pagination {
+	margin: 3rem auto 1rem auto !important;
+}
+
 @media only screen and (max-width: 992px) {
+
+	/* change of columns for tablet */
 	.masonry {
-    	column-count: 3 !important;
+    	//column-count: 3 !important;
+	}
+
+	.masonry-sizer {
+		width: 33.333%;
+	}
+
+	.masonry .post {
+		width: 29.333%;
+		margin: 2%;
+	}
+
+	body:not(.post-template) .post-title {
+		font-size: 1.6rem;
 	}
 }
 
 @media only screen and (max-width: 768px) {
-	.masonry {
-	    column-count: 1 !important;
+
+	header.no-cover.main-header {
+		height: 35px !important;
+		padding: 0;
 	}
+
+	.wrapper {
+		margin-top: 0;
+	}
+
+	/* change of columns for mobile */
+	.masonry {
+	    //column-count: 1 !important;
+	}
+
+	.masonry-sizer {
+		width: 100%;
+	}
+
+	.masonry .post {
+		width: 96%;
+		margin: 2%;
+	}
+
+	.post-date {
+    	display: inline;
+	}
+
+	body:not(.post-template) .post-title {
+		font-size: 1.4rem;
+	}
+
+	/* hide on mobile class */
 	.hide-on-mobile {
-		display: none;
+		display: none !important;
 	}
 }
