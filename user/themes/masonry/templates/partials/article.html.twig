@@ -1,10 +1,18 @@
 {% set url = base_url ~ "/api/leaving/?for=" ~ post.header.source ~ "&referrer=Website" %}
-{% if post.header.image or page.media.images|first %}
+{% if post.header.image or page.media.images %}
 
-    {% if post.media.images|first %}
-        {% set image = post.media.images|first %}
-    {% elseif post.header.image %}
-        {% set image = post.header.image %}
+    {% set image = false %}
+
+    {% if post.media.images %}
+        {% for key, item in post.media.images %}
+            {% if post.media.images|length > 1 %}
+                {% if key != "image.jpg" %}
+                    {% set image = item %}
+                {% endif %}
+            {% else %}
+                {% set image = item %}
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
 {% endif %}
