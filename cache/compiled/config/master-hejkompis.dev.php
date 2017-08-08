@@ -1,13 +1,17 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1502179613,
-    'checksum' => 'c13080d9f43086aa4809b2b7b14529fb',
+    'timestamp' => 1502183415,
+    'checksum' => '99f58b85734dada9c33372b0e3db8a6f',
     'files' => [
         'user/config' => [
             'media' => [
                 'file' => 'user/config/media.yaml',
                 'modified' => 1500047079
+            ],
+            'plugins/socialbuttons' => [
+                'file' => 'user/config/plugins/socialbuttons.yaml',
+                'modified' => 1502183681
             ],
             'security' => [
                 'file' => 'user/config/security.yaml',
@@ -23,7 +27,7 @@ return [
             ],
             'system' => [
                 'file' => 'user/config/system.yaml',
-                'modified' => 1500047079
+                'modified' => 1502182892
             ]
         ],
         'system/config' => [
@@ -76,6 +80,10 @@ return [
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
                 'modified' => 1502179771
+            ],
+            'plugins/socialbuttons' => [
+                'file' => 'user/plugins/socialbuttons/socialbuttons.yaml',
+                'modified' => 1502182889
             ]
         ]
     ],
@@ -243,6 +251,63 @@ return [
             'problems' => [
                 'enabled' => true,
                 'built_in_css' => true
+            ],
+            'socialbuttons' => [
+                'enabled' => false,
+                'buttons' => [
+                    'facebook' => [
+                        'enabled' => true,
+                        'label' => 'Facebook'
+                    ],
+                    'twitter' => [
+                        'enabled' => true,
+                        'label' => 'Twitter'
+                    ],
+                    'googleplus' => [
+                        'enabled' => false,
+                        'label' => 'Google+'
+                    ],
+                    'linkedin' => [
+                        'enabled' => true,
+                        'label' => 'Linkedin'
+                    ],
+                    'reddit' => [
+                        'enabled' => false,
+                        'label' => 'Reddit'
+                    ],
+                    'youtube' => [
+                        'enabled' => false,
+                        'label' => 'Youtube'
+                    ],
+                    'hackernews' => [
+                        'enabled' => false,
+                        'label' => 'Hackernews'
+                    ],
+                    'pinterest' => [
+                        'enabled' => false,
+                        'label' => 'Pinterest'
+                    ],
+                    'pocket' => [
+                        'enabled' => false,
+                        'label' => 'Pocket'
+                    ],
+                    'tumblr' => [
+                        'enabled' => false,
+                        'label' => 'Tumblr'
+                    ],
+                    'vk' => [
+                        'enabled' => false,
+                        'label' => 'VK'
+                    ],
+                    'github' => [
+                        'enabled' => false,
+                        'label' => 'Github'
+                    ],
+                    'email' => [
+                        'enabled' => true,
+                        'label' => 'Email'
+                    ]
+                ]
             ]
         ],
         'media' => [

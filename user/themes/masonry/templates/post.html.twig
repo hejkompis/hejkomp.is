@@ -6,8 +6,9 @@
 
 {% block content %}
 
-X: {{page.header.source}}
-{% redirect page.header.source %}
+{% set url = base_url ~ "/api/leaving/?for=" ~ page.header.source ~ "&referrer=Website_SinglePage" %}
+
+<meta http-equiv="refresh" content="0;URL='{{url}}'" />
 
 {% include 'partials/header.html.twig' %}
 
