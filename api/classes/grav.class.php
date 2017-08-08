@@ -250,7 +250,7 @@
 					$content .= "title:  ".$fileData['title']."\r\n";
 					$content .= "slug:  ".$fileData['slug']."\r\n";
 					$content .= "source:  ".$fileData['source']."\r\n";
-					$content .= "date:  ".date('Y-m-d H:i', $fileData['timestamp'])."\r\n";
+					$content .= "date:  ".$fileData['date']."\r\n";
 					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 					$content .= $image_to_content;
 
