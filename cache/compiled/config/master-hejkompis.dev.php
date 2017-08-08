@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1502183415,
-    'checksum' => '99f58b85734dada9c33372b0e3db8a6f',
+    'timestamp' => 1502192061,
+    'checksum' => '11cea4b851ae2de0dc2be41915ed4bcc',
     'files' => [
         'user/config' => [
             'media' => [
@@ -80,10 +80,6 @@ return [
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
                 'modified' => 1502179771
-            ],
-            'plugins/socialbuttons' => [
-                'file' => 'user/plugins/socialbuttons/socialbuttons.yaml',
-                'modified' => 1502182889
             ]
         ]
     ],

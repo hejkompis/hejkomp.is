@@ -1,6 +1,6 @@
 /* custom css */
 
-body, h1, h2, h3, h4, h5, h6, p, span, a {
+body, h1, h2, h3, h4, h5, h6, p, span, a, section, .site-footer {
 	font-family: "proxima-nova",sans-serif !important;
 }
 
