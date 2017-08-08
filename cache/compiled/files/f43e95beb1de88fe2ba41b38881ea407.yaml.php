@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/system/blueprints/user/account.yaml',
-    'modified' => 1500047079,
+    'modified' => 1502179323,
     'data' => [
         'title' => 'Account',
         'form' => [
@@ -80,10 +80,11 @@ return [
                     'underline' => true,
                     'fields' => [
                         'groups' => [
-                            'type' => 'selectize',
+                            'type' => 'select',
+                            'multiple' => true,
                             'size' => 'large',
                             'label' => 'PLUGIN_ADMIN.GROUPS',
-                            'data-options@' => '\\Grav\\User\\Groups::groups',
+                            'data-options@' => '\\Grav\\Common\\User\\Group::groupNames',
                             'classes' => 'fancy',
                             'help' => 'PLUGIN_ADMIN.GROUPS_HELP',
                             'validate' => [
