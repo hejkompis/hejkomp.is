@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/system/config/system.yaml',
-    'modified' => 1500047079,
+    'modified' => 1502179323,
     'data' => [
         'absolute_urls' => false,
         'timezone' => '',
@@ -163,7 +163,8 @@ return [
             ],
             'allowed_fallback_types' => [
                 
-            ]
+            ],
+            'auto_metadata_exif' => false
         ],
         'session' => [
             'enabled' => true,

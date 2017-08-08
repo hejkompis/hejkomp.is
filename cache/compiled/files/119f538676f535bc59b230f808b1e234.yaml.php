@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/login/languages.yaml',
-    'modified' => 1500047081,
+    'modified' => 1502179822,
     'data' => [
         'en' => [
             'PLUGIN_LOGIN' => [
@@ -108,9 +108,11 @@ return [
                 'SECONDS' => 'seconds',
                 'RESETS' => 'resets',
                 'ATTEMPTS' => 'attempts',
+                'ROUTES' => 'Routes',
                 'ROUTE_FORGOT' => 'Forgot password route',
                 'ROUTE_RESET' => 'Reset password route',
-                'ROUTE_PROFILE' => 'User profile route'
+                'ROUTE_PROFILE' => 'User profile route',
+                'ROUTE_ACTIVATE' => 'User activation route'
             ]
         ],
         'de' => [

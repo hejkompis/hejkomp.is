@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/admin/languages/cy.yaml',
-    'modified' => 1500047079,
+    'modified' => 1502179874,
     'data' => [
         'PLUGIN_ADMIN' => [
             'ADMIN_BETA_MSG' => 'Mae hwn yn fersiwn beta! Defnyddio hwn yn cynhyrchu ar risg eich hun...',

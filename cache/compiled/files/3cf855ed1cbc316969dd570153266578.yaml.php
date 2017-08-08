@@ -2,10 +2,10 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/login/blueprints.yaml',
-    'modified' => 1500047081,
+    'modified' => 1502179822,
     'data' => [
         'name' => 'Login',
-        'version' => '2.3.0',
+        'version' => '2.3.2',
         'description' => 'Enables user authentication and login screen.',
         'icon' => 'sign-in',
         'author' => [
@@ -129,6 +129,55 @@ return [
                                         'type' => 'bool'
                                     ]
                                 ],
+                                'routes' => [
+                                    'type' => 'section',
+                                    'title' => 'PLUGIN_LOGIN.ROUTES',
+                                    'fields' => [
+                                        'route_activate' => [
+                                            'type' => 'text',
+                                            'size' => 'medium',
+                                            'label' => 'PLUGIN_LOGIN.ROUTE_ACTIVATE',
+                                            'placeholder' => '/activate_user'
+                                        ],
+                                        'route_forgot' => [
+                                            'type' => 'text',
+                                            'size' => 'medium',
+                                            'label' => 'PLUGIN_LOGIN.ROUTE_FORGOT',
+                                            'placeholder' => '/forgot_password'
+                                        ],
+                                        'route_reset' => [
+                                            'type' => 'text',
+                                            'size' => 'medium',
+                                            'label' => 'PLUGIN_LOGIN.ROUTE_RESET',
+                                            'placeholder' => '/reset_password'
+                                        ],
+                                        'route_profile' => [
+                                            'type' => 'text',
+                                            'size' => 'medium',
+                                            'label' => 'PLUGIN_LOGIN.ROUTE_PROFILE',
+                                            'placeholder' => '/user_profile'
+                                        ],
+                                        'route_register' => [
+                                            'type' => 'text',
+                                            'size' => 'medium',
+                                            'label' => 'PLUGIN_LOGIN.ROUTE_REGISTER',
+                                            'help' => 'PLUGIN_LOGIN.ROUTE_REGISTER_HELP',
+                                            'placeholder' => '/register'
+                                        ],
+                                        'user_registration.redirect_after_registration' => [
+                                            'type' => 'text',
+                                            'label' => 'PLUGIN_LOGIN.REDIRECT_AFTER_REGISTRATION',
+                                            'help' => 'PLUGIN_LOGIN.REDIRECT_AFTER_REGISTRATION_HELP',
+                                            'placeholder' => '/page-to-show-after-registration'
+                                        ],
+                                        'user_registration.redirect_after_activation' => [
+                                            'type' => 'text',
+                                            'label' => 'PLUGIN_LOGIN.REDIRECT_AFTER_ACTIVATION',
+                                            'help' => 'PLUGIN_LOGIN.REDIRECT_AFTER_ACTIVATION_HELP',
+                                            'placeholder' => '/page-to-show-after-activation'
+                                        ]
+                                    ]
+                                ],
                                 'rememberme' => [
                                     'type' => 'section',
                                     'title' => 'PLUGIN_LOGIN.REMEMBER_ME',
@@ -183,25 +232,6 @@ return [
                                     'validate' => [
                                         'type' => 'bool'
                                     ]
-                                ],
-                                'route_register' => [
-                                    'type' => 'text',
-                                    'size' => 'medium',
-                                    'label' => 'PLUGIN_LOGIN.ROUTE_REGISTER',
-                                    'help' => 'PLUGIN_LOGIN.ROUTE_REGISTER_HELP',
-                                    'placeholder' => '/register'
-                                ],
-                                'user_registration.redirect_after_registration' => [
-                                    'type' => 'text',
-                                    'label' => 'PLUGIN_LOGIN.REDIRECT_AFTER_REGISTRATION',
-                                    'help' => 'PLUGIN_LOGIN.REDIRECT_AFTER_REGISTRATION_HELP',
-                                    'placeholder' => '/page-to-show-after-registration'
-                                ],
-                                'user_registration.redirect_after_activation' => [
-                                    'type' => 'text',
-                                    'label' => 'PLUGIN_LOGIN.REDIRECT_AFTER_ACTIVATION',
-                                    'help' => 'PLUGIN_LOGIN.REDIRECT_AFTER_ACTIVATION_HELP',
-                                    'placeholder' => '/page-to-show-after-activation'
                                 ],
                                 'registration_fields' => [
                                     'type' => 'section',

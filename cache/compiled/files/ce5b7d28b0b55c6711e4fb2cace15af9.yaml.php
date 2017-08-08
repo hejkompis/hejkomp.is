@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/admin/languages/en.yaml',
-    'modified' => 1500047079,
+    'modified' => 1502179874,
     'data' => [
         'PLUGIN_ADMIN' => [
             'ADMIN_BETA_MSG' => 'This is a Beta release! Use this in production at your own risk...',
@@ -36,6 +36,8 @@ return [
             'THEMES' => 'Themes',
             'LOGOUT' => 'Logout',
             'BACK' => 'Back',
+            'NEXT' => 'Next',
+            'PREVIOUS' => 'Previous',
             'ADD_PAGE' => 'Add Page',
             'ADD_MODULAR' => 'Add Modular',
             'MOVE' => 'Move',
@@ -422,7 +424,7 @@ return [
             'IS_NOW_AVAILABLE' => 'is now available',
             'CURRENT' => 'Current',
             'UPDATE_GRAV_NOW' => 'Update Grav Now',
-            'GRAV_SYMBOLICALLY_LINKED' => 'Grav is symbolically linked. Upgrade won\\\'t be available',
+            'GRAV_SYMBOLICALLY_LINKED' => 'Grav is symbolically linked. Upgrade won\'t be available',
             'UPDATING_PLEASE_WAIT' => 'Updating... please wait, downloading',
             'OF_THIS' => 'of this',
             'OF_YOUR' => 'of your',
@@ -676,7 +678,9 @@ return [
             'USERNAME_REGEX' => 'Username Regex',
             'USERNAME_REGEX_HELP' => 'By default: Only lowercase chars, digits, dashes, and underscores. 3 - 16 chars',
             'CONTENT_PADDING' => 'Content padding',
-            'CONTENT_PADDING_HELP' => 'Enable/Disable content padding around content area to provide more space'
+            'CONTENT_PADDING_HELP' => 'Enable/Disable content padding around content area to provide more space',
+            'ENABLE_AUTO_METADATA' => 'Auto metadata from Exif',
+            'ENABLE_AUTO_METADATA_HELP' => 'Automatically generate metadata files for images with exif information'
         ]
     ]
 ];

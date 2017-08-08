@@ -2,17 +2,17 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/login/login.yaml',
-    'modified' => 1500047081,
+    'modified' => 1502179822,
     'data' => [
         'enabled' => true,
         'built_in_css' => true,
         'route' => NULL,
         'redirect_after_login' => NULL,
-        'route_register' => false,
         'route_activate' => '/activate_user',
         'route_forgot' => '/forgot_password',
         'route_reset' => '/reset_password',
         'route_profile' => '/user_profile',
+        'route_register' => '/user_register',
         'parent_acl' => false,
         'protect_protected_page_media' => false,
         'user_registration' => [

@@ -2,10 +2,10 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/plugins/admin/blueprints.yaml',
-    'modified' => 1500047079,
+    'modified' => 1502179874,
     'data' => [
         'name' => 'Admin Panel',
-        'version' => '1.4.2',
+        'version' => '1.5.1',
         'description' => 'Adds an advanced administration panel to manage your site',
         'icon' => 'empire',
         'author' => [
@@ -21,7 +21,7 @@ return [
         'dependencies' => [
             0 => [
                 'name' => 'grav',
-                'version' => '>=1.2.4'
+                'version' => '>=1.3.0-rc.3'
             ],
             1 => [
                 'name' => 'form',
@@ -152,6 +152,28 @@ return [
                     ],
                     'help' => 'Auto will use blueprint if available, if none found, it will use "Expert" mode.'
                 ],
+                'frontend_pages_target' => [
+                    'type' => 'select',
+                    'label' => 'Open frontend pages in',
+                    'size' => 'medium',
+                    'default' => '_blank',
+                    'options' => [
+                        '_blank' => 'New tab',
+                        'frontend_tab' => 'Separate tab (always the same)',
+                        '_self' => 'Current tab'
+                    ]
+                ],
+                'pages.show_parents' => [
+                    'type' => 'select',
+                    'size' => 'medium',
+                    'label' => 'Parent dropdown',
+                    'highlight' => 1,
+                    'options' => [
+                        'both' => 'Show slug and folder',
+                        'folder' => 'Show folder',
+                        'fullpath' => 'Show fullpath'
+                    ]
+                ],
                 'google_fonts' => [
                     'type' => 'toggle',
                     'label' => 'Use Google Fonts',
@@ -221,6 +243,16 @@ return [
                         'type' => 'bool'
                     ],
                     'help' => 'Ask the user confirmation when deleting a page'
+                ],
+                'hide_page_types' => [
+                    'type' => 'array',
+                    'label' => 'Hide page types in Admin',
+                    'value_only' => true
+                ],
+                'hide_modular_page_types' => [
+                    'type' => 'array',
+                    'label' => 'Hide modular page types in Admin',
+                    'value_only' => true
                 ],
                 'Dashboard' => [
                     'type' => 'section',

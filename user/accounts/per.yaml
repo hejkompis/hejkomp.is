@@ -4,8 +4,15 @@ title: Administrator
 state: enabled
 access:
   admin:
-    login: true
-    super: true
+    super: 'true'
+    login: 'true'
   site:
-    login: true
-hashed_password: $2y$10$KbqzKJ/Ytcf1YJmfx.knuO23BKTT7j8cI1hp2CYGKe4/r2omu1be6
+    login: 'true'
+hashed_password: $2y$10$GaKhhblcqakSKbxOY5ZTPOvNlrdimw6GBOzM3fs6DZAIH6Fy03XqO
+language: en
+avatar:
+  user/accounts/avatars/14wXS2shEPnMdaU.jpg:
+    name: 14wXS2shEPnMdaU.jpg
+    type: image/jpeg
+    size: 47520
+    path: user/accounts/avatars/14wXS2shEPnMdaU.jpg
