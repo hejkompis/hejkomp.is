@@ -16,7 +16,7 @@
 				't' 	=> 'pageview',				// Hit Type. pageview/event
 				'dh' 	=> ROOT,	       			// Document hostname.
 				'dp' 	=> '/leaving',         		// Page.
-				'dt' 	=> 'Leaving',      			// Title.
+				'dt' 	=> $url	      			// Title.
 			];
 
 			$response = Curl::get('https://www.google-analytics.com/collect', false, 'post', $pw_payload);
@@ -42,7 +42,7 @@
 				't' 	=> 'event',					// Hit Type. pageview/event
 				'ec' 	=> 'Leaving',	        	// Event Category. Required.
 				'ea' 	=> $referrer,         		// Event Action. Required.
-				'el' 	=> $url,      				// Event label.
+				'el' 	=> $url      				// Event label.
 			];
 
 			$response = Curl::get('https://www.google-analytics.com/collect', false, 'post', $ev_payload);
