@@ -19,7 +19,7 @@
 				'dt' 	=> 'Leaving',      			// Title.
 			];
 
-			$response = Curl::get('https://www.google-analytics.com/collect', false, 'post', $ev_payload);
+			$response = Curl::get('https://www.google-analytics.com/collect', false, 'post', $pw_payload);
 
 			/*
 			
@@ -46,9 +46,6 @@
 			];
 
 			$response = Curl::get('https://www.google-analytics.com/collect', false, 'post', $ev_payload);
-
-			print_r($_COOKIE['_ga']);
-			die();
 
 			header('Location: '.$url);
 
