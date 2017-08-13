@@ -19,7 +19,7 @@
 
         <li class="nav-x {{ current_page }}" role="presentation"><a href="{{ url('./') }}">Visa alla</a></li>
 
-        {% for tag in tags %}
+        {% for tag in tags|sort %}
             <li class="nav-x {{ current_page }}" role="presentation"><a href="{{ base_url }}/tag{{ config.system.param_sep }}{{ tag }}">{{ tag|capitalize }}</a></li>
         {% endfor %}
 

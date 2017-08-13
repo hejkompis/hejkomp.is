@@ -9,18 +9,7 @@
             <a class="blog-logo" href="{{url('./')}}"><img src="{{ theme_url }}/images/{{site.logo}}" alt="{{ site.title}}" width="100%" height="100%" /></a>
         {% endif %}
 
-        <span class="small-text hide-on-mobile">
-            <a href="./api/leaving/?for=https://www.instagram.com/dinkompisper/&amp;referrer=Website" target="_blank"><i class="fa fa-fw fa-instagram" aria-hidden="true"></i> dinkompisper</a>
-        </span> 
-        <span class="small-text hide-on-mobile">
-            <a href="./api/leaving/?for=https://www.twitter.com/p3r&amp;referrer=Website" target="_blank"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i> p3r</a>
-        </span> 
-        <span class="small-text hide-on-mobile">
-            <a href="./api/leaving/?for=https://www.linkedin.com/in/hejkompis/&amp;referrer=Website" target="_blank"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i> Per</a>
-        </span> 
-        <span class="spotify_current small-text hide-on-mobile">
-            <a href="./api/leaving/?for=https://open.spotify.com/user/amadore&amp;referrer=Website"><i class="fa fa-fw fa-spotify" aria-hidden="true"></i> amadore</a>
-        </span>
+        {% include 'partials/socialmedia.html.twig' %}
 
         <a class="menu-button icon-menu" href="#">
             <label for="show-menu" class="word">{{ 'THEME_MASONRY.MENU_TITLE'|t }}</label>

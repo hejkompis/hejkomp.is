@@ -3,10 +3,12 @@
 .DS_STORE
 /cache/
 cache/
-/logs/
+/logs
+/logs/*
 logs/
 /images/
 images/
+/api/classes/test.class.php
 /api/adminer/*
 
 ### Composer ###
