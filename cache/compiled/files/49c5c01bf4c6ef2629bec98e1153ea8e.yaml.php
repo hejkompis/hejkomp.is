@@ -2,14 +2,45 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/themes/masonry/languages.yaml',
-    'modified' => 1500047081,
+    'modified' => 1502620580,
     'data' => [
-        'en' => [
+        'sv' => [
             'THEME_MASONRY' => [
                 'HOME' => 'Hem',
                 'MENU_TITLE' => 'Kategorier',
                 'BLOG' => [
                     'CONTINUE_READING' => 'Läs mer',
+                    'POST' => [
+                        'MORE' => [
+                            'AUTHOR' => 'Fler inlägg från denna författare',
+                            'SPEC_AUTHOR' => 'Fler inlägg från'
+                        ],
+                        'SHARE' => 'Dela'
+                    ],
+                    'PAGINATION' => [
+                        'OLDER' => 'Äldre',
+                        'NEWER' => 'Nyare',
+                        'PAGE' => [
+                            'PAGE' => 'Sida',
+                            'OF' => 'av'
+                        ]
+                    ],
+                    'SUBSCRIBE' => 'Prenumerera'
+                ],
+                'DISQUS' => [
+                    'NOSCRIPT' => 'Vänligen aktivera JavaScript för att se kommentarer.'
+                ],
+                'ERROR' => [
+                    404 => '404, Sidan du söker kan inte hittas'
+                ]
+            ]
+        ],
+        'en' => [
+            'THEME_MASONRY' => [
+                'HOME' => 'Home',
+                'MENU_TITLE' => 'Menu',
+                'BLOG' => [
+                    'CONTINUE_READING' => 'Read More',
                     'POST' => [
                         'MORE' => [
                             'AUTHOR' => 'More posts by this author',
@@ -31,7 +62,7 @@ return [
                     'NOSCRIPT' => 'Please enable JavaScript to view the comments powered by Disqus.'
                 ],
                 'ERROR' => [
-                    404 => '404, Sidan du söker kan inte hittas'
+                    404 => '404, Page Not Found'
                 ]
             ]
         ],
