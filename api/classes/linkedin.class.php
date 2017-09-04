@@ -135,10 +135,10 @@
 
 				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
 
-				// echo '<pre>';
-				// 	print_r($response);
-				// 	print_r($postdata);
-				// echo '</pre>';
+				echo '<pre>';
+					print_r($response);
+					//print_r($postdata);
+				echo '</pre>';
 
 			}
 
