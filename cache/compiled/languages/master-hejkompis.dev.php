@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledLanguages',
-    'timestamp' => 1502182771,
-    'checksum' => 'b28c08eb83d6962e34b8d0ddc603759a',
+    'timestamp' => 1502697470,
+    'checksum' => '6653a123f92900d734d362ce0e6fc646',
     'files' => [
         'system/languages' => [
             'ar' => [
@@ -134,6 +134,10 @@ return [
             'plugins/login' => [
                 'file' => 'user/plugins/login/languages.yaml',
                 'modified' => 1502179822
+            ],
+            'plugins/social-seo-metatags' => [
+                'file' => 'user/plugins/social-seo-metatags/languages.yaml',
+                'modified' => 1502697456
             ]
         ],
         'user/plugins/admin/languages' => [
@@ -5440,6 +5444,60 @@ Pfad: `%2$s`
                 'ROUTE_PROFILE' => 'User profile route',
                 'ROUTE_ACTIVATE' => 'User activation route'
             ],
+            'PLUGINS' => [
+                'SOCIAL_SEO_METATAGS' => [
+                    'PLUGIN_NAME' => 'Social SEO Meta Tags',
+                    'PLUGIN_STATUS' => 'Plugin status',
+                    'PLUGIN_ACTIVE' => 'Active',
+                    'PLUGIN_INACTIVE' => 'Inactive',
+                    'PLUGIN_ACTIVE_HELP' => 'This option is used to (de-)activate this plugin on a per-page basis.',
+                    'YES' => 'Yes',
+                    'NO' => 'No',
+                    'GENERAL' => [
+                        'NAME' => 'General',
+                        'ROBOTS' => [
+                            'NAME' => 'Default Robots Meta-Tag',
+                            'WITHOUT' => 'Without meta-tag',
+                            'HELP' => 'Default value of the meta-tag Robots'
+                        ],
+                        'KEYWORDS' => [
+                            'TAXONOMY' => [
+                                'NAME' => 'Use Taxonomy Keywords',
+                                'HELP' => 'Enable using of Taxonomy Keywords for Meta-Tags'
+                            ],
+                            'PAGE_CONTENT' => [
+                                'NAME' => 'Use Page Content Keywords',
+                                'HELP' => 'Enable using of Page content Keywords for Meta-Tags (strong and emphasis)'
+                            ],
+                            'LENGTH' => [
+                                'NAME' => 'Number of keywords',
+                                'HELP' => 'Maximum number of keywords to display in meta-tag'
+                            ]
+                        ]
+                    ],
+                    'TWITTER' => [
+                        'NAME' => 'Twitter Cards',
+                        'ENABLED' => 'Twitter Cards active',
+                        'HELP' => 'Share with Twitter Cards',
+                        'TYPE' => 'Card Type',
+                        'TYPE_HELP' => 'Summary Card with Large Image or Short Summary',
+                        'TYPE_CARDS' => [
+                            'LARGE' => 'Summary Card with Large Image',
+                            'SUMMARY' => 'Summary Card'
+                        ],
+                        'ABOUTME' => 'Use AboutMe Plugin',
+                        'USERNAME' => 'Username',
+                        'USERNAME_HELP' => 'If you not use AboutMe plugin, please define your twitter username (@username)'
+                    ],
+                    'FACEBOOK' => [
+                        'NAME' => 'Facebook Open Graph',
+                        'ENABLED' => 'Facebook Open Graph active',
+                        'HELP' => 'Share on Facebook',
+                        'APPID' => 'App ID',
+                        'APPID_HELP' => 'The App ID you get from the Facebook Developers page (https://developers.facebook.com/apps).'
+                    ]
+                ]
+            ],
             'FRONTMATTER_ERROR_PAGE' => '---
 title: %1$s
 ---
@@ -7707,6 +7765,60 @@ Ruta: `%2$s`
                 'USE_PARENT_ACL_HELP' => 'Utiliser les règles d’accès parentes si aucune règle n’a été définie',
                 'PROTECT_PROTECTED_PAGE_MEDIA_LABEL' => 'Protéger le média d\'une page par une protection par connexion',
                 'PROTECT_PROTECTED_PAGE_MEDIA_HELP' => 'Si activé, les médias d\'une page protégée par connexion sera également protégé par un système de connexion et ne pourra pas être visible à moins d\'être connecté.'
+            ],
+            'PLUGINS' => [
+                'SOCIAL_SEO_METATAGS' => [
+                    'PLUGIN_NAME' => 'Social SEO Meta Tags',
+                    'PLUGIN_STATUS' => 'Statut du plugin',
+                    'PLUGIN_ACTIVE' => 'Actif',
+                    'PLUGIN_INACTIVE' => 'Inactif',
+                    'PLUGIN_ACTIVE_HELP' => 'Cette option permet d’activer ou non le plugin sur une base par page.',
+                    'YES' => 'Oui',
+                    'NO' => 'Non',
+                    'GENERAL' => [
+                        'NAME' => 'Général',
+                        'ROBOTS' => [
+                            'NAME' => 'Meta-Tag Robots par défaut',
+                            'WITHOUT' => 'Sans meta-tag',
+                            'HELP' => 'Valeur du meta-tag Robots par défaut'
+                        ],
+                        'KEYWORDS' => [
+                            'TAXONOMY' => [
+                                'NAME' => 'Utiliser les mots-clés Taxonomy',
+                                'HELP' => 'Active l\'utilisation de la liste des mots clés Taxonomy pour les Meta-Tags'
+                            ],
+                            'PAGE_CONTENT' => [
+                                'NAME' => 'Utiliser les mots-clés du contenu de la page',
+                                'HELP' => 'Active l\'utilisation de la liste des mots-clés du contenu de la page (strong et em) pour les Meta-Tags'
+                            ],
+                            'LENGTH' => [
+                                'NAME' => 'Nombre de mots-clés',
+                                'HELP' => 'Nombre de mots-clés maximal à afficher dans la meta-tag'
+                            ]
+                        ]
+                    ],
+                    'TWITTER' => [
+                        'NAME' => 'Cartes Twitter',
+                        'ENABLED' => 'Cartes Twitter activées',
+                        'HELP' => 'Partager avec les cartes Twitter',
+                        'TYPE' => 'Type de carte',
+                        'TYPE_HELP' => 'Carte de résumé avec grande image ou résumé court',
+                        'TYPE_CARDS' => [
+                            'LARGE' => 'Carte de résumé avec grande image',
+                            'SUMMARY' => 'Carte de résumé'
+                        ],
+                        'ABOUTME' => 'Utiliser le plugin AboutMe',
+                        'USERNAME' => 'Nom d\'utilisateur',
+                        'USERNAME_HELP' => 'Si le plugin AboutMe n\'est pas utilisé, veuillez définir le nom d\'utilisateur Twitter SVP'
+                    ],
+                    'FACEBOOK' => [
+                        'NAME' => 'Facebook Open Graph',
+                        'ENABLED' => 'Facebook Open Graph activé',
+                        'HELP' => 'Partager sur Facebook',
+                        'APPID' => 'ID d’application',
+                        'APPID_HELP' => 'L’ID d’application pour se connecter à la page Développeurs Facebook (https://developers.facebook.com/apps).'
+                    ]
+                ]
             ],
             'FRONTMATTER_ERROR_PAGE' => '---
 title: %1$s
@@ -17710,7 +17822,7 @@ Path: `%2$s`
                 6 => 'søndag'
             ]
         ],
-        'checksum' => 'b28c08eb83d6962e34b8d0ddc603759a',
-        'timestamp' => 1502182771
+        'checksum' => '6653a123f92900d734d362ce0e6fc646',
+        'timestamp' => 1502697470
     ]
 ];

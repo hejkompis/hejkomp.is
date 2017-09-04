@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1502192061,
-    'checksum' => '11cea4b851ae2de0dc2be41915ed4bcc',
+    'timestamp' => 1502697467,
+    'checksum' => 'f1e7ddafde11d54319864bb2bd09c0c3',
     'files' => [
         'user/config' => [
             'media' => [
@@ -27,7 +27,7 @@ return [
             ],
             'system' => [
                 'file' => 'user/config/system.yaml',
-                'modified' => 1502182892
+                'modified' => 1502697457
             ]
         ],
         'system/config' => [
@@ -80,6 +80,10 @@ return [
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
                 'modified' => 1502179771
+            ],
+            'plugins/social-seo-metatags' => [
+                'file' => 'user/plugins/social-seo-metatags/social-seo-metatags.yaml',
+                'modified' => 1502697456
             ]
         ]
     ],
@@ -247,6 +251,32 @@ return [
             'problems' => [
                 'enabled' => true,
                 'built_in_css' => true
+            ],
+            'social-seo-metatags' => [
+                'enabled' => true,
+                'seo' => [
+                    'robots' => 'without',
+                    'length' => 20,
+                    'taxonomy' => [
+                        'enabled' => true
+                    ],
+                    'page_content' => [
+                        'enabled' => false
+                    ]
+                ],
+                'social_pages' => [
+                    'pages' => [
+                        'twitter' => [
+                            'enabled' => true,
+                            'type' => 'summary',
+                            'username' => ''
+                        ],
+                        'facebook' => [
+                            'enabled' => false,
+                            'appid' => '1234567890'
+                        ]
+                    ]
+                ]
             ],
             'socialbuttons' => [
                 'enabled' => false,
@@ -635,9 +665,10 @@ return [
             'pwd_regex' => '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
             'languages' => [
                 'supported' => [
-                    
+                    0 => 'sv',
+                    1 => 'en'
                 ],
-                'include_default_lang' => true,
+                'include_default_lang' => false,
                 'translations' => true,
                 'translations_fallback' => true,
                 'session_store_active' => false,

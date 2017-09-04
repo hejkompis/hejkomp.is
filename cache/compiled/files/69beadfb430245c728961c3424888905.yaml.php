@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/var/www/public/user/config/system.yaml',
-    'modified' => 1502182892,
+    'modified' => 1502697457,
     'data' => [
         'absolute_urls' => false,
         'timezone' => 'Europe/Stockholm',
@@ -13,7 +13,11 @@ return [
         'username_regex' => '^[a-z0-9_-]{3,16}$',
         'pwd_regex' => '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
         'languages' => [
-            'include_default_lang' => true,
+            'supported' => [
+                0 => 'sv',
+                1 => 'en'
+            ],
+            'include_default_lang' => false,
             'translations' => true,
             'translations_fallback' => true,
             'session_store_active' => false,
@@ -149,7 +153,8 @@ return [
         ],
         'media' => [
             'enable_media_timestamp' => false,
-            'upload_limit' => 0
+            'upload_limit' => 0,
+            'auto_metadata_exif' => false
         ],
         'session' => [
             'enabled' => true,

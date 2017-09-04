@@ -54,20 +54,22 @@
 
 		public static function post($data) {
 
+			$clean_data = DB::clean($data);
+
 			$credentials = self::get_from_db();
 
-			if(isset($data['error'])) {
+			if(isset($clean_data['error'])) {
 		
-				echo $data['error'] . ': ' . $data['error_description'];
+				echo $clean_data['error'] . ': ' . $clean_data['error_description'];
 				die;
 		
 			}
 
-			elseif(isset($data['code'])) {
+			elseif(isset($clean_data['code'])) {
 			
-				if($credentials['state'] == $data['state']) {
+				if($credentials['state'] == $clean_data['state']) {
 					// Get token so you can make API calls
-					$credentials = self::get_token($data);
+					$credentials = self::get_token($clean_data);
 				} else {
 					// CSRF attack? Or did you mix up your states?
 					die;
@@ -93,14 +95,21 @@
 
 			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
-				$what_post = self::get_what_post();
+				$static_day = isset($clean_data['day']) ? $clean_data['day'] : false;
+				$day_category_settings = self::get_day_category($static_day);
 
-				$post = Grav::publish_item($what_post);
+				$post = Grav::publish_item($day_category_settings);
+
+				$standard_comment = $post['post_type'] == 'last_week' ? $day_category_settings['comment_last_week'] : $day_category_settings['comment_all_time'];
+
+				$source = $post['source'];
+				$source = ltrim($source, "'");
+				$source = rtrim($source, "'");
 
 				$contentArray = [
 					'title' => $post['title'],
-					'description' => isset($post['description']) ? $post['description'] : $what_post['description'],
-					'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$post['source'].'&referrer=Linkedin',
+					'description' => isset($post['description']) ? $post['description'] : $day_category_settings['description'],
+					'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$source.'&referrer=Linkedin',
 					'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
 				];
 
@@ -109,10 +118,12 @@
 				];
 
 				$postArray = [
-					'comment' => $what_post['comment'],
+					'comment' => array_key_exists('comment', $post) && $post['comment'] != '' ? $post['comment'] : $standard_comment,
 					'content' => $contentArray,
 					'visibility' => $visbilityArray
 				];
+
+				//$postArray['comment'] .= "\n";
 
 				$postdata = json_encode($postArray);
 
@@ -126,6 +137,7 @@
 
 				echo '<pre>';
 					print_r($response);
+					//print_r($postdata);
 				echo '</pre>';
 
 			}
@@ -226,9 +238,9 @@
 
 		}
 
-		public static function get_what_post() {
+		public static function get_day_category($static_day = false) {
 
-			$day = date('N');
+			$day = $static_day ? $static_day : date('N');
 			$output = [];
 
 			switch ($day) {
@@ -236,35 +248,40 @@
 					// Monday
 					$output['tag'] = 'låtar';
 					$output['description'] = '';
-					$output['comment'] = 'Musikmåndag: Ett tips från mina favoritlåtar på Spotify. Se hela listan på http://hejkomp.is/tag:musiken';
+					$output['comment_last_week'] = 'Jag tänkte tipsa om en bra låt jag hittat veckan som gått. Se alla låtar som finns på min favoritlista på http://hejkomp.is/tag:låtar';
+					$output['comment_all_time'] = 'Det är måndag och jag tänkte att en låt från min favoritlista kunde pigga upp. Se hela listan på http://hejkomp.is/tag:låtar';
 					break;
 				case "2":
 					// Tuesday
-					die;
+					$output['tag'] = 'inspiration';
+					$output['description'] = '';
+					$output['comment'] = 'Lite inspiration behövs varje tisdag! Denna har jag hittat veckan som gått. Hitta mer inspiration på http://hejkomp.is/tag:inspiration';
+					$output['comment'] = 'Lite inspiration behövs varje tisdag! Denna är en favorit från arkivet. Alla finns på http://hejkomp.is/tag:inspiration';
 					break;
 				case "3":
 					// Wednesday
 					$output['tag'] = 'jobbet';
 					$output['description'] = '';
-					$output['comment'] = 'Halva jobbveckan har snart gått, och det är nu det behövs en bra jobbrelaterad artikel att läsa. Hitta fler på http://hejkomp.is/tag:jobbet';
+					$output['comment_last_week'] = 'Jag samlar bra och läsvärda jobbartiklar på min sajt, http://hejkomp.is/tag:jobbet, och delar med mig av en från den senaste veckan här.';
+					$output['comment_all_time'] = 'Jag samlar bra och läsvärda jobbartiklar på min sajt, http://hejkomp.is/tag:jobbet, och tänkte här dela med mig av en ur arkivet.';
 					break;
 				case "4":
 					// Thursday
 					$output['tag'] = 'köket';
 					$output['description'] = '';
-					$output['comment'] = 'Vet du vad du ska du äta idag? Här kommer ett tips till köket. Hitta mer på http://hejkomp.is/tag:köket';
+					$output['comment_last_week'] = 'Nånting som jag tycker är svårt efter en lång jobbdag är att hitta motivation att laga god middagsmat. Ett bra recept brukar dock göra susen. Därför tänkte jag tipsa om ett spännande recept jag hittat nyss. Se fler recept på http://hejkomp.is/tag:köket';
+					$output['comment_all_time'] = 'Bra recept kan man aldrig få för många. Därför tänkte jag dela med mig av recept från mitt arkiv. Se alla mina sparade recept på http://hejkomp.is/tag:köket';
 					break;
 				case "5":
 					// Friday
-					$output['tag'] = 'inspiration';
-					$output['description'] = '';
-					$output['comment'] = 'Lite inspiration behövs varje fredag! Det finns mer på http://hejkomp.is/tag:inspiration';
+					die;
 					break;
 				case "6":
 					// Saturday
 					$output['tag'] = 'fåtöljen';
 					$output['description'] = '';
-					$output['comment'] = 'Lördag morgon, och äntligen tid att läsa en riktigt bra artikel. Se alla jag sparat, på http://hejkomp.is/tag:fåtöljen';
+					$output['comment_last_week'] = 'Lördag morgon, och äntligen tid att läsa en av de där riktigt bra artikel jag inte hunnit med från veckan som gått. Se alla jag sparat, på http://hejkomp.is/tag:fåtöljen';
+					$output['comment_all_time'] = 'Lördag morgon, och äntligen tid att läsa en riktigt bra artikel ur arkivet. Se hela artikelbiblioteket på http://hejkomp.is/tag:fåtöljen';
 					break;
 				case "7":
 					// Sunday

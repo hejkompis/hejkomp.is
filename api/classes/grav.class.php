@@ -30,7 +30,7 @@
 					$content .= "title:  ".$value->name."\r\n";
 					$content .= "slug:  ".$value->slug."\r\n";
 					$content .= "source:  ".$value->url."\r\n";
-					$content .= "date:  ".date('Y-m-d H:i', $value->timestamp)."\r\n";
+					$content .= "date:  '".date('Y-m-d H:i', $value->timestamp)."'\r\n";
 					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 
 					$img_data = [];
@@ -144,11 +144,12 @@
 		static public function save_item($input) {
 
 			$folder_name = $input->folder_name;
-			$post_file = '../user/pages/blog/'.$folder_name.'/post.md';
 			$directory_path = BLOG_PATH.'/'.$folder_name;
 
 			if (!file_exists('../user/pages/blog/'.$folder_name)) {
 				mkdir('../user/pages/blog/'.$folder_name, 0777, true);
+
+				$post_file = '../user/pages/blog/'.$folder_name.'/post.md';
 
 				$tags = !empty($input->tags) ? implode(',', $input->tags) : '';
 
@@ -156,7 +157,7 @@
 				$content .= "title:  ".$input->name."\r\n";
 				$content .= "slug:  ".$input->slug."\r\n";
 				$content .= "source:  ".$input->url."\r\n";
-				$content .= "date:  ".date('Y-m-d H:i', $input->timestamp)."\r\n";
+				$content .= "date:  '".date('Y-m-d H:i', $input->timestamp)."'\r\n";
 				$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 
 				$img_data = [];
@@ -189,6 +190,11 @@
 				fclose($fp);
 				
 			} else {
+
+				$post_file = '../user/pages/blog/'.$folder_name.'/post.md';
+				if(!file_exists($post_file)) {
+					$post_file = rtrim($post_file, ".md").'.sv.md';
+				}
 
 				// hämta ut innehållet
 				$fileData = self::read_contents_of_file($post_file);
@@ -245,16 +251,23 @@
 
 				if($update_content) {
 
+					$date = $fileData['date'];
+					$date = ltrim($date, "'");
+					$date = rtrim($date, "'");
+
 					// samla ihop innehållet
 					$content = "---\r\n";
 					$content .= "title:  ".$fileData['title']."\r\n";
 					$content .= "slug:  ".$fileData['slug']."\r\n";
 					$content .= "source:  ".$fileData['source']."\r\n";
-					$content .= "date:  ".$fileData['date']."\r\n";
+					$content .= "date:  '".$date."'\r\n";
 					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 					$content .= $image_to_content;
 
 					$content .= "---";
+					if($fileData['comment']) {
+						$content .= $fileData['comment'];
+					}
 				
 					// spara i fil
 					$fp = fopen($post_file,'wb');
@@ -267,7 +280,7 @@
 
 		}
 
-		public static function publish_item($url) {
+		public static function publish_item($data) {
 			
 			if(empty($data['tag'])) { echo 'tag saknas, stänger av.'; die; }
 			$date = !empty($data['date']) ? strtotime($data['date']) : time();
@@ -278,9 +291,9 @@
 			$di = new RecursiveDirectoryIterator('../user/pages/blog/');
 			foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
 				
-				if($file->getFilename() == 'post.md') {
+				if($file->getFilename() == 'post.md' || $file->getFilename() == 'post.sv.md') {
 					
-					self::read_contents_of_file($file->getRealPath());
+					$postDataArray = self::read_contents_of_file($file->getRealPath());
 
 					if(in_array($data['tag'], $postDataArray['tagArray'])) {
 						array_push($selectedPosts, $postDataArray);
@@ -300,11 +313,11 @@
 
 			$lastWeeksPosts = [];
 
-			$now = time();
-			$then = $now - (7*24*60*60);
+			$end_of_today = strtotime('Today, 23:59:59');
+			$beginning_of_seven_days_ago = ($end_of_today+1)-(8*24*60*60);
 
 			foreach($selectedPosts as $post) {
-				if($post['timestamp'] <= $now && $post['timestamp'] >= $then) {
+				if($post['timestamp'] <= $end_of_today && $post['timestamp'] >= $beginning_of_seven_days_ago) {
 					array_push($lastWeeksPosts, $post);
 				}
 			}
@@ -334,33 +347,68 @@
 
 			$postDataArray = explode("\n", $postData);
 
+			$empty_keys_array = [];
+
 			foreach($postDataArray as $key => $value) {
 
 				$value = trim($value);
 
 				if($value != '') {
 					$splitValue = explode(": ", $value);
+
 					if(!empty($splitValue[1])) {
-						$postDataArray[trim($splitValue[0])] = trim($splitValue[1]);
+						$postDataArray[$splitValue[0]] = $splitValue[1];
+					}
+					else {
+						$empty_keys_array[] = $splitValue[0];
 					}
 
-					$postDataArray['tagArray'] = [];
-
-					if(array_key_exists('tag', $postDataArray)) {
-						$tagString = ltrim($postDataArray['tag'], "[");
-						$tagString = rtrim($tagString, "]");
-
-						$tagArray = explode(',', $tagString);
-						foreach($tagArray as $tag) {
-							if($tag != '') { array_push($postDataArray['tagArray'],$tag); }
-						}
-					}
 				}
 				unset($postDataArray[$key]);
 
 			}
 
-			$postDataArray['timestamp'] = strtotime($postDataArray['date']);
+			$date = $postDataArray['date'];
+			$date = ltrim($date, "'");
+			$date = rtrim($date, "'");
+
+			$postDataArray['timestamp'] = strtotime($date);
+
+			foreach($empty_keys_array as $key => $value) {
+
+				if($value == 'taxonomy:') {
+					//unset($empty_keys_array[$key]);
+				}
+
+				if($value == 'tag:') {
+					$tag_value = ltrim($empty_keys_array[$key+1], "- ");
+					$postDataArray['tag'] = $tag_value;
+				}
+
+				if($value == '---') {
+					$tag_value = array_key_exists($key+1, $empty_keys_array) ? $empty_keys_array[$key+1] : false;
+					if($tag_value) {
+						$postDataArray['comment'] = $tag_value;
+					}
+				}
+
+			}
+
+			$postDataArray['tagArray'] = [];
+
+			if(array_key_exists('tag', $postDataArray)) {
+				$tagString = ltrim($postDataArray['tag'], "[");
+				$tagString = rtrim($tagString, "]");
+
+				$tagArray = explode(',', $tagString);
+				foreach($tagArray as $tag) {
+					if($tag != '') { array_push($postDataArray['tagArray'],$tag); }
+				}
+			}
+
+			// echo '<pre>';
+			// 	print_r($postDataArray);
+			// echo '</pre>';
 
 			if(array_key_exists('image', $postDataArray)) {
 

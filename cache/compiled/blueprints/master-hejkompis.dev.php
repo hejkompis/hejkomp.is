@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledBlueprints',
-    'timestamp' => 1502192061,
-    'checksum' => 'fc4b637bdc16187de6c4f29dc4f2f9bd',
+    'timestamp' => 1502697467,
+    'checksum' => 'fe3768e4ba1eb9ee74dd7a708d5e4d0f',
     'files' => [
         'system/blueprints/config' => [
             'media' => [
@@ -54,6 +54,10 @@ return [
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/blueprints.yaml',
                 'modified' => 1502179771
+            ],
+            'plugins/social-seo-metatags' => [
+                'file' => 'user/plugins/social-seo-metatags/blueprints.yaml',
+                'modified' => 1502697456
             ]
         ]
     ],
@@ -3121,6 +3125,221 @@ return [
                 ],
                 'name' => 'plugins.problems.built_in_css',
                 'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags' => [
+                'type' => '_root',
+                'form_field' => false,
+                'form' => [
+                    'validation' => 'strict'
+                ]
+            ],
+            'plugins.social-seo-metatags.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.PLUGIN_STATUS',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'Enabled',
+                    0 => 'Disabled'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.robots' => [
+                'type' => 'select',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.NAME',
+                'default' => 'without',
+                'size' => 'medium',
+                'options' => [
+                    'index_follow' => 'Index, Follow',
+                    'noindex_follow' => 'NoIndex, Follow',
+                    'index_nofollow' => 'Index, NoFollow',
+                    'noindex_nofollow' => 'NoIndex, NoFollow',
+                    'nosnippet' => 'NoSnippet',
+                    'noarchive' => 'NoArchive',
+                    'noodp' => 'NoODP',
+                    'without' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.WITHOUT'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.robots',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.taxonomy' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.TAXONOMY.NAME',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.page_content' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.page_content.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.PAGE_CONTENT.NAME',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.use_cache' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.USE_CACHE.NAME',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.length' => [
+                'type' => 'text',
+                'size' => 'x-small',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.LENGTH.NAME',
+                'default' => 20,
+                'validate' => [
+                    'type' => 'number',
+                    'min' => 2,
+                    'max' => 30
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.length',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.plugin' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.plugin',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.ENABLED',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.type' => [
+                'type' => 'select',
+                'size' => 'medium',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE',
+                'default' => 'summary_large_image',
+                'options' => [
+                    'summary_large_image' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.LARGE',
+                    'summary' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.SUMMARY'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.username' => [
+                'type' => 'text',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.USERNAME',
+                'size' => 'small',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.twitter' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.twitter',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.ENABLED',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook.appid' => [
+                'type' => 'text',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.APPID',
+                'size' => 'medium',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.facebook' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.facebook',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages_types' => [
+                'type' => 'tabs',
+                'active' => 1,
+                'name' => 'plugins.social-seo-metatags.social_pages_types',
+                'validation' => 'strict'
             ]
         ],
         'rules' => [
@@ -3481,6 +3700,39 @@ return [
                 'problems' => [
                     'enabled' => 'plugins.problems.enabled',
                     'built_in_css' => 'plugins.problems.built_in_css'
+                ],
+                'social-seo-metatags' => [
+                    'social_pages_types' => 'plugins.social-seo-metatags.social_pages_types',
+                    'plugin' => 'plugins.social-seo-metatags.plugin',
+                    'enabled' => 'plugins.social-seo-metatags.enabled',
+                    'seo' => [
+                        'robots' => 'plugins.social-seo-metatags.seo.robots',
+                        'keywords' => [
+                            'taxonomy' => [
+                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled'
+                            ],
+                            'page_content' => [
+                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled'
+                            ],
+                            'use_cache' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
+                            'length' => 'plugins.social-seo-metatags.seo.keywords.length'
+                        ]
+                    ],
+                    'twitter' => 'plugins.social-seo-metatags.twitter',
+                    'social_pages' => [
+                        'pages' => [
+                            'twitter' => [
+                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
+                                'type' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
+                                'username' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username'
+                            ],
+                            'facebook' => [
+                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
+                                'appid' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid'
+                            ]
+                        ]
+                    ],
+                    'facebook' => 'plugins.social-seo-metatags.facebook'
                 ]
             ]
         ],
