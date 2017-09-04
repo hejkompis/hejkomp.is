@@ -105,16 +105,19 @@
 				$source = $post['source'];
 				$source = ltrim($source, "'");
 				$source = rtrim($source, "'");
+				$source = ltrim($source, " ");
+				$source = rtrim($source, " ");
 
 				$contentArray = [
 					'title' => $post['title'],
 					'description' => isset($post['description']) ? $post['description'] : $day_category_settings['description'],
 					'submitted-url' => 'http://'.ROOT.'/api/leaving/?for='.$source.'&referrer=Linkedin',
-					'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
+					//'submitted-image-url' => isset($post['imageUrl']) ? $post['imageUrl'] : ''
+					'submitted-image-url' => ''
 				];
 
 				$visbilityArray = [
-					'code' => 'connections-only'
+					'code' => 'anyone'
 				];
 
 				$postArray = [
@@ -133,11 +136,11 @@
 					'Authorization: Bearer '.$credentials['access_token']
 				];
 
-				//$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
+				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
 
 				echo '<pre>';
-					//print_r($response);
-					print_r($postdata);
+					print_r($response);
+					//print_r($postdata);
 				echo '</pre>';
 
 			}
