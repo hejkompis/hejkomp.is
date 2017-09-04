@@ -135,10 +135,10 @@
 
 				$response = Curl::get('https://api.linkedin.com/v1/people/~/shares?format=json', $headers, 'post', $postdata);
 
-				echo '<pre>';
-					print_r($response);
-					//print_r($postdata);
-				echo '</pre>';
+				// echo '<pre>';
+				// 	print_r($response);
+				// 	print_r($postdata);
+				// echo '</pre>';
 
 			}
 
@@ -255,8 +255,8 @@
 					// Tuesday
 					$output['tag'] = 'inspiration';
 					$output['description'] = '';
-					$output['comment'] = 'Lite inspiration behövs varje tisdag! Denna har jag hittat veckan som gått. Hitta mer inspiration på http://hejkomp.is/tag:inspiration';
-					$output['comment'] = 'Lite inspiration behövs varje tisdag! Denna är en favorit från arkivet. Alla finns på http://hejkomp.is/tag:inspiration';
+					$output['comment_last_week'] = 'Lite inspiration behövs varje tisdag! Denna har jag hittat veckan som gått. Hitta mer inspiration på http://hejkomp.is/tag:inspiration';
+					$output['comment_all_time'] = 'Lite inspiration behövs varje tisdag! Denna är en favorit från arkivet. Alla finns på http://hejkomp.is/tag:inspiration';
 					break;
 				case "3":
 					// Wednesday
