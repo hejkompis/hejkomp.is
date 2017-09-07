@@ -105,14 +105,16 @@
 			if($credentials['expires_at'] >= time() &&  $credentials['access_token'] != '') {
 
 				// do good stuff here
-				$no_of_songs = self::get_albums_length($credentials);
+				$no_of_albums = self::get_albums_length($credentials);
 				$headers = 'Authorization: Bearer '.$credentials['access_token'];
 
 				$output = [];			
 
-				for($i = 0; $i < $no_of_songs; $i += 100) {
+				echo $no_of_albums.'<br />';
 
-					$url = 'https://api.spotify.com/v1/me/albums?offset='.$i;
+				for($i = 0; $i < $no_of_albums; $i += 20) {
+
+					$url = 'https://api.spotify.com/v1/me/albums?market=SE&offset='.$i;
 					
 					$data = Curl::get($url, $headers);
 
@@ -137,6 +139,11 @@
 					}
 
 				}
+
+				echo '<pre>';
+					print_r($output);
+				echo '</pre>';
+				die;
 
 				foreach($output as $key => $value) {
 					Grav::save_item($value);
