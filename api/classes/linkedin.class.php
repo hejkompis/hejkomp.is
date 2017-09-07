@@ -126,7 +126,7 @@
 					'visibility' => $visbilityArray
 				];
 
-				$postArray['comment'] .= "\n\n".'Denna post publicerades automatiskt via min bibliotekssajt, hejkomp.is, där jag spar läsvärda och inspirerande länkar till artiklar, recept eller musik som jag gillar.';
+				$postArray['comment'] .= "\n\n".'Denna post publicerades automatiskt via min bibliotekssajt, <a href="http://hejkomp.is/&referrer=Linkedin">hejkomp.is</a>, där jag spar läsvärda och inspirerande länkar till artiklar, recept eller musik som jag gillar.';
 
 				$postdata = json_encode($postArray);
 
