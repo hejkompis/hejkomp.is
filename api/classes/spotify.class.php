@@ -110,8 +110,6 @@
 
 				$output = [];			
 
-				echo $no_of_albums.'<br />';
-
 				for($i = 0; $i < $no_of_albums; $i += 20) {
 
 					$url = 'https://api.spotify.com/v1/me/albums?market=SE&offset='.$i;
