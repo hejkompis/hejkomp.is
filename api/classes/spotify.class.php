@@ -140,11 +140,6 @@
 
 				}
 
-				echo '<pre>';
-					print_r($output);
-				echo '</pre>';
-				die;
-
 				foreach($output as $key => $value) {
 					Grav::save_item($value);
 				}
