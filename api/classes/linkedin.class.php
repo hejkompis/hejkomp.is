@@ -126,7 +126,7 @@
 					'visibility' => $visbilityArray
 				];
 
-				//$postArray['comment'] .= "\n";
+				$postArray['comment'] .= "\n\n".'Denna post publicerades automatiskt via min bibliotekssajt, hejkomp.is, där jag spar läsvärda och inspirerande länkar till artiklar, recept eller musik som jag gillar.';
 
 				$postdata = json_encode($postArray);
 
@@ -251,29 +251,29 @@
 					// Monday
 					$output['tag'] = 'låtar';
 					$output['description'] = '';
-					$output['comment_last_week'] = 'Jag tänkte tipsa om en bra låt jag hittat veckan som gått. Se alla låtar som finns på min favoritlista på http://hejkomp.is/tag:låtar';
-					$output['comment_all_time'] = 'Det är måndag och jag tänkte att en låt från min favoritlista kunde pigga upp. Se hela listan på http://hejkomp.is/tag:låtar';
+					$output['comment_last_week'] = 'Jag hittade en riktigt bra låt under veckan som gick. Delar den med er och hoppas att någon mer gillar!';
+					$output['comment_all_time'] = 'Det är måndag och jag tänkte att en låt från min favoritlista kunde pigga upp inledningen på veckan!';
 					break;
 				case "2":
 					// Tuesday
 					$output['tag'] = 'inspiration';
 					$output['description'] = '';
-					$output['comment_last_week'] = 'Lite inspiration behövs varje tisdag! Denna har jag hittat veckan som gått. Hitta mer inspiration på http://hejkomp.is/tag:inspiration';
-					$output['comment_all_time'] = 'Lite inspiration behövs varje tisdag! Denna är en favorit från arkivet. Alla finns på http://hejkomp.is/tag:inspiration';
+					$output['comment_last_week'] = 'Jag letar ständigt efter inspiration. Jag hittar det i stort och smått. Här är ett exempel från den senaste veckan.';
+					$output['comment_all_time'] = 'Ibland uppskattar jag att ta en titt i arkivet bland gamla inspirerande alster jag sparat. Här är ett sådant exempel.';
 					break;
 				case "3":
 					// Wednesday
 					$output['tag'] = 'jobbet';
 					$output['description'] = '';
-					$output['comment_last_week'] = 'Jag samlar bra och läsvärda jobbartiklar på min sajt, http://hejkomp.is/tag:jobbet, och delar med mig av en från den senaste veckan här.';
-					$output['comment_all_time'] = 'Jag samlar bra och läsvärda jobbartiklar på min sajt, http://hejkomp.is/tag:jobbet, och tänkte här dela med mig av en ur arkivet.';
+					$output['comment_last_week'] = 'När jag spar artiklar med taggen "jobbet" kan det bli nästan vad som helst, men oftast är det något jag tror jag kan ta med mig för att göra arbetet lite bättre för mig själv eller någon av mina kollegor. Det här är ett sådant exempel från den senaste veckan.';
+					$output['comment_all_time'] = 'När jag spar artiklar med taggen "jobbet" kan det bli nästan vad som helst, men oftast är det något jag tror jag kan ta med mig för att göra arbetet lite bättre för mig själv eller någon av mina kollegor. Det här är ett sådant exempel ur mitt stora arkiv.';
 					break;
 				case "4":
 					// Thursday
-					$output['tag'] = 'köket';
+					$output['tag'] = 'webben';
 					$output['description'] = '';
-					$output['comment_last_week'] = 'Nånting som jag tycker är svårt efter en lång jobbdag är att hitta motivation att laga god middagsmat. Ett bra recept brukar dock göra susen. Därför tänkte jag tipsa om ett spännande recept jag hittat nyss. Se fler recept på http://hejkomp.is/tag:köket';
-					$output['comment_all_time'] = 'Bra recept kan man aldrig få för många. Därför tänkte jag dela med mig av recept från mitt arkiv. Se alla mina sparade recept på http://hejkomp.is/tag:köket';
+					$output['comment_last_week'] = 'Att bli en bättre webbutvecklare är något jag strävat efter mer eller mindre varje dag sedan jag var 15 år gammal. Nu för tiden går det lite långsammare, men jag spar ändå kloka tips och artiklar jag borde läsa. Det här är ett sådant exempel från den senaste veckan.';
+					$output['comment_all_time'] = 'Att bli en bättre webbutvecklare är något jag strävat efter mer eller mindre varje dag sedan jag var 15 år gammal. Nu för tiden går det lite långsammare, men jag spar ändå kloka tips och artiklar jag borde läsa. Det här är ett sådant exempel jag sparat i mitt arkiv.';
 					break;
 				case "5":
 					// Friday
@@ -283,8 +283,8 @@
 					// Saturday
 					$output['tag'] = 'fåtöljen';
 					$output['description'] = '';
-					$output['comment_last_week'] = 'Lördag morgon, och äntligen tid att läsa en av de där riktigt bra artikel jag inte hunnit med från veckan som gått. Se alla jag sparat, på http://hejkomp.is/tag:fåtöljen';
-					$output['comment_all_time'] = 'Lördag morgon, och äntligen tid att läsa en riktigt bra artikel ur arkivet. Se hela artikelbiblioteket på http://hejkomp.is/tag:fåtöljen';
+					$output['comment_last_week'] = 'Lördag morgon, och äntligen tid att läsa en av alla intressanta artiklar jag inte hunnit med från veckan som gått.';
+					$output['comment_all_time'] = 'Lördag morgon, och äntligen tid att läsa ikapp en av alla olästa artiklar jag sparat i arkivet.';
 					break;
 				case "7":
 					// Sunday
