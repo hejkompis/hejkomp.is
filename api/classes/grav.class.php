@@ -30,7 +30,7 @@
 					$content .= "title:  ".$value->name."\r\n";
 					$content .= "slug:  ".$value->slug."\r\n";
 					$content .= "source:  ".$value->url."\r\n";
-					$content .= "date:  '".date('Y-m-d H:i', $value->timestamp)."'\r\n";
+					$content .= "date:  ".date('Y-m-d H:i', $value->timestamp)."\r\n";
 					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 
 					$img_data = [];
@@ -316,6 +316,8 @@
 			$end_of_today = strtotime('Today, 23:59:59');
 			$beginning_of_seven_days_ago = ($end_of_today+1)-(8*24*60*60);
 
+			echo date('Y-m-d H:i:s',$beginning_of_seven_days_ago).' - '.date('Y-m-d H:i:s',$end_of_today).'<br /><br />';
+
 			foreach($selectedPosts as $post) {
 				if($post['timestamp'] <= $end_of_today && $post['timestamp'] >= $beginning_of_seven_days_ago) {
 					array_push($lastWeeksPosts, $post);
@@ -369,8 +371,8 @@
 			}
 
 			$date = $postDataArray['date'];
-			$date = ltrim($date, "'");
-			$date = rtrim($date, "'");
+			$date = trim($date);
+			$date = str_replace("'", "", $date);
 
 			$postDataArray['timestamp'] = strtotime($date);
 
