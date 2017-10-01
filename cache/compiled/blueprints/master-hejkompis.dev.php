@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledBlueprints',
-    'timestamp' => 1502697467,
-    'checksum' => 'fe3768e4ba1eb9ee74dd7a708d5e4d0f',
+    'timestamp' => 1506870546,
+    'checksum' => 'd203cf98a6f7ff540827fd3224970adb',
     'files' => [
         'system/blueprints/config' => [
             'media' => [
@@ -23,26 +23,6 @@ return [
             ]
         ],
         'user/plugins' => [
-            'plugins/admin' => [
-                'file' => 'user/plugins/admin/blueprints.yaml',
-                'modified' => 1502179874
-            ],
-            'plugins/email' => [
-                'file' => 'user/plugins/email/blueprints.yaml',
-                'modified' => 1502179794
-            ],
-            'plugins/error' => [
-                'file' => 'user/plugins/error/blueprints.yaml',
-                'modified' => 1500047081
-            ],
-            'plugins/form' => [
-                'file' => 'user/plugins/form/blueprints.yaml',
-                'modified' => 1502179843
-            ],
-            'plugins/login' => [
-                'file' => 'user/plugins/login/blueprints.yaml',
-                'modified' => 1502179822
-            ],
             'plugins/markdown-notices' => [
                 'file' => 'user/plugins/markdown-notices/blueprints.yaml',
                 'modified' => 1500047081
@@ -51,6 +31,14 @@ return [
                 'file' => 'user/plugins/pagination/blueprints.yaml',
                 'modified' => 1500047081
             ],
+            'plugins/form' => [
+                'file' => 'user/plugins/form/blueprints.yaml',
+                'modified' => 1502179843
+            ],
+            'plugins/admin' => [
+                'file' => 'user/plugins/admin/blueprints.yaml',
+                'modified' => 1502179874
+            ],
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/blueprints.yaml',
                 'modified' => 1502179771
@@ -58,6 +46,18 @@ return [
             'plugins/social-seo-metatags' => [
                 'file' => 'user/plugins/social-seo-metatags/blueprints.yaml',
                 'modified' => 1502697456
+            ],
+            'plugins/error' => [
+                'file' => 'user/plugins/error/blueprints.yaml',
+                'modified' => 1500047081
+            ],
+            'plugins/login' => [
+                'file' => 'user/plugins/login/blueprints.yaml',
+                'modified' => 1502179822
+            ],
+            'plugins/email' => [
+                'file' => 'user/plugins/email/blueprints.yaml',
+                'modified' => 1502179794
             ]
         ]
     ],
@@ -1714,17 +1714,216 @@ return [
                 'name' => 'system.advanced',
                 'validation' => 'loose'
             ],
-            'plugins.admin' => [
+            'plugins.markdown-notices' => [
                 'type' => '_root',
                 'form_field' => false,
                 'form' => [
-                    'validation' => 'loose'
+                    'validation' => 'strict'
                 ]
             ],
             'plugins' => [
                 'type' => '_parent',
                 'name' => 'plugins',
                 'form_field' => false
+            ],
+            'plugins.markdown-notices.enabled' => [
+                'type' => 'toggle',
+                'label' => 'Plugin status',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'Enabled',
+                    0 => 'Disabled'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.markdown-notices.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.markdown-notices.built_in_css' => [
+                'type' => 'toggle',
+                'label' => 'Use built in CSS',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'Enabled',
+                    0 => 'Disabled'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.markdown-notices.built_in_css',
+                'validation' => 'strict'
+            ],
+            'plugins.markdown-notices.level_classes' => [
+                'type' => 'selectize',
+                'size' => 'large',
+                'label' => 'Level classes',
+                'classes' => 'fancy',
+                'validate' => [
+                    'type' => 'commalist'
+                ],
+                'name' => 'plugins.markdown-notices.level_classes',
+                'validation' => 'strict'
+            ],
+            'plugins.pagination' => [
+                'type' => '_root',
+                'form_field' => false,
+                'form' => [
+                    'validation' => 'strict'
+                ]
+            ],
+            'plugins.pagination.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.pagination.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.pagination.delta' => [
+                'type' => 'text',
+                'size' => 'x-small',
+                'label' => 'Delta',
+                'default' => 0,
+                'validate' => [
+                    'type' => 'number',
+                    'min' => 0
+                ],
+                'name' => 'plugins.pagination.delta',
+                'validation' => 'strict'
+            ],
+            'plugins.pagination.built_in_css' => [
+                'type' => 'toggle',
+                'label' => 'Use built in CSS',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.pagination.built_in_css',
+                'validation' => 'strict'
+            ],
+            'plugins.form' => [
+                'type' => '_root',
+                'form_field' => false,
+                'form' => [
+                    'validation' => 'strict'
+                ]
+            ],
+            'plugins.form.enabled' => [
+                'type' => 'hidden',
+                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.form.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.form.built_in_css' => [
+                'type' => 'toggle',
+                'label' => 'PLUGIN_FORM.USE_BUILT_IN_CSS',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'Enabled',
+                    0 => 'Disabled'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.form.built_in_css',
+                'validation' => 'strict'
+            ],
+            'plugins.form.general' => [
+                'type' => 'section',
+                'name' => 'plugins.form.general',
+                'validation' => 'strict'
+            ],
+            'plugins.form.files' => [
+                'type' => 'section',
+                'name' => 'plugins.form.files',
+                'validation' => 'strict'
+            ],
+            'plugins.form.files.multiple' => [
+                'type' => 'toggle',
+                'label' => 'PLUGIN_FORM.ALLOW_MULTIPLE',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.form.files.multiple',
+                'validation' => 'strict'
+            ],
+            'plugins.form.files.destination' => [
+                'type' => 'text',
+                'label' => 'PLUGIN_FORM.DESTINATION',
+                'default' => '@self',
+                'name' => 'plugins.form.files.destination',
+                'validation' => 'strict'
+            ],
+            'plugins.form.files.accept' => [
+                'type' => 'selectize',
+                'size' => 'large',
+                'label' => 'PLUGIN_FORM.ACCEPT',
+                'classes' => 'fancy',
+                'default' => [
+                    0 => 'image/*'
+                ],
+                'validate' => [
+                    'type' => 'commalist'
+                ],
+                'name' => 'plugins.form.files.accept',
+                'validation' => 'strict'
+            ],
+            'plugins.form.recaptcha' => [
+                'type' => 'section',
+                'name' => 'plugins.form.recaptcha',
+                'validation' => 'strict'
+            ],
+            'plugins.form.recaptcha.site_key' => [
+                'type' => 'text',
+                'label' => 'PLUGIN_FORM.RECAPTCHA_SITE_KEY',
+                'default' => '',
+                'name' => 'plugins.form.recaptcha.site_key',
+                'validation' => 'strict'
+            ],
+            'plugins.form.recaptcha.secret_key' => [
+                'type' => 'text',
+                'label' => 'PLUGIN_FORM.RECAPTCHA_SECRET_KEY',
+                'default' => '',
+                'name' => 'plugins.form.recaptcha.secret_key',
+                'validation' => 'strict'
+            ],
+            'plugins.admin' => [
+                'type' => '_root',
+                'form_field' => false,
+                'form' => [
+                    'validation' => 'loose'
+                ]
             ],
             'plugins.admin.Basics' => [
                 'type' => 'section',
@@ -2227,221 +2426,16 @@ return [
                 'name' => 'plugins.admin.popularity.history.visitors',
                 'validation' => 'loose'
             ],
-            'plugins.email' => [
+            'plugins.problems' => [
                 'type' => '_root',
                 'form_field' => false,
                 'form' => [
-                    'validation' => 'loose'
+                    'validation' => 'strict'
                 ]
             ],
-            'plugins.email.enabled' => [
-                'type' => 'hidden',
-                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
-                'highlight' => 1,
-                'default' => 1,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.email.enabled',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer' => [
-                'type' => '_parent',
-                'name' => 'plugins.email.mailer',
-                'form_field' => false
-            ],
-            'plugins.email.mailer.engine' => [
-                'type' => 'select',
-                'label' => 'Mail Engine',
-                'size' => 'medium',
-                'options' => [
-                    'none' => 'Disabled',
-                    'smtp' => 'SMTP',
-                    'sendmail' => 'Sendmail',
-                    'mail' => 'PHP Mail'
-                ],
-                'name' => 'plugins.email.mailer.engine',
-                'validation' => 'loose'
-            ],
-            'plugins.email.content_type' => [
-                'type' => 'select',
-                'label' => 'Content type',
-                'size' => 'medium',
-                'default' => 'text/html',
-                'options' => [
-                    'text/plain' => 'Plain text',
-                    'text/html' => 'HTML'
-                ],
-                'name' => 'plugins.email.content_type',
-                'validation' => 'loose'
-            ],
-            'plugins.email.charset' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Charset',
-                'name' => 'plugins.email.charset',
-                'validation' => 'loose'
-            ],
-            'plugins.email.from' => [
-                'type' => 'email',
-                'size' => 'medium',
-                'label' => 'Email from',
-                'validate' => [
-                    'required' => true,
-                    'type' => 'email'
-                ],
-                'name' => 'plugins.email.from',
-                'validation' => 'loose'
-            ],
-            'plugins.email.from_name' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Email from name',
-                'name' => 'plugins.email.from_name',
-                'validation' => 'loose'
-            ],
-            'plugins.email.to' => [
-                'type' => 'email',
-                'size' => 'medium',
-                'label' => 'Email to',
-                'multiple' => true,
-                'validate' => [
-                    'required' => true,
-                    'type' => 'email'
-                ],
-                'name' => 'plugins.email.to',
-                'validation' => 'loose'
-            ],
-            'plugins.email.to_name' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Email to name',
-                'name' => 'plugins.email.to_name',
-                'validation' => 'loose'
-            ],
-            'plugins.email.cc' => [
-                'type' => 'email',
-                'size' => 'medium',
-                'label' => 'Email CC',
-                'multiple' => true,
-                'validate' => [
-                    'type' => 'email'
-                ],
-                'name' => 'plugins.email.cc',
-                'validation' => 'loose'
-            ],
-            'plugins.email.cc_name' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Email CC name',
-                'name' => 'plugins.email.cc_name',
-                'validation' => 'loose'
-            ],
-            'plugins.email.bcc' => [
-                'type' => 'email',
-                'size' => 'medium',
-                'label' => 'Email BCC',
-                'multiple' => true,
-                'validate' => [
-                    'type' => 'email'
-                ],
-                'name' => 'plugins.email.bcc',
-                'validation' => 'loose'
-            ],
-            'plugins.email.reply_to' => [
-                'type' => 'email',
-                'size' => 'medium',
-                'label' => 'Email reply-to',
-                'multiple' => true,
-                'validate' => [
-                    'type' => 'email'
-                ],
-                'name' => 'plugins.email.reply_to',
-                'validation' => 'loose'
-            ],
-            'plugins.email.reply_to_name' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Email reply-to name',
-                'name' => 'plugins.email.reply_to_name',
-                'validation' => 'loose'
-            ],
-            'plugins.email.body' => [
-                'type' => 'textarea',
-                'size' => 'medium',
-                'label' => 'Email body',
-                'name' => 'plugins.email.body',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.smtp' => [
-                'type' => '_parent',
-                'name' => 'plugins.email.mailer.smtp',
-                'form_field' => false
-            ],
-            'plugins.email.mailer.smtp.server' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'SMTP server',
-                'name' => 'plugins.email.mailer.smtp.server',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.smtp.port' => [
-                'type' => 'text',
-                'size' => 'small',
-                'label' => 'SMTP port',
-                'validate' => [
-                    'type' => 'number',
-                    'min' => 1,
-                    'max' => 65535
-                ],
-                'name' => 'plugins.email.mailer.smtp.port',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.smtp.encryption' => [
-                'type' => 'select',
-                'size' => 'medium',
-                'label' => 'SMTP encryption',
-                'options' => [
-                    'none' => 'None',
-                    'ssl' => 'SSL',
-                    'tls' => 'TLS'
-                ],
-                'name' => 'plugins.email.mailer.smtp.encryption',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.smtp.user' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'SMTP login name',
-                'name' => 'plugins.email.mailer.smtp.user',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.smtp.password' => [
-                'type' => 'password',
-                'size' => 'medium',
-                'label' => 'SMTP password',
-                'name' => 'plugins.email.mailer.smtp.password',
-                'validation' => 'loose'
-            ],
-            'plugins.email.mailer.sendmail' => [
-                'type' => '_parent',
-                'name' => 'plugins.email.mailer.sendmail',
-                'form_field' => false
-            ],
-            'plugins.email.mailer.sendmail.bin' => [
-                'type' => 'text',
-                'size' => 'medium',
-                'label' => 'Path to sendmail',
-                'name' => 'plugins.email.mailer.sendmail.bin',
-                'validation' => 'loose'
-            ],
-            'plugins.email.debug' => [
+            'plugins.problems.enabled' => [
                 'type' => 'toggle',
-                'label' => 'Debug',
+                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
                 'highlight' => 1,
                 'default' => 0,
                 'options' => [
@@ -2451,8 +2445,238 @@ return [
                 'validate' => [
                     'type' => 'bool'
                 ],
-                'name' => 'plugins.email.debug',
-                'validation' => 'loose'
+                'name' => 'plugins.problems.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.problems.built_in_css' => [
+                'type' => 'toggle',
+                'label' => 'Use built in CSS',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.problems.built_in_css',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags' => [
+                'type' => '_root',
+                'form_field' => false,
+                'form' => [
+                    'validation' => 'strict'
+                ]
+            ],
+            'plugins.social-seo-metatags.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.PLUGIN_STATUS',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'Enabled',
+                    0 => 'Disabled'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.robots' => [
+                'type' => 'select',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.NAME',
+                'default' => 'without',
+                'size' => 'medium',
+                'options' => [
+                    'index_follow' => 'Index, Follow',
+                    'noindex_follow' => 'NoIndex, Follow',
+                    'index_nofollow' => 'Index, NoFollow',
+                    'noindex_nofollow' => 'NoIndex, NoFollow',
+                    'nosnippet' => 'NoSnippet',
+                    'noarchive' => 'NoArchive',
+                    'noodp' => 'NoODP',
+                    'without' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.WITHOUT'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.robots',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.taxonomy' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.TAXONOMY.NAME',
+                'highlight' => 1,
+                'default' => 1,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.page_content' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.seo.keywords.page_content.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.PAGE_CONTENT.NAME',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.use_cache' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.USE_CACHE.NAME',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.seo.keywords.length' => [
+                'type' => 'text',
+                'size' => 'x-small',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.LENGTH.NAME',
+                'default' => 20,
+                'validate' => [
+                    'type' => 'number',
+                    'min' => 2,
+                    'max' => 30
+                ],
+                'name' => 'plugins.social-seo-metatags.seo.keywords.length',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.plugin' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.plugin',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.ENABLED',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.type' => [
+                'type' => 'select',
+                'size' => 'medium',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE',
+                'default' => 'summary_large_image',
+                'options' => [
+                    'summary_large_image' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.LARGE',
+                    'summary' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.SUMMARY'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.twitter.username' => [
+                'type' => 'text',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.USERNAME',
+                'size' => 'small',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.twitter' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.twitter',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook' => [
+                'type' => '_parent',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook',
+                'form_field' => false
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook.enabled' => [
+                'type' => 'toggle',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.ENABLED',
+                'highlight' => 1,
+                'default' => 0,
+                'options' => [
+                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
+                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                ],
+                'validate' => [
+                    'type' => 'bool'
+                ],
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages.pages.facebook.appid' => [
+                'type' => 'text',
+                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.APPID',
+                'size' => 'medium',
+                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.facebook' => [
+                'type' => 'tab',
+                'name' => 'plugins.social-seo-metatags.facebook',
+                'validation' => 'strict'
+            ],
+            'plugins.social-seo-metatags.social_pages_types' => [
+                'type' => 'tabs',
+                'active' => 1,
+                'name' => 'plugins.social-seo-metatags.social_pages_types',
+                'validation' => 'strict'
             ],
             'plugins.error' => [
                 'type' => '_root',
@@ -2487,108 +2711,6 @@ return [
                 'label' => '404 Route',
                 'default' => '/error',
                 'name' => 'plugins.error.routes.404',
-                'validation' => 'strict'
-            ],
-            'plugins.form' => [
-                'type' => '_root',
-                'form_field' => false,
-                'form' => [
-                    'validation' => 'strict'
-                ]
-            ],
-            'plugins.form.enabled' => [
-                'type' => 'hidden',
-                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.form.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.form.built_in_css' => [
-                'type' => 'toggle',
-                'label' => 'PLUGIN_FORM.USE_BUILT_IN_CSS',
-                'highlight' => 1,
-                'default' => 1,
-                'options' => [
-                    1 => 'Enabled',
-                    0 => 'Disabled'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.form.built_in_css',
-                'validation' => 'strict'
-            ],
-            'plugins.form.general' => [
-                'type' => 'section',
-                'name' => 'plugins.form.general',
-                'validation' => 'strict'
-            ],
-            'plugins.form.files' => [
-                'type' => 'section',
-                'name' => 'plugins.form.files',
-                'validation' => 'strict'
-            ],
-            'plugins.form.files.multiple' => [
-                'type' => 'toggle',
-                'label' => 'PLUGIN_FORM.ALLOW_MULTIPLE',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.form.files.multiple',
-                'validation' => 'strict'
-            ],
-            'plugins.form.files.destination' => [
-                'type' => 'text',
-                'label' => 'PLUGIN_FORM.DESTINATION',
-                'default' => '@self',
-                'name' => 'plugins.form.files.destination',
-                'validation' => 'strict'
-            ],
-            'plugins.form.files.accept' => [
-                'type' => 'selectize',
-                'size' => 'large',
-                'label' => 'PLUGIN_FORM.ACCEPT',
-                'classes' => 'fancy',
-                'default' => [
-                    0 => 'image/*'
-                ],
-                'validate' => [
-                    'type' => 'commalist'
-                ],
-                'name' => 'plugins.form.files.accept',
-                'validation' => 'strict'
-            ],
-            'plugins.form.recaptcha' => [
-                'type' => 'section',
-                'name' => 'plugins.form.recaptcha',
-                'validation' => 'strict'
-            ],
-            'plugins.form.recaptcha.site_key' => [
-                'type' => 'text',
-                'label' => 'PLUGIN_FORM.RECAPTCHA_SITE_KEY',
-                'default' => '',
-                'name' => 'plugins.form.recaptcha.site_key',
-                'validation' => 'strict'
-            ],
-            'plugins.form.recaptcha.secret_key' => [
-                'type' => 'text',
-                'label' => 'PLUGIN_FORM.RECAPTCHA_SECRET_KEY',
-                'default' => '',
-                'name' => 'plugins.form.recaptcha.secret_key',
                 'validation' => 'strict'
             ],
             'plugins.login' => [
@@ -2992,92 +3114,17 @@ return [
                 'name' => 'plugins.login.tabs',
                 'validation' => 'loose'
             ],
-            'plugins.markdown-notices' => [
+            'plugins.email' => [
                 'type' => '_root',
                 'form_field' => false,
                 'form' => [
-                    'validation' => 'strict'
+                    'validation' => 'loose'
                 ]
             ],
-            'plugins.markdown-notices.enabled' => [
-                'type' => 'toggle',
-                'label' => 'Plugin status',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'Enabled',
-                    0 => 'Disabled'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.markdown-notices.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.markdown-notices.built_in_css' => [
-                'type' => 'toggle',
-                'label' => 'Use built in CSS',
-                'highlight' => 1,
-                'default' => 1,
-                'options' => [
-                    1 => 'Enabled',
-                    0 => 'Disabled'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.markdown-notices.built_in_css',
-                'validation' => 'strict'
-            ],
-            'plugins.markdown-notices.level_classes' => [
-                'type' => 'selectize',
-                'size' => 'large',
-                'label' => 'Level classes',
-                'classes' => 'fancy',
-                'validate' => [
-                    'type' => 'commalist'
-                ],
-                'name' => 'plugins.markdown-notices.level_classes',
-                'validation' => 'strict'
-            ],
-            'plugins.pagination' => [
-                'type' => '_root',
-                'form_field' => false,
-                'form' => [
-                    'validation' => 'strict'
-                ]
-            ],
-            'plugins.pagination.enabled' => [
-                'type' => 'toggle',
+            'plugins.email.enabled' => [
+                'type' => 'hidden',
                 'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
                 'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.pagination.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.pagination.delta' => [
-                'type' => 'text',
-                'size' => 'x-small',
-                'label' => 'Delta',
-                'default' => 0,
-                'validate' => [
-                    'type' => 'number',
-                    'min' => 0
-                ],
-                'name' => 'plugins.pagination.delta',
-                'validation' => 'strict'
-            ],
-            'plugins.pagination.built_in_css' => [
-                'type' => 'toggle',
-                'label' => 'Use built in CSS',
-                'highlight' => 1,
                 'default' => 1,
                 'options' => [
                     1 => 'PLUGIN_ADMIN.ENABLED',
@@ -3086,260 +3133,213 @@ return [
                 'validate' => [
                     'type' => 'bool'
                 ],
-                'name' => 'plugins.pagination.built_in_css',
-                'validation' => 'strict'
+                'name' => 'plugins.email.enabled',
+                'validation' => 'loose'
             ],
-            'plugins.problems' => [
-                'type' => '_root',
-                'form_field' => false,
-                'form' => [
-                    'validation' => 'strict'
-                ]
-            ],
-            'plugins.problems.enabled' => [
-                'type' => 'toggle',
-                'label' => 'PLUGIN_ADMIN.PLUGIN_STATUS',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.problems.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.problems.built_in_css' => [
-                'type' => 'toggle',
-                'label' => 'Use built in CSS',
-                'highlight' => 1,
-                'default' => 1,
-                'options' => [
-                    1 => 'PLUGIN_ADMIN.ENABLED',
-                    0 => 'PLUGIN_ADMIN.DISABLED'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.problems.built_in_css',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags' => [
-                'type' => '_root',
-                'form_field' => false,
-                'form' => [
-                    'validation' => 'strict'
-                ]
-            ],
-            'plugins.social-seo-metatags.enabled' => [
-                'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.PLUGIN_STATUS',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'Enabled',
-                    0 => 'Disabled'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.social-seo-metatags.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.seo' => [
+            'plugins.email.mailer' => [
                 'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.seo',
+                'name' => 'plugins.email.mailer',
                 'form_field' => false
             ],
-            'plugins.social-seo-metatags.seo.robots' => [
+            'plugins.email.mailer.engine' => [
                 'type' => 'select',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.NAME',
-                'default' => 'without',
+                'label' => 'Mail Engine',
                 'size' => 'medium',
                 'options' => [
-                    'index_follow' => 'Index, Follow',
-                    'noindex_follow' => 'NoIndex, Follow',
-                    'index_nofollow' => 'Index, NoFollow',
-                    'noindex_nofollow' => 'NoIndex, NoFollow',
-                    'nosnippet' => 'NoSnippet',
-                    'noarchive' => 'NoArchive',
-                    'noodp' => 'NoODP',
-                    'without' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.ROBOTS.WITHOUT'
+                    'none' => 'Disabled',
+                    'smtp' => 'SMTP',
+                    'sendmail' => 'Sendmail',
+                    'mail' => 'PHP Mail'
                 ],
-                'name' => 'plugins.social-seo-metatags.seo.robots',
-                'validation' => 'strict'
+                'name' => 'plugins.email.mailer.engine',
+                'validation' => 'loose'
             ],
-            'plugins.social-seo-metatags.seo.keywords' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.seo.keywords',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.seo.keywords.taxonomy' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled' => [
-                'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.TAXONOMY.NAME',
-                'highlight' => 1,
-                'default' => 1,
-                'options' => [
-                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
-                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.seo.keywords.page_content' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.seo.keywords.page_content.enabled' => [
-                'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.PAGE_CONTENT.NAME',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
-                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.seo.keywords.use_cache' => [
-                'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.USE_CACHE.NAME',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
-                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.seo.keywords.length' => [
-                'type' => 'text',
-                'size' => 'x-small',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.GENERAL.KEYWORDS.LENGTH.NAME',
-                'default' => 20,
-                'validate' => [
-                    'type' => 'number',
-                    'min' => 2,
-                    'max' => 30
-                ],
-                'name' => 'plugins.social-seo-metatags.seo.keywords.length',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.plugin' => [
-                'type' => 'tab',
-                'name' => 'plugins.social-seo-metatags.plugin',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.social_pages' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.social_pages',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.social_pages.pages' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.social_pages.pages',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.social_pages.pages.twitter' => [
-                'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter',
-                'form_field' => false
-            ],
-            'plugins.social-seo-metatags.social_pages.pages.twitter.enabled' => [
-                'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.ENABLED',
-                'highlight' => 1,
-                'default' => 0,
-                'options' => [
-                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
-                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
-                ],
-                'validate' => [
-                    'type' => 'bool'
-                ],
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.social_pages.pages.twitter.type' => [
+            'plugins.email.content_type' => [
                 'type' => 'select',
+                'label' => 'Content type',
                 'size' => 'medium',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE',
-                'default' => 'summary_large_image',
+                'default' => 'text/html',
                 'options' => [
-                    'summary_large_image' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.LARGE',
-                    'summary' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.TYPE_CARDS.SUMMARY'
+                    'text/plain' => 'Plain text',
+                    'text/html' => 'HTML'
                 ],
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
-                'validation' => 'strict'
+                'name' => 'plugins.email.content_type',
+                'validation' => 'loose'
             ],
-            'plugins.social-seo-metatags.social_pages.pages.twitter.username' => [
+            'plugins.email.charset' => [
                 'type' => 'text',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.TWITTER.USERNAME',
+                'size' => 'medium',
+                'label' => 'Charset',
+                'name' => 'plugins.email.charset',
+                'validation' => 'loose'
+            ],
+            'plugins.email.from' => [
+                'type' => 'email',
+                'size' => 'medium',
+                'label' => 'Email from',
+                'validate' => [
+                    'required' => true,
+                    'type' => 'email'
+                ],
+                'name' => 'plugins.email.from',
+                'validation' => 'loose'
+            ],
+            'plugins.email.from_name' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'Email from name',
+                'name' => 'plugins.email.from_name',
+                'validation' => 'loose'
+            ],
+            'plugins.email.to' => [
+                'type' => 'email',
+                'size' => 'medium',
+                'label' => 'Email to',
+                'multiple' => true,
+                'validate' => [
+                    'required' => true,
+                    'type' => 'email'
+                ],
+                'name' => 'plugins.email.to',
+                'validation' => 'loose'
+            ],
+            'plugins.email.to_name' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'Email to name',
+                'name' => 'plugins.email.to_name',
+                'validation' => 'loose'
+            ],
+            'plugins.email.cc' => [
+                'type' => 'email',
+                'size' => 'medium',
+                'label' => 'Email CC',
+                'multiple' => true,
+                'validate' => [
+                    'type' => 'email'
+                ],
+                'name' => 'plugins.email.cc',
+                'validation' => 'loose'
+            ],
+            'plugins.email.cc_name' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'Email CC name',
+                'name' => 'plugins.email.cc_name',
+                'validation' => 'loose'
+            ],
+            'plugins.email.bcc' => [
+                'type' => 'email',
+                'size' => 'medium',
+                'label' => 'Email BCC',
+                'multiple' => true,
+                'validate' => [
+                    'type' => 'email'
+                ],
+                'name' => 'plugins.email.bcc',
+                'validation' => 'loose'
+            ],
+            'plugins.email.reply_to' => [
+                'type' => 'email',
+                'size' => 'medium',
+                'label' => 'Email reply-to',
+                'multiple' => true,
+                'validate' => [
+                    'type' => 'email'
+                ],
+                'name' => 'plugins.email.reply_to',
+                'validation' => 'loose'
+            ],
+            'plugins.email.reply_to_name' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'Email reply-to name',
+                'name' => 'plugins.email.reply_to_name',
+                'validation' => 'loose'
+            ],
+            'plugins.email.body' => [
+                'type' => 'textarea',
+                'size' => 'medium',
+                'label' => 'Email body',
+                'name' => 'plugins.email.body',
+                'validation' => 'loose'
+            ],
+            'plugins.email.mailer.smtp' => [
+                'type' => '_parent',
+                'name' => 'plugins.email.mailer.smtp',
+                'form_field' => false
+            ],
+            'plugins.email.mailer.smtp.server' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'SMTP server',
+                'name' => 'plugins.email.mailer.smtp.server',
+                'validation' => 'loose'
+            ],
+            'plugins.email.mailer.smtp.port' => [
+                'type' => 'text',
                 'size' => 'small',
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username',
-                'validation' => 'strict'
+                'label' => 'SMTP port',
+                'validate' => [
+                    'type' => 'number',
+                    'min' => 1,
+                    'max' => 65535
+                ],
+                'name' => 'plugins.email.mailer.smtp.port',
+                'validation' => 'loose'
             ],
-            'plugins.social-seo-metatags.twitter' => [
-                'type' => 'tab',
-                'name' => 'plugins.social-seo-metatags.twitter',
-                'validation' => 'strict'
+            'plugins.email.mailer.smtp.encryption' => [
+                'type' => 'select',
+                'size' => 'medium',
+                'label' => 'SMTP encryption',
+                'options' => [
+                    'none' => 'None',
+                    'ssl' => 'SSL',
+                    'tls' => 'TLS'
+                ],
+                'name' => 'plugins.email.mailer.smtp.encryption',
+                'validation' => 'loose'
             ],
-            'plugins.social-seo-metatags.social_pages.pages.facebook' => [
+            'plugins.email.mailer.smtp.user' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'SMTP login name',
+                'name' => 'plugins.email.mailer.smtp.user',
+                'validation' => 'loose'
+            ],
+            'plugins.email.mailer.smtp.password' => [
+                'type' => 'password',
+                'size' => 'medium',
+                'label' => 'SMTP password',
+                'name' => 'plugins.email.mailer.smtp.password',
+                'validation' => 'loose'
+            ],
+            'plugins.email.mailer.sendmail' => [
                 'type' => '_parent',
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook',
+                'name' => 'plugins.email.mailer.sendmail',
                 'form_field' => false
             ],
-            'plugins.social-seo-metatags.social_pages.pages.facebook.enabled' => [
+            'plugins.email.mailer.sendmail.bin' => [
+                'type' => 'text',
+                'size' => 'medium',
+                'label' => 'Path to sendmail',
+                'name' => 'plugins.email.mailer.sendmail.bin',
+                'validation' => 'loose'
+            ],
+            'plugins.email.debug' => [
                 'type' => 'toggle',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.ENABLED',
+                'label' => 'Debug',
                 'highlight' => 1,
                 'default' => 0,
                 'options' => [
-                    1 => 'PLUGINS.SOCIAL_SEO_METATAGS.YES',
-                    0 => 'PLUGINS.SOCIAL_SEO_METATAGS.NO'
+                    1 => 'PLUGIN_ADMIN.ENABLED',
+                    0 => 'PLUGIN_ADMIN.DISABLED'
                 ],
                 'validate' => [
                     'type' => 'bool'
                 ],
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.social_pages.pages.facebook.appid' => [
-                'type' => 'text',
-                'label' => 'PLUGINS.SOCIAL_SEO_METATAGS.FACEBOOK.APPID',
-                'size' => 'medium',
-                'name' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.facebook' => [
-                'type' => 'tab',
-                'name' => 'plugins.social-seo-metatags.facebook',
-                'validation' => 'strict'
-            ],
-            'plugins.social-seo-metatags.social_pages_types' => [
-                'type' => 'tabs',
-                'active' => 1,
-                'name' => 'plugins.social-seo-metatags.social_pages_types',
-                'validation' => 'strict'
+                'name' => 'plugins.email.debug',
+                'validation' => 'loose'
             ]
         ],
         'rules' => [
@@ -3529,6 +3529,30 @@ return [
                 'custom_base_url' => 'system.custom_base_url'
             ],
             'plugins' => [
+                'markdown-notices' => [
+                    'enabled' => 'plugins.markdown-notices.enabled',
+                    'built_in_css' => 'plugins.markdown-notices.built_in_css',
+                    'level_classes' => 'plugins.markdown-notices.level_classes'
+                ],
+                'pagination' => [
+                    'enabled' => 'plugins.pagination.enabled',
+                    'delta' => 'plugins.pagination.delta',
+                    'built_in_css' => 'plugins.pagination.built_in_css'
+                ],
+                'form' => [
+                    'enabled' => 'plugins.form.enabled',
+                    'general' => 'plugins.form.general',
+                    'built_in_css' => 'plugins.form.built_in_css',
+                    'files' => [
+                        'multiple' => 'plugins.form.files.multiple',
+                        'destination' => 'plugins.form.files.destination',
+                        'accept' => 'plugins.form.files.accept'
+                    ],
+                    'recaptcha' => [
+                        'site_key' => 'plugins.form.recaptcha.site_key',
+                        'secret_key' => 'plugins.form.recaptcha.secret_key'
+                    ]
+                ],
                 'admin' => [
                     'Basics' => 'plugins.admin.Basics',
                     'enabled' => 'plugins.admin.enabled',
@@ -3589,53 +3613,47 @@ return [
                         'days_of_stats' => 'plugins.admin.dashboard.days_of_stats'
                     ]
                 ],
-                'email' => [
-                    'enabled' => 'plugins.email.enabled',
-                    'mailer' => [
-                        'engine' => 'plugins.email.mailer.engine',
-                        'smtp' => [
-                            'server' => 'plugins.email.mailer.smtp.server',
-                            'port' => 'plugins.email.mailer.smtp.port',
-                            'encryption' => 'plugins.email.mailer.smtp.encryption',
-                            'user' => 'plugins.email.mailer.smtp.user',
-                            'password' => 'plugins.email.mailer.smtp.password'
-                        ],
-                        'sendmail' => [
-                            'bin' => 'plugins.email.mailer.sendmail.bin'
+                'problems' => [
+                    'enabled' => 'plugins.problems.enabled',
+                    'built_in_css' => 'plugins.problems.built_in_css'
+                ],
+                'social-seo-metatags' => [
+                    'social_pages_types' => 'plugins.social-seo-metatags.social_pages_types',
+                    'plugin' => 'plugins.social-seo-metatags.plugin',
+                    'enabled' => 'plugins.social-seo-metatags.enabled',
+                    'seo' => [
+                        'robots' => 'plugins.social-seo-metatags.seo.robots',
+                        'keywords' => [
+                            'taxonomy' => [
+                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled'
+                            ],
+                            'page_content' => [
+                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled'
+                            ],
+                            'use_cache' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
+                            'length' => 'plugins.social-seo-metatags.seo.keywords.length'
                         ]
                     ],
-                    'content_type' => 'plugins.email.content_type',
-                    'charset' => 'plugins.email.charset',
-                    'from' => 'plugins.email.from',
-                    'from_name' => 'plugins.email.from_name',
-                    'to' => 'plugins.email.to',
-                    'to_name' => 'plugins.email.to_name',
-                    'cc' => 'plugins.email.cc',
-                    'cc_name' => 'plugins.email.cc_name',
-                    'bcc' => 'plugins.email.bcc',
-                    'reply_to' => 'plugins.email.reply_to',
-                    'reply_to_name' => 'plugins.email.reply_to_name',
-                    'body' => 'plugins.email.body',
-                    'debug' => 'plugins.email.debug'
+                    'twitter' => 'plugins.social-seo-metatags.twitter',
+                    'social_pages' => [
+                        'pages' => [
+                            'twitter' => [
+                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
+                                'type' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
+                                'username' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username'
+                            ],
+                            'facebook' => [
+                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
+                                'appid' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid'
+                            ]
+                        ]
+                    ],
+                    'facebook' => 'plugins.social-seo-metatags.facebook'
                 ],
                 'error' => [
                     'enabled' => 'plugins.error.enabled',
                     'routes' => [
                         404 => 'plugins.error.routes.404'
-                    ]
-                ],
-                'form' => [
-                    'enabled' => 'plugins.form.enabled',
-                    'general' => 'plugins.form.general',
-                    'built_in_css' => 'plugins.form.built_in_css',
-                    'files' => [
-                        'multiple' => 'plugins.form.files.multiple',
-                        'destination' => 'plugins.form.files.destination',
-                        'accept' => 'plugins.form.files.accept'
-                    ],
-                    'recaptcha' => [
-                        'site_key' => 'plugins.form.recaptcha.site_key',
-                        'secret_key' => 'plugins.form.recaptcha.secret_key'
                     ]
                 ],
                 'login' => [
@@ -3687,52 +3705,34 @@ return [
                     'max_login_count' => 'plugins.login.max_login_count',
                     'max_login_interval' => 'plugins.login.max_login_interval'
                 ],
-                'markdown-notices' => [
-                    'enabled' => 'plugins.markdown-notices.enabled',
-                    'built_in_css' => 'plugins.markdown-notices.built_in_css',
-                    'level_classes' => 'plugins.markdown-notices.level_classes'
-                ],
-                'pagination' => [
-                    'enabled' => 'plugins.pagination.enabled',
-                    'delta' => 'plugins.pagination.delta',
-                    'built_in_css' => 'plugins.pagination.built_in_css'
-                ],
-                'problems' => [
-                    'enabled' => 'plugins.problems.enabled',
-                    'built_in_css' => 'plugins.problems.built_in_css'
-                ],
-                'social-seo-metatags' => [
-                    'social_pages_types' => 'plugins.social-seo-metatags.social_pages_types',
-                    'plugin' => 'plugins.social-seo-metatags.plugin',
-                    'enabled' => 'plugins.social-seo-metatags.enabled',
-                    'seo' => [
-                        'robots' => 'plugins.social-seo-metatags.seo.robots',
-                        'keywords' => [
-                            'taxonomy' => [
-                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.taxonomy.enabled'
-                            ],
-                            'page_content' => [
-                                'enabled' => 'plugins.social-seo-metatags.seo.keywords.page_content.enabled'
-                            ],
-                            'use_cache' => 'plugins.social-seo-metatags.seo.keywords.use_cache',
-                            'length' => 'plugins.social-seo-metatags.seo.keywords.length'
+                'email' => [
+                    'enabled' => 'plugins.email.enabled',
+                    'mailer' => [
+                        'engine' => 'plugins.email.mailer.engine',
+                        'smtp' => [
+                            'server' => 'plugins.email.mailer.smtp.server',
+                            'port' => 'plugins.email.mailer.smtp.port',
+                            'encryption' => 'plugins.email.mailer.smtp.encryption',
+                            'user' => 'plugins.email.mailer.smtp.user',
+                            'password' => 'plugins.email.mailer.smtp.password'
+                        ],
+                        'sendmail' => [
+                            'bin' => 'plugins.email.mailer.sendmail.bin'
                         ]
                     ],
-                    'twitter' => 'plugins.social-seo-metatags.twitter',
-                    'social_pages' => [
-                        'pages' => [
-                            'twitter' => [
-                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.twitter.enabled',
-                                'type' => 'plugins.social-seo-metatags.social_pages.pages.twitter.type',
-                                'username' => 'plugins.social-seo-metatags.social_pages.pages.twitter.username'
-                            ],
-                            'facebook' => [
-                                'enabled' => 'plugins.social-seo-metatags.social_pages.pages.facebook.enabled',
-                                'appid' => 'plugins.social-seo-metatags.social_pages.pages.facebook.appid'
-                            ]
-                        ]
-                    ],
-                    'facebook' => 'plugins.social-seo-metatags.facebook'
+                    'content_type' => 'plugins.email.content_type',
+                    'charset' => 'plugins.email.charset',
+                    'from' => 'plugins.email.from',
+                    'from_name' => 'plugins.email.from_name',
+                    'to' => 'plugins.email.to',
+                    'to_name' => 'plugins.email.to_name',
+                    'cc' => 'plugins.email.cc',
+                    'cc_name' => 'plugins.email.cc_name',
+                    'bcc' => 'plugins.email.bcc',
+                    'reply_to' => 'plugins.email.reply_to',
+                    'reply_to_name' => 'plugins.email.reply_to_name',
+                    'body' => 'plugins.email.body',
+                    'debug' => 'plugins.email.debug'
                 ]
             ]
         ],

@@ -157,7 +157,7 @@
 				$content .= "title:  ".$input->name."\r\n";
 				$content .= "slug:  ".$input->slug."\r\n";
 				$content .= "source:  ".$input->url."\r\n";
-				$content .= "date:  '".date('Y-m-d H:i', $input->timestamp)."'\r\n";
+				$content .= "date:  ".date('Y-m-d H:i', $input->timestamp)."\r\n";
 				$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 
 				$img_data = [];
@@ -260,7 +260,7 @@
 					$content .= "title:  ".$fileData['title']."\r\n";
 					$content .= "slug:  ".$fileData['slug']."\r\n";
 					$content .= "source:  ".$fileData['source']."\r\n";
-					$content .= "date:  '".$date."'\r\n";
+					$content .= "date:  ".$date."\r\n";
 					$content .= "taxonomy:"."\r\n  tag: [".$tags."]\r\n";
 					$content .= $image_to_content;
 

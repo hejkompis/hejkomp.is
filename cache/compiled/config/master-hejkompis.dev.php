@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1502697467,
-    'checksum' => 'f1e7ddafde11d54319864bb2bd09c0c3',
+    'timestamp' => 1506870546,
+    'checksum' => '65a9f36cb2461783f5841520235d7ec5',
     'files' => [
         'user/config' => [
             'media' => [
@@ -49,26 +49,6 @@ return [
             ]
         ],
         'user/plugins' => [
-            'plugins/admin' => [
-                'file' => 'user/plugins/admin/admin.yaml',
-                'modified' => 1502179874
-            ],
-            'plugins/email' => [
-                'file' => 'user/plugins/email/email.yaml',
-                'modified' => 1502179794
-            ],
-            'plugins/error' => [
-                'file' => 'user/plugins/error/error.yaml',
-                'modified' => 1500047081
-            ],
-            'plugins/form' => [
-                'file' => 'user/plugins/form/form.yaml',
-                'modified' => 1502179843
-            ],
-            'plugins/login' => [
-                'file' => 'user/plugins/login/login.yaml',
-                'modified' => 1502179822
-            ],
             'plugins/markdown-notices' => [
                 'file' => 'user/plugins/markdown-notices/markdown-notices.yaml',
                 'modified' => 1500047081
@@ -77,6 +57,14 @@ return [
                 'file' => 'user/plugins/pagination/pagination.yaml',
                 'modified' => 1500047081
             ],
+            'plugins/form' => [
+                'file' => 'user/plugins/form/form.yaml',
+                'modified' => 1502179843
+            ],
+            'plugins/admin' => [
+                'file' => 'user/plugins/admin/admin.yaml',
+                'modified' => 1502179874
+            ],
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
                 'modified' => 1502179771
@@ -84,11 +72,53 @@ return [
             'plugins/social-seo-metatags' => [
                 'file' => 'user/plugins/social-seo-metatags/social-seo-metatags.yaml',
                 'modified' => 1502697456
+            ],
+            'plugins/error' => [
+                'file' => 'user/plugins/error/error.yaml',
+                'modified' => 1500047081
+            ],
+            'plugins/login' => [
+                'file' => 'user/plugins/login/login.yaml',
+                'modified' => 1502179822
+            ],
+            'plugins/email' => [
+                'file' => 'user/plugins/email/email.yaml',
+                'modified' => 1502179794
             ]
         ]
     ],
     'data' => [
         'plugins' => [
+            'markdown-notices' => [
+                'enabled' => true,
+                'built_in_css' => true,
+                'level_classes' => [
+                    0 => 'yellow',
+                    1 => 'red',
+                    2 => 'blue',
+                    3 => 'green'
+                ]
+            ],
+            'pagination' => [
+                'enabled' => true,
+                'built_in_css' => true,
+                'delta' => 0
+            ],
+            'form' => [
+                'enabled' => true,
+                'built_in_css' => true,
+                'files' => [
+                    'multiple' => false,
+                    'limit' => 10,
+                    'filesize' => 5,
+                    'destination' => 'self@',
+                    'avoid_overwriting' => false,
+                    'random_name' => false,
+                    'accept' => [
+                        0 => 'image/*'
+                    ]
+                ]
+            ],
             'admin' => [
                 'enabled' => true,
                 'route' => '/admin',
@@ -145,47 +175,40 @@ return [
                     ]
                 ]
             ],
-            'email' => [
+            'problems' => [
                 'enabled' => true,
-                'from' => NULL,
-                'from_name' => NULL,
-                'to' => NULL,
-                'to_name' => NULL,
-                'mailer' => [
-                    'engine' => 'mail',
-                    'smtp' => [
-                        'server' => 'localhost',
-                        'port' => 25,
-                        'encryption' => 'none',
-                        'user' => '',
-                        'password' => ''
+                'built_in_css' => true
+            ],
+            'social-seo-metatags' => [
+                'enabled' => true,
+                'seo' => [
+                    'robots' => 'without',
+                    'length' => 20,
+                    'taxonomy' => [
+                        'enabled' => true
                     ],
-                    'sendmail' => [
-                        'bin' => '/usr/sbin/sendmail'
+                    'page_content' => [
+                        'enabled' => false
                     ]
                 ],
-                'content_type' => 'text/html',
-                'debug' => false
+                'social_pages' => [
+                    'pages' => [
+                        'twitter' => [
+                            'enabled' => true,
+                            'type' => 'summary',
+                            'username' => ''
+                        ],
+                        'facebook' => [
+                            'enabled' => false,
+                            'appid' => '1234567890'
+                        ]
+                    ]
+                ]
             ],
             'error' => [
                 'enabled' => true,
                 'routes' => [
                     404 => '/error'
-                ]
-            ],
-            'form' => [
-                'enabled' => true,
-                'built_in_css' => true,
-                'files' => [
-                    'multiple' => false,
-                    'limit' => 10,
-                    'filesize' => 5,
-                    'destination' => 'self@',
-                    'avoid_overwriting' => false,
-                    'random_name' => false,
-                    'accept' => [
-                        0 => 'image/*'
-                    ]
                 ]
             ],
             'login' => [
@@ -233,50 +256,27 @@ return [
                 'max_login_count' => 0,
                 'max_login_interval' => 2
             ],
-            'markdown-notices' => [
+            'email' => [
                 'enabled' => true,
-                'built_in_css' => true,
-                'level_classes' => [
-                    0 => 'yellow',
-                    1 => 'red',
-                    2 => 'blue',
-                    3 => 'green'
-                ]
-            ],
-            'pagination' => [
-                'enabled' => true,
-                'built_in_css' => true,
-                'delta' => 0
-            ],
-            'problems' => [
-                'enabled' => true,
-                'built_in_css' => true
-            ],
-            'social-seo-metatags' => [
-                'enabled' => true,
-                'seo' => [
-                    'robots' => 'without',
-                    'length' => 20,
-                    'taxonomy' => [
-                        'enabled' => true
+                'from' => NULL,
+                'from_name' => NULL,
+                'to' => NULL,
+                'to_name' => NULL,
+                'mailer' => [
+                    'engine' => 'mail',
+                    'smtp' => [
+                        'server' => 'localhost',
+                        'port' => 25,
+                        'encryption' => 'none',
+                        'user' => '',
+                        'password' => ''
                     ],
-                    'page_content' => [
-                        'enabled' => false
+                    'sendmail' => [
+                        'bin' => '/usr/sbin/sendmail'
                     ]
                 ],
-                'social_pages' => [
-                    'pages' => [
-                        'twitter' => [
-                            'enabled' => true,
-                            'type' => 'summary',
-                            'username' => ''
-                        ],
-                        'facebook' => [
-                            'enabled' => false,
-                            'appid' => '1234567890'
-                        ]
-                    ]
-                ]
+                'content_type' => 'text/html',
+                'debug' => false
             ],
             'socialbuttons' => [
                 'enabled' => false,
